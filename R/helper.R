@@ -905,7 +905,7 @@ extract.Hull <- function(fit, what = "PVAF", R2.aux = NULL){
 
     for(j in 1:J){
       for(q in 1:(2^K - 2)){
-        exp.cor[, q, j] <- lg.post[,j.lg.index[[q]]] %*% lg.pc[j.lg.index[[q]], j]
+        exp.cor[, q, j] <- lg.post[,j.lg.index[[q]], drop = FALSE] %*% lg.pc[j.lg.index[[q]], j, drop = FALSE]
         exp.cor[, q, j][round(exp.cor[, q, j], 14) == 1] <- 1 - 1e-15 # Avoid round 1
         LL.tmp <- sum((dat[,j] * log(exp.cor[, q, j])) + ((1 - dat[,j]) * log(1 - exp.cor[, q, j])))
         R2.McF <- 1 - (LL.tmp / LL.0j[j])
