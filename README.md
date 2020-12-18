@@ -1,5 +1,6 @@
 # cdmTools: Useful Tools for Cognitive Diagnosis Modeling
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
 This is a beta version of the package. Please report any bugs at https://github.com/pablo-najera/cdmTools/issues
 ## How to cite this package
 Nájera, P., Sorrel, M. A., & Abad, F. J. (2020). *cdmTools: Useful Tools for Cognitive Diagnosis Modeling*. R package version 0.1.0. Retrieved from https://github.com/Pablo-Najera/cdmTools.
