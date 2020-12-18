@@ -1,0 +1,20 @@
+Package: cdmTools
+Type: Package
+Title: Useful Tools for Cognitive Diagnosis Modeling
+Version: 0.1.0
+Date: 2020-12-17
+Authors@R: c(person(given = "Pablo", family = "Nájera", role = c("aut", "cre", "cph")), person(given = "Miguel A.", family = "Sorrel", role = c("aut", "cre", "cph"), email = "miguel.sorrel@uam.es"), person(given = "Francisco J.", family = "Abad", role = c("aut", "cre", "cph")))
+Description: Provides useful tools for cognitive diagnosis modeling (CDM) for both applied and simulation studies. It includes empirical Q-matrix estimation and validation methods, as well as procedures for determining the dimensionality (i.e., number of attributes) underlying CDM data.
+License: GPL-3
+LazyData: TRUE
+Depends: R (>= 3.6.0)
+Imports: GDINA (>= 2.8.0), ggplot2 (>= 3.3.0), psych (>= 1.9.12), sirt (>= 3.9-4), parallel (>= 3.6.3), stats (>= 3.6.3), GPArotation (>= 2014.11-1), combinat (>= 0.0-8)
+Suggests: CDM
+URL: https://github.com/pablo-najera/cdmTools
+BugReports: https://github.com/pablo-najera/cdmTools/issues
+RoxygenNote: 7.1.1
+Encoding: UTF-8
+Author: Pablo Nájera [aut, cre, cph],
+  Miguel A. Sorrel [aut, cre, cph],
+  Francisco J. Abad [aut, cre, cph]
+Maintainer: Pablo Nájera <pablo.najera@uam.es>
