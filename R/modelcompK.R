@@ -106,10 +106,10 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
   if((!is.numeric(valQ.args$maxitr) & !is.double(valQ.args$maxitr)) | length(valQ.args$maxitr) > 1){stop("Error in modelcompK: valQ.args$maxitr must be a unique numeric value.")}
   if((!is.numeric(valQ.args$CDMconv) & !is.double(valQ.args$CDMconv)) | length(valQ.args$CDMconv) > 1){stop("Error in modelcompK: valQ.args$CDMconv must be a unique numeric value.")}
   if(!is.logical(verbose)){stop("Error in modelcompK: verbose must be logical.")}
-  
+
   N <- nrow(dat)
   J <- ncol(dat)
-  
+
   Qs.pre <- Qs
   if(is.null(Qs)){
     fit.res <- matrix(NA, nrow = length(rangeK), ncol = 13)
@@ -122,7 +122,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
   }
   fit.res <- as.data.frame(fit.res)
   valQ.conv <- sug.K <- c()
-  
+
   if(is.null(Qs)){
     if(verbose){
       if(val.Q){cat("\n", "Estimating and validating Q-matrix with K =", rangeK, "\n")}
@@ -203,7 +203,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
       names(sug.K) <- names(sel.Q)
     }
   }
-  
+
   spec <- list(dat = dat, rangeK = rangeK, Qs = Qs.pre, stop = stop, val.Q = val.Q, estQ.args = estQ.args, valQ.args = valQ.args, verbose = verbose)
   if(is.null(Qs.pre)){
     res <- list(sug.K = sug.K, sel.Q = sel.Q, fit = fit.res, usedQ = Qs, specifications = spec)
