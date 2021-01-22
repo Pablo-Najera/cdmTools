@@ -1,7 +1,6 @@
 # cdmTools: Useful Tools for Cognitive Diagnosis Modeling
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-This is a beta version of the package. Please report any bugs at https://github.com/Pablo-Najera/cdmTools/issues.
 ## How to cite this package
 Nájera, P., Sorrel, M. A., & Abad, F. J. (2021). *cdmTools: Useful Tools for Cognitive Diagnosis Modeling*. R package version 0.2.0. Retrieved from https://github.com/Pablo-Najera/cdmTools.
 ## Features of the package
@@ -14,3 +13,6 @@ To install this package from source:
 2. Install the `devtools` package (if necessary), and install the package from the Github source code.
 
 `#install.packages("devtools")`<br>`devtools::install_github("Pablo-Najera/cdmTools")`
+
+## Bug report
+Please report any bugs at https://github.com/Pablo-Najera/cdmTools/issues.
