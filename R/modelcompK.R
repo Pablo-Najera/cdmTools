@@ -106,10 +106,10 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
   if((!is.numeric(valQ.args$maxitr) & !is.double(valQ.args$maxitr)) | length(valQ.args$maxitr) > 1){stop("Error in modelcompK: valQ.args$maxitr must be a unique numeric value.")}
   if((!is.numeric(valQ.args$CDMconv) & !is.double(valQ.args$CDMconv)) | length(valQ.args$CDMconv) > 1){stop("Error in modelcompK: valQ.args$CDMconv must be a unique numeric value.")}
   if(!is.logical(verbose)){stop("Error in modelcompK: verbose must be logical.")}
-
+  
   N <- nrow(dat)
   J <- ncol(dat)
-
+  
   Qs.pre <- Qs
   if(is.null(Qs)){
     fit.res <- matrix(NA, nrow = length(rangeK), ncol = 13)
@@ -122,7 +122,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
   }
   fit.res <- as.data.frame(fit.res)
   valQ.conv <- sug.K <- c()
-
+  
   if(is.null(Qs)){
     if(verbose){
       if(val.Q){cat("\n", "Estimating and validating Q-matrix with K =", rangeK, "\n")}
@@ -134,6 +134,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
       est.Q <- est.Q.info$est.Q
       fit <- GDINA::GDINA(dat, est.Q, verbose = 0)
       mfit <- GDINA::modelfit(fit)
+      if(is.null(mfit$M2)){mfit$M2 <- NA; mfit$M2.pvalue <- NA; mfit$M2.df <- NA; mfit$RMSEA2 <- NA; mfit$RMSEA2.CI <- c(NA, NA)}
       ifit <- GDINA::itemfit(fit)
       if(val.Q){
         if(k > 1){
@@ -141,7 +142,12 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
           sug.Q <- sug.Q.info$sug.Q
           valQ.conv <- c(valQ.conv, sug.Q.info$convergence)
           Qs[[which(rangeK == k)]] <- sug.Q
-          fit.res[which(rangeK == k),] <- sug.Q.info$sugQ.fit
+          if(length(sug.Q.info$sugQ.fit) == 13){
+            fit.res[which(rangeK == k),] <- sug.Q.info$sugQ.fit
+          } else {
+            sug.Q.info$sugQ.fit <- c(sug.Q.info$sugQ.fit[1:6], M2 = NA, M2.p = NA, sug.Q.info$sugQ.fit[7], RMSEA2 = NA, RMSEA2.low = NA, RMSEA2.high = NA, sug.Q.info$sugQ.fit[8])
+            fit.res[which(rangeK == k),] <- sug.Q.info$sugQ.fit
+          }
         } else {
           Qs[[which(rangeK == k)]] <- est.Q
           fit.res[which(rangeK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
@@ -160,6 +166,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
     for(q in 1:length(Qs)){
       fit <- GDINA::GDINA(dat, Qs[[q]], verbose = 0)
       mfit <- GDINA::modelfit(fit)
+      if(is.null(mfit$M2)){mfit$M2 <- NA; mfit$M2.pvalue <- NA; mfit$M2.df <- NA; mfit$RMSEA2 <- NA; mfit$RMSEA2.CI <- c(NA, NA)}
       ifit <- GDINA::itemfit(fit)
       fit.res$logLik[q] <- GDINA::extract(fit, what = "logLik")
       fit.res$np[q] <- fit$testfit$npar
@@ -196,7 +203,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
       names(sug.K) <- names(sel.Q)
     }
   }
-
+  
   spec <- list(dat = dat, rangeK = rangeK, Qs = Qs.pre, stop = stop, val.Q = val.Q, estQ.args = estQ.args, valQ.args = valQ.args, verbose = verbose)
   if(is.null(Qs.pre)){
     res <- list(sug.K = sug.K, sel.Q = sel.Q, fit = fit.res, usedQ = Qs, specifications = spec)
