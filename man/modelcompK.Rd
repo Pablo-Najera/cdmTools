@@ -98,9 +98,9 @@ mc$fit # Check fit indices for each Q explored
 \references{
 Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). DOI: 10.18637/jss.v093.i14.
 
-Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}.
+Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
 
-Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}.
+Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
 
 Wang, W., Song, L., & Ding, S. (2018). An exploratory discrete factor loading method for Q-matrix specification in cognitive diagnosis models. In: M. Wilberg, S. Culpepper, R. Janssen, J. González, & D. Molenaar (Eds.), \emph{Quantitative Psychology. IMPS 2017. Springer Proceedings in Mathematics & Statistics} (Vol. 233, pp. 351-362). Springer.
 }

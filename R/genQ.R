@@ -26,7 +26,7 @@
 #' @references
 #' Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. DOI: 10.1080/01621459.2014.934827.
 #'
-#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}.
+#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
 #'
 #' Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. DOI: 10.1080/01621459.2017.1340889.
 #'

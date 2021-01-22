@@ -4,7 +4,7 @@
 #' The procedure can be used either with the PVAF (de la Torre & Chiu, 2016) or McFadden's pseudo R-squared (McFadden, 1974).
 #' The PVAF is recommended (Najera, Sorrel, de la Torre, & Abad, 2020a).
 #' Note that the pseudo R-squared might not be computationally feasible for highly dimensional Q-matrices, say more than 10 attributes.
-#' Different iterative implementations are available, such as the test-level implementation (see Terzi & de la Torre, 2018), attribute-test-level implementation (Najera, Sorrel, de la Torre, & Abad, 2020), and item-level implementation (Najera, Sorrel, de la Torre, & Abad, 2020b).
+#' Different iterative implementations are available, such as the test-level implementation (see Terzi & de la Torre, 2018), attribute-test-level implementation (Najera, Sorrel, de la Torre, & Abad, 2020a), and item-level implementation (Najera, Sorrel, de la Torre, & Abad, 2020b).
 #' If an iterative implementation is used, the \code{GDINA} R package (Ma & de la Torre, 2020) is used for the calibration of the CDMs.
 #'
 #' @param fit A G-DINA model fit object from the \code{GDINA} package (Ma & de la Torre, 2020).
@@ -37,9 +37,9 @@
 #'
 #' McFadden, D. (1974). Conditional logit analysis of qualitative choice behavior. In P. Zarembka (Ed.), \emph{Frontiers in Economics} (pp. 105-142). Academic Press.
 #'
-#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020a). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}.
+#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020a). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
 #'
-#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020b). Improving robustness in Q-matrix validation using an iterative and dynamic procedure. \emph{Applied Psychological Measurement}. DOI: 10.1177/0146621620909904.
+#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020b). Improving robustness in Q-matrix validation using an iterative and dynamic procedure. \emph{Applied Psychological Measurement}, \emph{46}, 431-446. DOI: 10.1177/0146621620909904.
 #'
 #' Terzi, R., & de la Torre, J. (2018). An iterative method for empirically-based Q-matrix validation. \emph{International Journal of Assessment Tools in Education}, \emph{5}, 248-262. DOI: 10.21449/ijate.407193.
 #'

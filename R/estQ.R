@@ -38,7 +38,7 @@
 #' @references
 #' Garcia-Garzon, E., Abad, F. J., & Garrido, L. E. (2018). Improving bi-factor exploratory modelling: Empirical target rotation based on loading differences. \emph{Methodology}, \emph{15}, 45–55. DOI: 10.1027/1614-2241/a000163.
 #'
-#' Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}.
+#' Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
 #'
 #' Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. Retrieved from https://CRAN.R-project.org/package=psych.
 #'

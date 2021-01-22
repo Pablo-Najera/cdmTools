@@ -65,7 +65,7 @@ pa.K$plot # Show parallel analysis plot
 \references{
 Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474.
 
-Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}.
+Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
 
 Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. Retrieved from https://CRAN.R-project.org/package=psych.
 
