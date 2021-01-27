@@ -14,5 +14,5 @@ To install this package from source:
 
 `#install.packages("devtools")`<br>`devtools::install_github("Pablo-Najera/cdmTools")`
 
-## Bug report
+## Bug reports
 Please report any bugs at https://github.com/Pablo-Najera/cdmTools/issues.
