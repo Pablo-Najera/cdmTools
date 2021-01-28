@@ -52,7 +52,7 @@ orderQ <- function(Q, target){
   order.Q <- mQ[,order.k[[which.max(CC)]]]
   rownames(order.Q) <- 1:nrow(order.Q)
   configs <- cbind(order = order.k.col[1:length(MAD)], MAD, CC)
-  configs <- configs[order(configs[,"order"]),]
+  configs <- configs[order(configs[,"order"]),,drop = FALSE]
   rownames(configs) <- 1:nrow(configs)
 
   spec <- list(Q = Q, target = target)
