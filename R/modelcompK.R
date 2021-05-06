@@ -157,7 +157,7 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
         fit.res[which(rangeK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
       }
       if(verbose){cat("   k =", k, "explored | AIC =", round(fit.res$AIC[which(rangeK == k)]), "| BIC =", round(fit.res$BIC[which(rangeK == k)]), "\n")}
-      if(k > 1 & stop != "none"){
+      if(k > 1 & stop != "none" & which(rangeK == k) > 1){
         if(fit.res[which(rangeK == k), stop] > fit.res[which(rangeK == k) - 1, stop]){break}
       }
     }
