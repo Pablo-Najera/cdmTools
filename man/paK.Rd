@@ -31,9 +31,9 @@ paK(
 
 \item{plot}{Print the parallel analysis plot? Note that the plot might be messy if many variants are requested. The default is \code{TRUE}.}
 
-\item{seed}{A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.}
+\item{verbose}{progress. The default is \code{TRUE}.}
 
-\item{Show}{progress. The default is \code{TRUE}.}
+\item{seed}{A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.}
 }
 \value{
 \code{paK} returns an object of class \code{paK}.
