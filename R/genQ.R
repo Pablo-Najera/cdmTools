@@ -34,7 +34,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' Kj <- c(15, 10, 0, 5) # 15 1-attribute, 10 2-attribute, 0 3-attribute, and 5 4-attribute items
+#' Kj <- c(15, 10, 0, 5) # # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
 #' Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)
 #' }
 genQ <- function(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed = NULL){

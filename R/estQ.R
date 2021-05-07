@@ -66,7 +66,7 @@
 #' #------------------------------------
 #' sugQ2 <- estQ(r = dat, K = 5, boot = TRUE, boot.args = list(seed = 123)) # Estimate Q-matrix
 #' sugQ2$est.Q <- orderQ(sugQ2$est.Q, Q)$order.Q # Reorder Q-matrix attributes
-#' sugQ2$boot.Q # Check the proportion of replicas a q-entry has been specified in the estimated Q-matrix
+#' sugQ2$boot.Q # Proportion of replicas a q-entry was specified in the estimated Q-matrix
 #' mean(sugQ2$est.Q == Q) # Check similarity with the generating Q-matrix
 #' }
 estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args = list(cor = "tet", rotation = "oblimin", fm = "uls"), boot.args = list(N = .8, R = 100, verbose = TRUE, seed = NULL)){
