@@ -13,7 +13,7 @@
 #' @param cutoff What criterion to use as the cutoff. It can be \code{"mean"} (for the average generated eigenvalues) or a value between 0 and 100 (for a percentile). A vector with several criteria can be used. The default is \code{"mean"}.
 #' @param fm Factoring method to use. It includes \code{"uls"} (for unweighted least squares), \code{"ml"} (for maximum likelihood), and \code{"wls"} (for weighted least squares), among others. The default is \code{"uls"}.
 #' @param plot Print the parallel analysis plot? Note that the plot might be messy if many variants are requested. The default is \code{TRUE}.
-#' @param Show progress. The default is \code{TRUE}.
+#' @param verbose progress. The default is \code{TRUE}.
 #' @param seed A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.
 #'
 #' @return \code{paK} returns an object of class \code{paK}.
