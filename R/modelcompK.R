@@ -64,7 +64,7 @@
 #' mcK <- modelcompK(dat = dat, exploreK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
 #' mcK$sug.K # Check suggested number of attributes by each fit index
 #' mcK$fit # Check fit indices for each K explored
-#' sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Extract the suggested Q-matrix by the suggested dimentionality according to AIC
+#' sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Suggested Q-matrix by AIC
 #' sug.Q <- orderQ(sug.Q, Q)$order.Q # Reorder Q-matrix attributes
 #' mean(sug.Q == Q) # Check similarity with the generating Q-matrix
 #'

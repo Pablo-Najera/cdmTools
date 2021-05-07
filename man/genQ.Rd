@@ -17,7 +17,7 @@ genQ(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed = NULL)
 
 \item{min.JK}{Minimum number of items measuring each attribute. It can be overwritten by \code{I}, if \code{I} is higher than \code{min.JK}. The default is 3.}
 
-\item{max.Kcor}{Maximum allowed tetrachoric correlation among the columns. A value lower than 1 might prevent from attribute overlapping (Najera, Sorrel, de la Torre, & Abad, 2020). The default is 1.}
+\item{max.Kcor}{Maximum allowed tetrachoric correlation among the columns to avoid overlapping (Nájera, Sorrel, de la Torre, & Abad, 2020). The default is 1.}
 
 \item{Qid}{Assure that the generated Q-matrix is identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.}
 
@@ -41,14 +41,14 @@ Useful for simulation studies.
 }
 \examples{
 \dontrun{
-Kj <- c(15, 10, 0, 5) # 15 one-attribute, 10 two-attribute, 0 three attribute, and 5 four-attribute items
+Kj <- c(15, 10, 0, 5) # 15 1-attribute, 10 2-attribute, 0 3-attribute, and 5 4-attribute items
 Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)
 }
 }
 \references{
-Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. DOI: 10.1080/01621459.2014.934827.
+Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. https://doi.org/10.1080/01621459.2014.934827
 
-Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
+Nájera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. https://doi.org/10.1111/bmsp.12228
 
-Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. DOI: 10.1080/01621459.2017.1340889.
+Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. https://doi.org/10.1080/01621459.2017.1340889
 }

@@ -24,7 +24,7 @@ is.Qid(Q, model = "others", verbose = TRUE)
 }
 }
 \description{
-Checks whether a Q-matrix is complete (Kohn & Chiu, 2017, 2018) and identifiable according to the criteria from Chen, Liu, Xu, & Ying (2015) and Xu & Shang (2018).
+Checks whether a Q-matrix is complete (Köhn & Chiu, 2017, 2018) and identifiable according to the criteria from Chen, Liu, Xu, & Ying (2015) and Xu & Shang (2018).
 }
 \examples{
 \dontrun{
@@ -34,11 +34,11 @@ idQ <- is.Qid(Q)
 }
 }
 \references{
-Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. DOI: 10.1080/01621459.2014.934827.
+Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. https://doi.org/10.1080/01621459.2014.934827
 
-Kohn, H.-F., & Chiu, C.-Y. (2017). A procedure for assessing the completeness of the Q-matrices of cognitively diagnostic tests. \emph{Psychometrika}, \emph{82}, 112-132. DOI: 10.1007/s11336-016-9536-7.
+Köhn, H.-F., & Chiu, C.-Y. (2017). A procedure for assessing the completeness of the Q-matrices of cognitively diagnostic tests. \emph{Psychometrika}, \emph{82}, 112-132. https://doi.org/10.1007/s11336-016-9536-7
 
-Kohn, H.-F., & Chiu, C.-Y. (2018). How to build a complete Q-matrix for a cognitively diagnostic test. \emph{Journal of Classification}, \emph{35}, 273-299. DOI: 10.1007/s00357-018-9255-0.
+Köhn, H.-F., & Chiu, C.-Y. (2018). How to build a complete Q-matrix for a cognitively diagnostic test. \emph{Journal of Classification}, \emph{35}, 273-299. https://doi.org/10.1007/s00357-018-9255-0
 
-Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. DOI: 10.1080/01621459.2017.1340889.
+Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. https://doi.org/10.1080/01621459.2017.1340889
 }

@@ -45,8 +45,8 @@ paK(
 }
 }
 \description{
-Parallel analysis with column permutation (i.e., resampling) as used in Najera, Abad, & Sorrel (2020).
-It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Najera, Abad, & Sorrel, 2020).
+Parallel analysis with column permutation (i.e., resampling) as used in Nájera, Abad, & Sorrel (2020).
+It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Nájera, Abad, & Sorrel, 2020).
 The parallel analysis based on principal axis factor analysis is conducted using the \code{fa.parallel} function of the \code{psych} R package (Revelle, 2020).
 The tetrachoric correlations are efficiently estimated using the \code{sirt} R package (Robitzsch, 2020).
 The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
@@ -63,13 +63,13 @@ pa.K$plot # Show parallel analysis plot
 }
 }
 \references{
-Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474.
+Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474. https://doi.org/10.1037/a0030005
 
-Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
+Nájera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 
-Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. Retrieved from https://CRAN.R-project.org/package=psych.
+Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. https://CRAN.R-project.org/package=psych.
 
-Robitzsch, A. (2020). \emph{sirt: Supplementary Item Response Theory Models}. R package version 3.9-4. Retrieved from https://CRAN.R-project.org/package=sirt.
+Robitzsch, A. (2020). \emph{sirt: Supplementary Item Response Theory Models}. R package version 3.9-4. https://CRAN.R-project.org/package=sirt.
 
-Wickham, H., et al. (2020). \emph{ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics}. R package version 3.3.2. Retrieved from https://CRAN.R-project.org/package=ggplot2.
+Wickham, H., et al. (2020). \emph{ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics}. R package version 3.3.2. https://CRAN.R-project.org/package=ggplot2.
 }

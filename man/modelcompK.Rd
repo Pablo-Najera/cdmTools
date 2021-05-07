@@ -6,7 +6,7 @@
 \usage{
 modelcompK(
   dat,
-  rangeK = 1:7,
+  exploreK = 1:7,
   Qs = NULL,
   stop = "none",
   val.Q = TRUE,
@@ -18,11 +18,11 @@ modelcompK(
 \arguments{
 \item{dat}{A \emph{N} individuals x \emph{J} items (\code{matrix} or \code{data.frame}). Missing values need to be coded as \code{NA}.}
 
-\item{rangeK}{Number of attributes to use. The number of attributes to explore. The default is from 1 to 7 attributes.}
+\item{exploreK}{Number of attributes to explore. The default is from 1 to 7 attributes.}
 
-\item{Qs}{A list of Q-matrices to compare in terms of fit. If \code{Qs} is used, \code{rangeK} is ignored.}
+\item{Qs}{A list of Q-matrices to compare in terms of fit. If \code{Qs} is used, \code{exploreK} is ignored.}
 
-\item{stop}{A fit index to use for stopping the procedure if a model leads to worse fit than a simpler one. This can be useful for saving time without exploring the whole rangeK when it is probable that the correct dimensionality has been already visited. It includes \code{"AIC"}, \code{"BIC"}, \code{"CAIC"}, \code{"SABIC"}, \code{"M2"}, \code{"SRMSR"}, \code{"RMSEA2"}, or \code{"sig.item.pairs"}. The latter represents the number of items that show bad fit with at least another item based on the transformed correlations (see \code{itemfit} function in the \code{GDINA} package; Ma & de la Torre, 2020). It can be also \code{"none"}, which means that the whole \code{rangeK} will be examined. The default is \code{"none"}.}
+\item{stop}{A fit index to use for stopping the procedure if a model leads to worse fit than a simpler one. This can be useful for saving time without exploring the whole exploreK when it is probable that the correct dimensionality has been already visited. It includes \code{"AIC"}, \code{"BIC"}, \code{"CAIC"}, \code{"SABIC"}, \code{"M2"}, \code{"SRMSR"}, \code{"RMSEA2"}, or \code{"sig.item.pairs"}. The latter represents the number of items that show bad fit with at least another item based on the transformed correlations (see \code{itemfit} function in the \code{GDINA} package; Ma & de la Torre, 2020). It can be also \code{"none"}, which means that the whole \code{exploreK} will be examined. The default is \code{"none"}.}
 
 \item{val.Q}{Validate the estimated Q-matrices using the \emph{Hull} method? Note that validating the Q-matrix is expected to increase its quality, but the computation time will increase. The default is \code{TRUE}.}
 
@@ -50,19 +50,19 @@ modelcompK(
 \item{\code{sug.K}}{The suggested number of attributes for each fit index (\code{vector}). Only if \code{Qs = NULL}.}
 \item{\code{sel.Q}}{The suggested Q-matrix for each fit index (\code{vector}).}
 \item{\code{fit}}{The fit indices for each fitted model (\code{matrix}).}
-\item{\code{exp.rangeK}}{Explored dimensionality (\code{vector}). It can be different from \code{rangeK} if \code{stop} has been used.}
+\item{\code{exp.exploreK}}{Explored dimensionality (\code{vector}). It can be different from \code{exploreK} if \code{stop} has been used.}
 \item{\code{usedQ}}{Q-matrices used to fit each model (\code{list}). They will be the estimated (and validated) Q-matrices if \code{Qs = NULL}. Otherwise, they will be \code{Qs}.}
 \item{\code{specifications}}{Function call specifications (\code{list}).}
 }
 }
 \description{
 A procedure for determining the number of attributes underlying CDM using model fit comparison.
-For each number of attributes under exploration, a Q-matrix is estimated from the data using the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018), which can be further validated using the \emph{Hull} method (Najera, Sorrel, de la Torre, & Abad, 2020).
+For each number of attributes under exploration, a Q-matrix is estimated from the data using the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018), which can be further validated using the \emph{Hull} method (Nájera, Sorrel, de la Torre, & Abad, 2020).
 Then, a CDM is fitted to the data using the resulting Q-matrix, and several fit indices are computed.
 After the desired range of number of attributes has been explored, the fit indices are compared.
 A suggested number of attributes is given for each fit index.
 The AIC index should be preferred among the other fit indices.
-For further details, see Najera, Abad, & Sorrel (2020).
+For further details, see Nájera, Abad, & Sorrel (2020).
 This function can be also used by directly providing different Q-matrices (instead of estimating them from the data) in order to compare their fit and select the most appropriate Q-matrix.
 Note that, if Q-matrices are provided, this function will no longer serve as a dimensionality assessment method, but just as an automated model comparison procedure.
 }
@@ -75,10 +75,10 @@ Q <- sim30GDINA$simQ
 #-------------------------------------
 # Assess dimensionality from CDM data
 #-------------------------------------
-mcK <- modelcompK(dat = dat, rangeK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
+mcK <- modelcompK(dat = dat, exploreK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
 mcK$sug.K # Check suggested number of attributes by each fit index
 mcK$fit # Check fit indices for each K explored
-sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Extract the suggested Q-matrix by the suggested dimentionality according to AIC
+sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Suggested Q-matrix by AIC
 sug.Q <- orderQ(sug.Q, Q)$order.Q # Reorder Q-matrix attributes
 mean(sug.Q == Q) # Check similarity with the generating Q-matrix
 
@@ -96,11 +96,11 @@ mc$fit # Check fit indices for each Q explored
 }
 }
 \references{
-Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). DOI: 10.18637/jss.v093.i14.
+Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 
-Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
+Nájera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 
-Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
+Nájera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. https://doi.org/10.1111/bmsp.12228
 
 Wang, W., Song, L., & Ding, S. (2018). An exploratory discrete factor loading method for Q-matrix specification in cognitive diagnosis models. In: M. Wilberg, S. Culpepper, R. Janssen, J. González, & D. Molenaar (Eds.), \emph{Quantitative Psychology. IMPS 2017. Springer Proceedings in Mathematics & Statistics} (Vol. 233, pp. 351-362). Springer.
 }

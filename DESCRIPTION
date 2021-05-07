@@ -2,9 +2,9 @@ Package: cdmTools
 Type: Package
 Title: Useful Tools for Cognitive Diagnosis Modeling
 Version: 0.1.1
-Date: 2021-01-22
-Authors@R: c(person(given = "Pablo", family = "Nájera", role = c("aut", "cre", "cph")), person(given = "Miguel A.", family = "Sorrel", role = c("aut", "cre", "cph"), email = "miguel.sorrel@uam.es"), person(given = "Francisco J.", family = "Abad", role = c("aut", "cre", "cph")))
-Description: Provides useful tools for cognitive diagnosis modeling (CDM) for both applied and simulation studies. It includes empirical Q-matrix estimation and validation methods, as well as procedures for determining the dimensionality (i.e., number of attributes) underlying CDM data.
+Date: 2021-05-07
+Authors@R: c(person(given = "Pablo", family = "Nájera", role = c("aut", "cre", "cph")), person(given = "Miguel A.", family = "Sorrel", role = c("aut", "cph"), email = "miguel.sorrel@uam.es"), person(given = "Francisco J.", family = "Abad", role = c("aut", "cph")))
+Description: Provides useful tools for cognitive diagnosis modeling (CDM) in applied and simulation studies. It includes empirical Q-matrix estimation and validation methods and procedures for determining the dimensionality (i.e., number of attributes) underlying CDM data.
 License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.6.0)
@@ -15,6 +15,6 @@ BugReports: https://github.com/pablo-najera/cdmTools/issues
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Author: Pablo Nájera [aut, cre, cph],
-  Miguel A. Sorrel [aut, cre, cph],
-  Francisco J. Abad [aut, cre, cph]
+  Miguel A. Sorrel [aut, cph],
+  Francisco J. Abad [aut, cph]
 Maintainer: Pablo Nájera <pablo.najera@uam.es>
