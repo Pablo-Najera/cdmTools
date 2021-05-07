@@ -1,19 +1,19 @@
 #' CDM fit comparison - dimensionality assessment method
 #'
 #' @description A procedure for determining the number of attributes underlying CDM using model fit comparison.
-#' For each number of attributes under exploration, a Q-matrix is estimated from the data using the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018), which can be further validated using the \emph{Hull} method (Najera, Sorrel, de la Torre, & Abad, 2020).
+#' For each number of attributes under exploration, a Q-matrix is estimated from the data using the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018), which can be further validated using the \emph{Hull} method (Nájera, Sorrel, de la Torre, & Abad, 2020).
 #' Then, a CDM is fitted to the data using the resulting Q-matrix, and several fit indices are computed.
 #' After the desired range of number of attributes has been explored, the fit indices are compared.
 #' A suggested number of attributes is given for each fit index.
 #' The AIC index should be preferred among the other fit indices.
-#' For further details, see Najera, Abad, & Sorrel (2020).
+#' For further details, see Nájera, Abad, & Sorrel (2020).
 #' This function can be also used by directly providing different Q-matrices (instead of estimating them from the data) in order to compare their fit and select the most appropriate Q-matrix.
 #' Note that, if Q-matrices are provided, this function will no longer serve as a dimensionality assessment method, but just as an automated model comparison procedure.
 #'
 #' @param dat A \emph{N} individuals x \emph{J} items (\code{matrix} or \code{data.frame}). Missing values need to be coded as \code{NA}.
-#' @param rangeK Number of attributes to use. The number of attributes to explore. The default is from 1 to 7 attributes.
-#' @param Qs A list of Q-matrices to compare in terms of fit. If \code{Qs} is used, \code{rangeK} is ignored.
-#' @param stop A fit index to use for stopping the procedure if a model leads to worse fit than a simpler one. This can be useful for saving time without exploring the whole rangeK when it is probable that the correct dimensionality has been already visited. It includes \code{"AIC"}, \code{"BIC"}, \code{"CAIC"}, \code{"SABIC"}, \code{"M2"}, \code{"SRMSR"}, \code{"RMSEA2"}, or \code{"sig.item.pairs"}. The latter represents the number of items that show bad fit with at least another item based on the transformed correlations (see \code{itemfit} function in the \code{GDINA} package; Ma & de la Torre, 2020). It can be also \code{"none"}, which means that the whole \code{rangeK} will be examined. The default is \code{"none"}.
+#' @param exploreK Number of attributes to explore. The default is from 1 to 7 attributes.
+#' @param Qs A list of Q-matrices to compare in terms of fit. If \code{Qs} is used, \code{exploreK} is ignored.
+#' @param stop A fit index to use for stopping the procedure if a model leads to worse fit than a simpler one. This can be useful for saving time without exploring the whole exploreK when it is probable that the correct dimensionality has been already visited. It includes \code{"AIC"}, \code{"BIC"}, \code{"CAIC"}, \code{"SABIC"}, \code{"M2"}, \code{"SRMSR"}, \code{"RMSEA2"}, or \code{"sig.item.pairs"}. The latter represents the number of items that show bad fit with at least another item based on the transformed correlations (see \code{itemfit} function in the \code{GDINA} package; Ma & de la Torre, 2020). It can be also \code{"none"}, which means that the whole \code{exploreK} will be examined. The default is \code{"none"}.
 #' @param val.Q Validate the estimated Q-matrices using the \emph{Hull} method? Note that validating the Q-matrix is expected to increase its quality, but the computation time will increase. The default is \code{TRUE}.
 #' @param estQ.args A list of arguments for the \emph{discrete factor loading} empirical Q-matrix estimation method (see the \code{estQ} function):
 #' \describe{
@@ -36,17 +36,17 @@
 #' \item{\code{sug.K}}{The suggested number of attributes for each fit index (\code{vector}). Only if \code{Qs = NULL}.}
 #' \item{\code{sel.Q}}{The suggested Q-matrix for each fit index (\code{vector}).}
 #' \item{\code{fit}}{The fit indices for each fitted model (\code{matrix}).}
-#' \item{\code{exp.rangeK}}{Explored dimensionality (\code{vector}). It can be different from \code{rangeK} if \code{stop} has been used.}
+#' \item{\code{exp.exploreK}}{Explored dimensionality (\code{vector}). It can be different from \code{exploreK} if \code{stop} has been used.}
 #' \item{\code{usedQ}}{Q-matrices used to fit each model (\code{list}). They will be the estimated (and validated) Q-matrices if \code{Qs = NULL}. Otherwise, they will be \code{Qs}.}
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
 #' @references
-#' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). DOI: 10.18637/jss.v093.i14.
+#' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 #'
-#' Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
+#' Nájera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 #'
-#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
+#' Nájera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. https://doi.org/10.1111/bmsp.12228
 #'
 #' Wang, W., Song, L., & Ding, S. (2018). An exploratory discrete factor loading method for Q-matrix specification in cognitive diagnosis models. In: M. Wilberg, S. Culpepper, R. Janssen, J. González, & D. Molenaar (Eds.), \emph{Quantitative Psychology. IMPS 2017. Springer Proceedings in Mathematics & Statistics} (Vol. 233, pp. 351-362). Springer.
 #'
@@ -61,7 +61,7 @@
 #' #-------------------------------------
 #' # Assess dimensionality from CDM data
 #' #-------------------------------------
-#' mcK <- modelcompK(dat = dat, rangeK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
+#' mcK <- modelcompK(dat = dat, exploreK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
 #' mcK$sug.K # Check suggested number of attributes by each fit index
 #' mcK$fit # Check fit indices for each K explored
 #' sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Extract the suggested Q-matrix by the suggested dimentionality according to AIC
@@ -80,10 +80,10 @@
 #' mc$sel.Q # Best-fitting Q-matrix for each fit index
 #' mc$fit # Check fit indices for each Q explored
 #' }
-modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE, estQ.args = list(criterion = "row", cor = "tet", rotation = "oblimin", fm = "uls"), valQ.args = list(index = "PVAF", iterative = "test.att", maxitr = 5, CDMconv = 0.01), verbose = TRUE){
+modelcompK <- function(dat, exploreK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE, estQ.args = list(criterion = "row", cor = "tet", rotation = "oblimin", fm = "uls"), valQ.args = list(index = "PVAF", iterative = "test.att", maxitr = 5, CDMconv = 0.01), verbose = TRUE){
   if(!is.matrix(dat) & !is.data.frame(dat)){stop("Error in modelcompK: dat must be a matrix or data.frame.")}
-  if((!is.numeric(rangeK) & !is.double(rangeK))){stop("Error in modelcompK: rangeK must be a numeric vector.")}
-  if(any(rangeK < 1)){stop("Error in modelcompK: rangeK must be greater than 0.")}
+  if((!is.numeric(exploreK) & !is.double(exploreK))){stop("Error in modelcompK: exploreK must be a numeric vector.")}
+  if(any(exploreK < 1)){stop("Error in modelcompK: exploreK must be greater than 0.")}
   if(!is.null(Qs)){if(!is.list(Qs)){stop("Error in modelcompK: Qs must be a list.")}}
   if(!(stop %in% c("none", "AIC", "BIC", "CAIC", "SABIC", "M2", "SRMSR", "RMSEA2", "sig.item.pairs"))){stop("Error in modelcompK: stop must be 'none', 'AIC', 'BIC', 'CAIC', 'SABIC', 'M2', 'SRMSR', 'RMSEA2', 'sig.item.pairs'.")}
   if(!is.logical(val.Q)){stop("Error in modelcompK: val.Q must be logical.")}
@@ -112,9 +112,9 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
 
   Qs.pre <- Qs
   if(is.null(Qs)){
-    fit.res <- matrix(NA, nrow = length(rangeK), ncol = 13)
+    fit.res <- matrix(NA, nrow = length(exploreK), ncol = 13)
     colnames(fit.res) <- c("logLik", "np", "AIC", "BIC", "CAIC", "SABIC", "M2", "M2.p", "SRMSR", "RMSEA2", "RMSEA2.low", "RMSEA2.high", "sig.item.pairs")
-    rownames(fit.res) <- paste0("K", rangeK)
+    rownames(fit.res) <- paste0("K", exploreK)
   } else {
     fit.res <- matrix(NA, nrow = length(Qs), ncol = 13)
     colnames(fit.res) <- c("logLik", "np", "AIC", "BIC", "CAIC", "SABIC", "M2", "M2.p", "SRMSR", "RMSEA2", "RMSEA2.low", "RMSEA2.high", "sig.item.pairs")
@@ -125,11 +125,11 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
 
   if(is.null(Qs)){
     if(verbose){
-      if(val.Q){cat("\n", "Estimating and validating Q-matrix with K =", rangeK, "\n")}
-      if(!val.Q){cat("\n", "Estimating Q-matrix with K =", rangeK, "\n")}
+      if(val.Q){cat("\n", "Estimating and validating Q-matrix with K =", exploreK, "\n")}
+      if(!val.Q){cat("\n", "Estimating Q-matrix with K =", exploreK, "\n")}
     }
     Qs <- list()
-    for(k in rangeK){
+    for(k in exploreK){
       est.Q.info <- estQ(r = dat, K = k, criterion = estQ.args$criterion, efa.args = list(cor = estQ.args$cor, rotation = estQ.args$rotation, fm = estQ.args$fm))
       est.Q <- est.Q.info$est.Q
       fit <- GDINA::GDINA(dat, est.Q, verbose = 0)
@@ -141,24 +141,24 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
           sug.Q.info <- valQ(fit, index = valQ.args$index, iterative = valQ.args$iterative, emptyatt = FALSE, maxitr = valQ.args$maxitr, CDMconv = valQ.args$CDMconv, verbose = FALSE)
           sug.Q <- sug.Q.info$sug.Q
           valQ.conv <- c(valQ.conv, sug.Q.info$convergence)
-          Qs[[which(rangeK == k)]] <- sug.Q
+          Qs[[which(exploreK == k)]] <- sug.Q
           if(length(sug.Q.info$sugQ.fit) == 13){
-            fit.res[which(rangeK == k),] <- sug.Q.info$sugQ.fit
+            fit.res[which(exploreK == k),] <- sug.Q.info$sugQ.fit
           } else {
             sug.Q.info$sugQ.fit <- c(sug.Q.info$sugQ.fit[1:6], M2 = NA, M2.p = NA, sug.Q.info$sugQ.fit[7], RMSEA2 = NA, RMSEA2.low = NA, RMSEA2.high = NA, sug.Q.info$sugQ.fit[8])
-            fit.res[which(rangeK == k),] <- sug.Q.info$sugQ.fit
+            fit.res[which(exploreK == k),] <- sug.Q.info$sugQ.fit
           }
         } else {
-          Qs[[which(rangeK == k)]] <- est.Q
-          fit.res[which(rangeK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
+          Qs[[which(exploreK == k)]] <- est.Q
+          fit.res[which(exploreK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
         }
       } else {
-        Qs[[which(rangeK == k)]] <- est.Q
-        fit.res[which(rangeK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
+        Qs[[which(exploreK == k)]] <- est.Q
+        fit.res[which(exploreK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
       }
-      if(verbose){cat("   k =", k, "explored | AIC =", round(fit.res$AIC[which(rangeK == k)]), "| BIC =", round(fit.res$BIC[which(rangeK == k)]), "\n")}
-      if(k > 1 & stop != "none" & which(rangeK == k) > 1){
-        if(fit.res[which(rangeK == k), stop] > fit.res[which(rangeK == k) - 1, stop]){break}
+      if(verbose){cat("   k =", k, "explored | AIC =", round(fit.res$AIC[which(exploreK == k)]), "| BIC =", round(fit.res$BIC[which(exploreK == k)]), "\n")}
+      if(k > 1 & stop != "none" & which(exploreK == k) > 1){
+        if(fit.res[which(exploreK == k), stop] > fit.res[which(exploreK == k) - 1, stop]){break}
       }
     }
   } else {
@@ -189,8 +189,8 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
   names(Qs) <- rownames(fit.res)
   sel.Q.pre <- fit.res[,-c(1:2)]
   if(is.null(Qs.pre)){
-    sel.Q <- paste0("K", rangeK[apply(sel.Q.pre, 2, which.min)])
-    sel.Q[6] <- paste0("K", rangeK[which.max(sel.Q.pre$M2.p)])
+    sel.Q <- paste0("K", exploreK[apply(sel.Q.pre, 2, which.min)])
+    sel.Q[6] <- paste0("K", exploreK[which.max(sel.Q.pre$M2.p)])
   } else{
     sel.Q <- rownames(sel.Q.pre)[apply(sel.Q.pre, 2, which.min)]
     sel.Q[6] <- rownames(sel.Q.pre)[which.max(sel.Q.pre$M2.p)]
@@ -198,13 +198,13 @@ modelcompK <- function(dat, rangeK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE
   names(sel.Q) <- colnames(sel.Q.pre)
   if(val.Q){
     if(is.null(Qs.pre)){
-      sug.K <- rangeK[apply(sel.Q.pre, 2, which.min)]
-      sug.K[6] <- rangeK[which.max(sel.Q.pre$M2.p)]
+      sug.K <- exploreK[apply(sel.Q.pre, 2, which.min)]
+      sug.K[6] <- exploreK[which.max(sel.Q.pre$M2.p)]
       names(sug.K) <- names(sel.Q)
     }
   }
 
-  spec <- list(dat = dat, rangeK = rangeK, Qs = Qs.pre, stop = stop, val.Q = val.Q, estQ.args = estQ.args, valQ.args = valQ.args, verbose = verbose)
+  spec <- list(dat = dat, exploreK = exploreK, Qs = Qs.pre, stop = stop, val.Q = val.Q, estQ.args = estQ.args, valQ.args = valQ.args, verbose = verbose)
   if(is.null(Qs.pre)){
     res <- list(sug.K = sug.K, sel.Q = sel.Q, fit = fit.res, usedQ = Qs, specifications = spec)
   } else {

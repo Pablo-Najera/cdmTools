@@ -10,7 +10,7 @@
 #' @param Kj A vector specifying the number (or proportion, if summing up to 1) of items measuring 1, 2, 3, ..., attributes. The first element of the vector determines the number (or proportion) of items measuring 1 attribute, and so on. See \code{Examples}.
 #' @param I Number of identity matrices to include in the Q-matrix (up to column permutation). The default is 2.
 #' @param min.JK Minimum number of items measuring each attribute. It can be overwritten by \code{I}, if \code{I} is higher than \code{min.JK}. The default is 3.
-#' @param max.Kcor Maximum allowed tetrachoric correlation among the columns. A value lower than 1 might prevent from attribute overlapping (Najera, Sorrel, de la Torre, & Abad, 2020). The default is 1.
+#' @param max.Kcor Maximum allowed tetrachoric correlation among the columns to avoid overlapping (Nájera, Sorrel, de la Torre, & Abad, 2020). The default is 1.
 #' @param Qid Assure that the generated Q-matrix is identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.
 #' @param seed A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.
 #'
@@ -24,11 +24,11 @@
 #' }
 #'
 #' @references
-#' Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. DOI: 10.1080/01621459.2014.934827.
+#' Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. https://doi.org/10.1080/01621459.2014.934827
 #'
-#' Najera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. DOI: 10.1111/bmsp.12228.
+#' Nájera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. https://doi.org/10.1111/bmsp.12228
 #'
-#' Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. DOI: 10.1080/01621459.2017.1340889.
+#' Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. https://doi.org/10.1080/01621459.2017.1340889
 #'
 #' @export
 #'

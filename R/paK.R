@@ -1,7 +1,7 @@
 #' Parallel analysis - dimensionality assessment method
 #'
-#' @description Parallel analysis with column permutation (i.e., resampling) as used in Najera, Abad, & Sorrel (2020).
-#' It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Najera, Abad, & Sorrel, 2020).
+#' @description Parallel analysis with column permutation (i.e., resampling) as used in Nájera, Abad, & Sorrel (2020).
+#' It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Nájera, Abad, & Sorrel, 2020).
 #' The parallel analysis based on principal axis factor analysis is conducted using the \code{fa.parallel} function of the \code{psych} R package (Revelle, 2020).
 #' The tetrachoric correlations are efficiently estimated using the \code{sirt} R package (Robitzsch, 2020).
 #' The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
@@ -25,15 +25,15 @@
 #' }
 #'
 #' @references
-#' Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474.
+#' Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474. https://doi.org/10.1037/a0030005
 #'
-#' Najera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Manuscript under review}.
+#' Nájera, P., Abad, F. J., & Sorrel, M. A. (2020). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 #'
-#' Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. Retrieved from https://CRAN.R-project.org/package=psych.
+#' Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. https://CRAN.R-project.org/package=psych.
 #'
-#' Robitzsch, A. (2020). \emph{sirt: Supplementary Item Response Theory Models}. R package version 3.9-4. Retrieved from https://CRAN.R-project.org/package=sirt.
+#' Robitzsch, A. (2020). \emph{sirt: Supplementary Item Response Theory Models}. R package version 3.9-4. https://CRAN.R-project.org/package=sirt.
 #'
-#' Wickham, H., et al. (2020). \emph{ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics}. R package version 3.3.2. Retrieved from https://CRAN.R-project.org/package=ggplot2.
+#' Wickham, H., et al. (2020). \emph{ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics}. R package version 3.3.2. https://CRAN.R-project.org/package=ggplot2.
 #'
 #' @export
 #'
@@ -62,15 +62,15 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
   if(!is.logical(verbose)){stop("Error in paK: verbose must be logical.")}
   if(!is.null(seed)){if((!is.numeric(seed) & !is.double(seed)) | length(seed) > 1){stop("Error in paK: seed must be a unique numeric value.")}}
   if(sum(is.na(cor(dat, use = "pair"))) > 0) stop("Error in paK: Parallel analysis cannot be computed when NAs are found in dat correlation matrix.")
-  
-  
+
+
   if(!is.null(seed)){set.seed(seed)}
   J <- ncol(dat)
   N <- nrow(dat)
-  
+
   if(fa == "both"){fa <- c("pc", "fa")}
   if(cor == "both"){cor <- c("cor", "tet")}
-  
+
   sim.pc.r <- sim.fa.r <- sim.pc.p <- sim.fa.p <- matrix(NA, R, J)
   for(i in 1:R){
     resample <- sapply(1:J, function(j) sample(dat[,j], length(dat[,j]), F))
@@ -87,7 +87,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
     if(verbose){cat("\r", "In paK: Iteration", i, "out of", R)}
   }
   if(verbose){cat("\n")}
-  
+
   conds <- expand.grid(fa = fa, cor = cor, cutoff = cutoff)
   N.conds <- nrow(conds)
   reference <- as.data.frame(matrix(NA, nrow = N.conds, ncol = J, dimnames = list(apply(conds, 1, paste, collapse = "."), 1:J)))
@@ -131,7 +131,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
       }
     }
   }
-  
+
   if("cor" %in% cor){cor.matrix <- cor(dat, use = "pair")}
   if("tet" %in% cor){tet.matrix <- sirt::tetrachoric2(dat)$rho}
   dat.eigen <- as.data.frame(matrix(NA, nrow = 4, ncol = J, dimnames = list(c("dat.fa.cor", "dat.fa.tet", "dat.pc.cor", "dat.pc.tet"), 1:J)))
@@ -144,7 +144,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
     if("tet" %in% cor){dat.eigen["dat.pc.tet",] <- eigen(tet.matrix, only.values = T)$values}
   }
   dat.eigen <- na.omit(dat.eigen)
-  
+
   nF <- as.data.frame(matrix(NA, nrow = 1, ncol = N.conds, dimnames = list(1, apply(conds, 1, paste, collapse = "."))))
   if("cor" %in% cor){
     if("fa" %in% fa){
@@ -194,7 +194,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
   dat.eigen <- dat.eigen[order(row.names(dat.eigen)),]
   reference <- reference[order(row.names(reference)),]
   e.values <- rbind(dat.eigen, reference)
-  
+
   P <- NULL
   if(plot){
     df.e.values <- data.frame(Dataset = rep(row.names(e.values), each = J), J = rep(1:J, nrow(e.values)), eigen = as.numeric(t(e.values)))
@@ -206,7 +206,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
       ggplot2::scale_x_continuous("Number") +
       ggplot2::theme_bw()
   }
-  
+
   spec <- list(dat = dat, R = R, fa = fa, cor = cor, cutoff = cutoff, fm = fm, verbose = verbose, seed = seed)
   res <- list(sug.K = sug.K, e.values = e.values, plot = P, specifications = spec)
   class(res) <- "paK"
