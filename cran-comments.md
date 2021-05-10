@@ -10,7 +10,6 @@ There were no ERRORs or WARNINGs.
 
 There was 1 NOTE:
 
-* Spelling has been checked. Please note that all possibly mis-spelled words are surnames, acronyms, or British spelling used in paper references.
 ```
 Mantainer: 'Pablo Nájera pablo.najera@uam.es'
 
@@ -19,3 +18,4 @@ New submission
 Possibly mis-spelled words in DESCRIPTION: 
 CDM (7:70, 7:265)
 ```
+* Spelling has been checked. Please note that all possibly mis-spelled words are surnames, acronyms, or British spelling used in paper references.
