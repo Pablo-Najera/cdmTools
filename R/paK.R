@@ -97,7 +97,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
         if(i == "mean"){
           reference["fa.cor.mean",] <- colMeans(sim.fa.r)
         } else {
-          reference[paste(c("fa.cor", i), collapse = "."),] <- apply(sim.fa.r, 2, function(x) quantile(x, as.numeric(i) / 100, na.rm = T))
+          reference[paste(c("fa.cor", i), collapse = "."),] <- apply(sim.fa.r, 2, function(x) stats::quantile(x, as.numeric(i) / 100, na.rm = T))
         }
       }
     }
@@ -106,7 +106,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
         if(i == "mean"){
           reference["pc.cor.mean",] <- colMeans(sim.pc.r)
         } else {
-          reference[paste(c("pc.cor", i), collapse = "."),] <- apply(sim.pc.r, 2, function(x) quantile(x, as.numeric(i) / 100, na.rm = T))
+          reference[paste(c("pc.cor", i), collapse = "."),] <- apply(sim.pc.r, 2, function(x) stats::quantile(x, as.numeric(i) / 100, na.rm = T))
         }
       }
     }
@@ -117,7 +117,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
         if(i == "mean"){
           reference["fa.tet.mean",] <- colMeans(sim.fa.p)
         } else {
-          reference[paste(c("fa.tet", i), collapse = "."),] <- apply(sim.fa.p, 2, function(x) quantile(x, as.numeric(i) / 100, na.rm = T))
+          reference[paste(c("fa.tet", i), collapse = "."),] <- apply(sim.fa.p, 2, function(x) stats::quantile(x, as.numeric(i) / 100, na.rm = T))
         }
       }
     }
@@ -126,7 +126,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
         if(i == "mean"){
           reference["pc.tet.mean",] <- colMeans(sim.pc.p)
         } else {
-          reference[paste(c("pc.tet", i), collapse = "."),] <- apply(sim.pc.p, 2, function(x) quantile(x, as.numeric(i) / 100, na.rm = T))
+          reference[paste(c("pc.tet", i), collapse = "."),] <- apply(sim.pc.p, 2, function(x) stats::quantile(x, as.numeric(i) / 100, na.rm = T))
         }
       }
     }
@@ -143,7 +143,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
     if("cor" %in% cor){dat.eigen["dat.pc.cor",] <- eigen(cor.matrix, only.values = T)$values}
     if("tet" %in% cor){dat.eigen["dat.pc.tet",] <- eigen(tet.matrix, only.values = T)$values}
   }
-  dat.eigen <- na.omit(dat.eigen)
+  dat.eigen <- stats::na.omit(dat.eigen)
 
   nF <- as.data.frame(matrix(NA, nrow = 1, ncol = N.conds, dimnames = list(1, apply(conds, 1, paste, collapse = "."))))
   if("cor" %in% cor){
@@ -195,11 +195,11 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
   reference <- reference[order(row.names(reference)),]
   e.values <- rbind(dat.eigen, reference)
 
-  P <- NULL
+  P <- dataeigen <- NULL
   if(plot){
-    df.e.values <- data.frame(Dataset = rep(row.names(e.values), each = J), J = rep(1:J, nrow(e.values)), eigen = as.numeric(t(e.values)))
-    point <- ifelse(grepl("dat", df.e.values$Dataset), 16, 4)
-    P <- ggplot2::ggplot(df.e.values, ggplot2::aes(x = J, y = eigen, color = Dataset)) +
+    df.e.values <- data.frame(dataeigen = rep(row.names(e.values), each = J), J = rep(1:J, nrow(e.values)), eigen = as.numeric(t(e.values)))
+    point <- ifelse(grepl("dat", df.e.values$dataeigen), 16, 4)
+    P <- ggplot2::ggplot(df.e.values, ggplot2::aes(x = J, y = eigen, color = dataeigen)) +
       ggplot2::geom_line(size = 1) +
       ggplot2::geom_point(size = 2, shape = point) +
       ggplot2::scale_y_continuous("Eigenvalues") +

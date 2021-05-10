@@ -113,7 +113,7 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
 
   if(is.null(n.obs)){
     if(efa.args$cor == "cor"){
-      use.r <- cor(r)
+      use.r <- stats::cor(r)
     } else if(efa.args$cor == "tet"){
       use.r <- sirt::tetrachoric2(r, progress = FALSE)$rho
     }
@@ -144,7 +144,7 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
         D.j <- apply(B, 2, function(f) order(f, decreasing = T))
         C <- apply(B, 2, function(f) sort(f, decreasing = T))
         D <- apply(C, 2, function(f) abs(diff(f)))
-        jump <- sapply(1:ncol(D), function(f) tail(D[D[,f] > mean(D[,f]), f], 1))
+        jump <- sapply(1:ncol(D), function(f) utils::tail(D[D[,f] > mean(D[,f]), f], 1))
         cut <- abs(sapply(1:ncol(D), function(f) A[D.j[which(D[,f] == jump[f]), f], f]))
         est.Q <- sapply(1:ncol(A), function(f) ifelse(abs(A[,f]) >= cut[f], 1, 0))
       } else {
@@ -159,7 +159,7 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
           N.boot <- sort(sample(1:N, boot.args$N, replace = F))
         }
         if(efa.args$cor == "cor"){
-          use.r <- cor(r[N.boot,])
+          use.r <- stats::cor(r[N.boot,])
         } else if(efa.args$cor == "tet"){
           use.r <- sirt::tetrachoric2(r[N.boot,], progress = FALSE)$rho
         }
@@ -182,7 +182,7 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
           D.j <- apply(B, 2, function(f) order(f, decreasing = T))
           C <- apply(B, 2, function(f) sort(f, decreasing = T))
           D <- apply(C, 2, function(f) abs(diff(f)))
-          jump <- sapply(1:ncol(D), function(f) tail(D[D[,f] > mean(D[,f]), f], 1))
+          jump <- sapply(1:ncol(D), function(f) utils::tail(D[D[,f] > mean(D[,f]), f], 1))
           cut <- abs(sapply(1:ncol(D), function(f) A[D.j[which(D[,f] == jump[f]), f], f]))
           tmp.Q <- sapply(1:ncol(A), function(f) ifelse(abs(A[,f]) >= cut[f], 1, 0))
           tmp.Q <- orderQ(tmp.Q, boot.Q)$order.Q

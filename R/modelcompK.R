@@ -150,11 +150,11 @@ modelcompK <- function(dat, exploreK = 1:7, Qs = NULL, stop = "none", val.Q = TR
           }
         } else {
           Qs[[which(exploreK == k)]] <- est.Q
-          fit.res[which(exploreK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
+          fit.res[which(exploreK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, stats::AIC(fit), stats::BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
         }
       } else {
         Qs[[which(exploreK == k)]] <- est.Q
-        fit.res[which(exploreK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, AIC(fit), BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
+        fit.res[which(exploreK == k),] <- c(GDINA::extract(fit, what = "logLik"), fit$testfit$npar, stats::AIC(fit), stats::BIC(fit), mfit$CAIC, mfit$SABIC, mfit$M2, mfit$M2.pvalue, mfit$SRMSR, mfit$RMSEA2, mfit$RMSEA2.CI[1], mfit$RMSEA2.CI[2], length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
       }
       if(verbose){cat("   k =", k, "explored | AIC =", round(fit.res$AIC[which(exploreK == k)]), "| BIC =", round(fit.res$BIC[which(exploreK == k)]), "\n")}
       if(k > 1 & stop != "none" & which(exploreK == k) > 1){
@@ -170,8 +170,8 @@ modelcompK <- function(dat, exploreK = 1:7, Qs = NULL, stop = "none", val.Q = TR
       ifit <- GDINA::itemfit(fit)
       fit.res$logLik[q] <- GDINA::extract(fit, what = "logLik")
       fit.res$np[q] <- fit$testfit$npar
-      fit.res$AIC[q] <- AIC(fit)
-      fit.res$BIC[q] <- BIC(fit)
+      fit.res$AIC[q] <- stats::AIC(fit)
+      fit.res$BIC[q] <- stats::BIC(fit)
       fit.res$CAIC[q] <- mfit$CAIC
       fit.res$SABIC[q] <- mfit$SABIC
       fit.res$M2[q] <- mfit$M2

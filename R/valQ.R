@@ -138,7 +138,7 @@ valQ <- function(fit, index = "PVAF", iterative = "test.att", emptyatt = TRUE, m
 
   mfit <- GDINA::modelfit(fit)
   ifit <- GDINA::itemfit(fit)
-  sugQ.fit <- c(logLik = GDINA::extract(fit, what = "logLik"), np = fit$testfit$npar, AIC = AIC(fit), BIC = BIC(fit), CAIC = mfit$CAIC, SABIC = mfit$SABIC, M2 = mfit$M2, M2.pvalue = mfit$M2.pvalue, SRMSR = mfit$SRMSR, RMSEA2 = mfit$RMSEA2, RMSEA2.CI = mfit$RMSEA2.CI[1], RMSEA2.CI = mfit$RMSEA2.CI[2], sig.item.pairs = length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
+  sugQ.fit <- c(logLik = GDINA::extract(fit, what = "logLik"), np = fit$testfit$npar, AIC = stats::AIC(fit), BIC = stats::BIC(fit), CAIC = mfit$CAIC, SABIC = mfit$SABIC, M2 = mfit$M2, M2.pvalue = mfit$M2.pvalue, SRMSR = mfit$SRMSR, RMSEA2 = mfit$RMSEA2, RMSEA2.CI = mfit$RMSEA2.CI[1], RMSEA2.CI = mfit$RMSEA2.CI[2], sig.item.pairs = length(which(ifit$max.itemlevel.fit[,5] < 0.05)))
   finish.time <- Sys.time()
   time.used <- difftime(finish.time, init.time, units = "secs")
   spec <- list(fit = fit, index = index, iterative = iterative, emptyatt = emptyatt, maxitr = maxitr, CDMconv = CDMconv, verbose = verbose)

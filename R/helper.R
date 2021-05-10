@@ -29,7 +29,7 @@ cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "obli
       if (psych::isCorrelation(r)) {
         mu <- rep(0, nvar)
         eX <- eigen(r)
-        X <- matrix(rnorm(nvar * n.obs), n.obs)
+        X <- matrix(stats::rnorm(nvar * n.obs), n.obs)
         X <- t(eX$vectors %*% diag(sqrt(pmax(eX$values,
                                              0)), nvar) %*% t(X))
       }
@@ -62,12 +62,12 @@ cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "obli
     replicates <- matrix(unlist(replicateslist), nrow = n.iter,
                          byrow = TRUE)
     means <- colMeans(replicates, na.rm = TRUE)
-    sds <- apply(replicates, 2, sd, na.rm = TRUE)
+    sds <- apply(replicates, 2, stats::sd, na.rm = TRUE)
     if (length(means) > (nvar * nfactors)) {
       means.rot <- means[(nvar * nfactors + 1):length(means)]
       sds.rot <- sds[(nvar * nfactors + 1):length(means)]
-      ci.rot.lower <- means.rot + qnorm(p/2) * sds.rot
-      ci.rot.upper <- means.rot + qnorm(1 - p/2) * sds.rot
+      ci.rot.lower <- means.rot + stats::qnorm(p/2) * sds.rot
+      ci.rot.upper <- means.rot + stats::qnorm(1 - p/2) * sds.rot
       ci.rot <- data.frame(lower = ci.rot.lower, upper = ci.rot.upper)
     }
     else {
@@ -80,17 +80,17 @@ cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "obli
     means <- matrix(means[1:(nvar * nfactors)], ncol = nfactors)
     sds <- matrix(sds[1:(nvar * nfactors)], ncol = nfactors)
     tci <- abs(means)/sds
-    ptci <- 1 - pnorm(tci)
+    ptci <- 1 - stats::pnorm(tci)
     if (!is.null(rep.rots)) {
       tcirot <- abs(means.rot)/sds.rot
-      ptcirot <- 1 - pnorm(tcirot)
+      ptcirot <- 1 - stats::pnorm(tcirot)
     }
     else {
       tcirot <- NULL
       ptcirot <- NULL
     }
-    ci.lower <- means + qnorm(p/2) * sds
-    ci.upper <- means + qnorm(1 - p/2) * sds
+    ci.lower <- means + stats::qnorm(p/2) * sds
+    ci.upper <- means + stats::qnorm(1 - p/2) * sds
     ci <- data.frame(lower = ci.lower, upper = ci.upper)
     class(means) <- "loadings"
     colnames(means) <- colnames(sds) <- colnames(fl)
@@ -180,7 +180,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
       start <- diag(S) - S.smc
     }
     if (fm == "ml" || fm == "mle") {
-      res <- optim(start, FAfn, FAgr, method = "L-BFGS-B",
+      res <- stats::optim(start, FAfn, FAgr, method = "L-BFGS-B",
                    lower = 0.005, upper = upper, control = c(list(fnscale = 1,
                                                                   parscale = rep(0.01, length(start))), control),
                    nf = nf, S = S)
@@ -193,7 +193,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
         else {
           start <- SMC
         }
-        res <- optim(start, FA.OLS, method = "L-BFGS-B",
+        res <- stats::optim(start, FA.OLS, method = "L-BFGS-B",
                      lower = 0.005, upper = upper, control = c(list(fnscale = 1,
                                                                     parscale = rep(0.01, length(start)))), nf = nf,
                      S = S)
@@ -201,7 +201,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
       else {
         if ((fm == "minres") | (fm == "uls")) {
           start <- diag(S) - psych::smc(S, covar)
-          res <- optim(start, fit.residuals, gr = FAgr.minres,
+          res <- stats::optim(start, fit.residuals, gr = FAgr.minres,
                        method = "L-BFGS-B", lower = 0.005,
                        upper = upper, control = c(list(fnscale = 1,
                                                        parscale = rep(0.01, length(start)))),
@@ -209,7 +209,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
         }
         else {
           start <- psych::smc(S, covar)
-          res <- optim(start, fit.residuals, gr = FAgr.minres2,
+          res <- stats::optim(start, fit.residuals, gr = FAgr.minres2,
                        method = "L-BFGS-B", lower = 0.005,
                        upper = upper, control = c(list(fnscale = 1,
                                                        parscale = rep(0.01, length(start)))),
@@ -285,7 +285,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
     return(L)
   }
   "MRFA" <- function(S, nf) {
-    com.glb <- glb.algebraic(S)
+    com.glb <- psych::glb.algebraic(S)
     L <- FAout.wls(1 - com.glb$solution, S, nf)
     h2 <- com.glb$solution
     result <- list(loadings = L, communality = h2)
@@ -336,7 +336,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
         x.matrix[miss] <- item.means[miss[, 2]]
       }
       else {
-        item.med <- apply(x.matrix, 2, median, na.rm = TRUE)
+        item.med <- apply(x.matrix, 2, stats::median, na.rm = TRUE)
         x.matrix[miss] <- item.med[miss[, 2]]
       }
     }
@@ -346,15 +346,15 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
     }
     switch(cor, cor = {
       if (!is.null(weight)) {
-        r <- cor.wt(r, w = weight)$r
+        r <- psych::cor.wt(r, w = weight)$r
       } else {
-        r <- cor(r, use = use)
+        r <- stats::cor(r, use = use)
       }
     }, cov = {
-      r <- cov(r, use = use)
+      r <- stats::cov(r, use = use)
       covar <- TRUE
     }, wtd = {
-      r <- cor.wt(r, w = weight)$r
+      r <- psych::cor.wt(r, w = weight)$r
     }, spearman = {
       r <- cor(r, use = use, method = "spearman")
     }, kendall = {
@@ -391,7 +391,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
       r <- as.matrix(r)
     }
     if (!covar) {
-      r <- cov2cor(r)
+      r <- stats::cov2cor(r)
     }
   }
   if (!residuals) {
@@ -459,7 +459,7 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
     e.values <- eigen(r, symmetric = symmetric)$values
     H2 <- diag(r.mat)
     while (err > min.err) {
-      r.mat <- cov2cor(r.mat)
+      r.mat <- stats::cov2cor(r.mat)
       eigens <- eigen(r.mat, symmetric = symmetric)
       loadings <- eigens$vectors[, 1:nfactors, drop = FALSE] %*%
         diag(sqrt(eigens$values[1:nfactors, drop = FALSE]))
@@ -587,10 +587,10 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rotate == "geominT" | rotate == "targetT" |
           rotate == "bifactor" | rotate == "TargetT" |
           rotate == "equamax" | rotate == "varimin" |
-          rotate == "specialT" | rotate == "Promax" |
+          rotate == "Promax" |
           rotate == "promax" | rotate == "cluster" |
-          rotate == "biquartimin" | rotate == "TargetQ" |
-          rotate == "specialQ") {
+          rotate == "biquartimin" |
+          rotate == "TargetQ") {
         Phi <- NULL
         switch(rotate, varimax = {
           rotated <- stats::varimax(loadings)
@@ -654,10 +654,6 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rot <- psych::varimin(loadings, ...)
           loadings <- rot$loadings
           rot.mat <- t(solve(rot$Th))
-        }, specialT = {
-          rot <- specialT(loadings, ...)
-          loadings <- rot$loadings
-          rot.mat <- t(solve(rot$Th))
         }, Promax = {
           pro <- psych::Promax(loadings, ...)
           loadings <- pro$loadings
@@ -670,8 +666,8 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rot.mat <- pro$rotmat
           Phi <- pro$Phi
         }, cluster = {
-          loadings <- varimax(loadings, ...)$loadings
-          pro <- target.rot(loadings)
+          loadings <- stats::varimax(loadings, ...)$loadings
+          pro <- psych::target.rot(loadings)
           loadings <- pro$loadings
           Phi <- pro$Phi
           rot.mat <- pro$rotmat
@@ -685,11 +681,6 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           loadings <- ob$loadings
           Phi <- ob$Phi
           rot.mat <- t(solve(ob$Th))
-        }, specialQ = {
-          ob <- specialQ(loadings, ...)
-          loadings <- ob$loadings
-          Phi <- ob$Phi
-          rot.mat <- t(solve(pro$Th))
         })
       }
       else {
@@ -701,11 +692,11 @@ cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
             Phi <- NULL
           }
           else {
-            ob <- try(do.call(getFromNamespace(rotate,
+            ob <- try(do.call(utils::getFromNamespace(rotate,
                                                "GPArotation"), list(loadings, ...)))
             if (inherits(ob, as.character("try-error"))) {
               warning("The requested transformaton failed, Promax was used instead as an oblique transformation")
-              ob <- Promax(loadings)
+              ob <- psych::Promax(loadings)
             }
             loadings <- ob$loadings
             Phi <- ob$Phi
@@ -988,7 +979,7 @@ select.q <- function(M, best.pos = NULL){
   np <- c(0, 2^(1:K))
   H.tmp <- H <- hull(bKj$best.M, np, TRUE)
   H.tmp[is.na(H.tmp)] <- 0
-  bK <- sapply(1:J, function(j) which.max(na.omit(abs(H.tmp[,j])))); names(bK) <- paste0("J", 1:J)
+  bK <- sapply(1:J, function(j) which.max(stats::na.omit(abs(H.tmp[,j])))); names(bK) <- paste0("J", 1:J)
   bq <- sapply(1:J, function(j) bKj$best.pos[bK[j], j])
   sug.Q <- GDINA::attributepattern(K)[1 + bq,]
   return(list(sug.Q = sug.Q, bKj = bKj, H = H, bK = bK, bq = bq))

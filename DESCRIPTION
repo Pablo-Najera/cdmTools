@@ -1,12 +1,12 @@
 Package: cdmTools
 Type: Package
 Title: Useful Tools for Cognitive Diagnosis Modeling
-Version: 0.1.1
-Date: 2021-05-07
+Version: 1.0.0
+Date: 2021-05-10
 Authors@R: c(person(given = "Pablo", family = "Nájera", role = c("aut", "cre", "cph"), email = "pablo.najera@uam.es"), person(given = "Miguel A.", family = "Sorrel", role = c("aut", "cph"), email = "miguel.sorrel@uam.es"), person(given = "Francisco J.", family = "Abad", role = c("aut", "cph")))
 Description: Provides useful tools for cognitive diagnosis modeling (CDM) in applied and simulation studies. It includes empirical Q-matrix estimation and validation methods and procedures for determining the dimensionality (i.e., number of attributes) underlying CDM data.
 License: GPL-3
-LazyData: TRUE
+LazyData: FALSE
 Depends: R (>= 3.6.0)
 Imports: GDINA (>= 2.8.0), ggplot2 (>= 3.3.0), psych (>= 1.9.12), sirt (>= 3.9-4), parallel (>= 3.6.3), stats (>= 3.6.3), GPArotation (>= 2014.11-1), combinat (>= 0.0-8)
 Suggests: CDM
