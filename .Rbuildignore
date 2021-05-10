@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^cran-comments.md$
+^cdmTools_1.0.0.pdf$
+^cdmTools_1.0.0.tar.gz$
