@@ -38,15 +38,14 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(GDINA)
 #' dat <- sim30GDINA$simdat
 #' Q <- sim30GDINA$simQ
-#' pa.K <- paK(dat = dat, fa = "pc", cutoff = c("mean", 95), plot = TRUE, verbose = TRUE, seed = 123)
+#' # In paK, R = 100 is recommended (R = 50 is here used for illustration purposes)
+#' pa.K <- paK(dat = dat, R = 50, fa = "pc", cutoff = c("mean", 95), plot = TRUE, verbose = TRUE, seed = 123)
 #' pa.K$sug.K # Check suggested number of attributes by each parallel analysis variant
 #' pa.K$e.values # Check eigenvalues
 #' pa.K$plot # Show parallel analysis plot
-#' }
 paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "uls", plot = TRUE, verbose = TRUE, seed = NULL){
   if(!is.matrix(dat) & !is.data.frame(dat)){stop("Error in paK: dat must be a matrix or data.frame.")}
   if((!is.numeric(R) & !is.double(R)) | length(R) > 1){stop("Error in paK: R must be a unique numeric value.")}

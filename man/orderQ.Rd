@@ -26,12 +26,10 @@ Reordering a Q-matrix is alike relabeling the attributes and it does not change 
 Useful for simulation studies (e.g., comparing a validated Q-matrix with the generating Q-matrix).
 }
 \examples{
-\dontrun{
 library(GDINA)
 dat <- sim30GDINA$simdat
 Q <- sim30GDINA$simQ
 sugQ1 <- estQ(r = dat, K = 5) # Estimate Q-matrix
 sugQ1$est.Q <- orderQ(sugQ1$est.Q, Q)$order.Q # Reorder Q-matrix attributes
 mean(sugQ1$est.Q == Q) # Check similarity with the generating Q-matrix
-}
 }

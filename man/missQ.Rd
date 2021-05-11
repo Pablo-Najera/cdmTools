@@ -34,11 +34,9 @@ Only binary Q-matrix are supported so far.
 Useful for simulation studies.
 }
 \examples{
-\dontrun{
 Kj <- c(15, 10, 0, 5) # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
 Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)
 miss.Q <- missQ(Q = Q$gen.Q, qjk = .20, retainJ = 4, seed = 123)
-}
 }
 \references{
 Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. https://doi.org/10.1080/01621459.2017.1340889

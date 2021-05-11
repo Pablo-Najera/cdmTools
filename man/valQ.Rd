@@ -54,7 +54,6 @@ Different iterative implementations are available, such as the test-level implem
 If an iterative implementation is used, the \code{GDINA} R package (Ma & de la Torre, 2020) is used for the calibration of the CDMs.
 }
 \examples{
-\dontrun{
 library(GDINA)
 dat <- sim30GDINA$simdat
 Q <- sim30GDINA$simQ # Generating Q-matrix
@@ -62,7 +61,6 @@ miss.Q <- missQ(Q = Q, qjk = .30, retainJ = 5, seed = 123)$miss.Q # Misspecified
 fit <- GDINA(dat, miss.Q) # GDINA object
 sug.Q <- valQ(fit = fit, verbose = TRUE) # Hull method for Q-matrix validation
 mean(sug.Q$sug.Q == Q) # Check similarity with the generating Q-matrix
-}
 }
 \references{
 de la Torre, J., & Chiu, C.-Y. (2016). A general method of empirical Q-matrix validation. \emph{Psychometrika}, \emph{81}, 253-273. https://doi.org/10.1007/s11336-015-9467-8

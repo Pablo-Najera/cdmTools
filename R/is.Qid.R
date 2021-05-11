@@ -27,11 +27,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' Kj <- c(15, 10, 0, 5)
 #' Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)$gen.Q
 #' idQ <- is.Qid(Q)
-#' }
 is.Qid <- function(Q, model = "others", verbose = TRUE){
   if(!is.matrix(Q) & !is.data.frame(Q)){stop("Error in is.Qid: Q must be a matrix or data.frame.")}
   if(!(model %in% c("others", "DINA", "DINO"))){stop("Error in is.Qid: model must be 'DINA', 'DINO', or 'others'.")}

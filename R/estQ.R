@@ -49,7 +49,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(GDINA)
 #' dat <- sim30GDINA$simdat
 #' Q <- sim30GDINA$simQ
@@ -64,11 +63,11 @@
 #' #------------------------------------
 #' # Using the bagging bootstrap method
 #' #------------------------------------
-#' sugQ2 <- estQ(r = dat, K = 5, boot = TRUE, boot.args = list(seed = 123)) # Estimate Q-matrix
+#' # In boot.args argument, R = 100 is recommended (R = 50 is here used for illustration purposes)
+#' sugQ2 <- estQ(r = dat, K = 5, boot = TRUE, boot.args = list(R = 50, seed = 123)) # Estimate Q-matrix
 #' sugQ2$est.Q <- orderQ(sugQ2$est.Q, Q)$order.Q # Reorder Q-matrix attributes
 #' sugQ2$boot.Q # Proportion of replicas a q-entry was specified in the estimated Q-matrix
 #' mean(sugQ2$est.Q == Q) # Check similarity with the generating Q-matrix
-#' }
 estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args = list(cor = "tet", rotation = "oblimin", fm = "uls"), boot.args = list(N = .8, R = 100, verbose = TRUE, seed = NULL)){
   if(!is.matrix(r) & !is.data.frame(r)){stop("Error in estQ: r must be a matrix or data.frame.")}
   if((!is.numeric(K) & !is.double(K)) | length(K) > 1){stop("Error in estQ: K must be a unique numeric value.")}

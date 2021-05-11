@@ -27,11 +27,9 @@ is.Qid(Q, model = "others", verbose = TRUE)
 Checks whether a Q-matrix is complete (Köhn & Chiu, 2017, 2018) and identifiable according to the criteria from Chen, Liu, Xu, & Ying (2015) and Xu & Shang (2018).
 }
 \examples{
-\dontrun{
 Kj <- c(15, 10, 0, 5)
 Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)$gen.Q
 idQ <- is.Qid(Q)
-}
 }
 \references{
 Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. https://doi.org/10.1080/01621459.2014.934827

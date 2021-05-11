@@ -59,7 +59,6 @@ Furthermore, the bagging bootstrap implementation (Xu & Shang, 2018) can be appl
 The \code{psych} package (Revelle, 2020) is used for estimating the required exploratory factor analysis (EFA).
 }
 \examples{
-\dontrun{
 library(GDINA)
 dat <- sim30GDINA$simdat
 Q <- sim30GDINA$simQ
@@ -74,11 +73,11 @@ mean(sugQ1$est.Q == Q) # Check similarity with the generating Q-matrix
 #------------------------------------
 # Using the bagging bootstrap method
 #------------------------------------
-sugQ2 <- estQ(r = dat, K = 5, boot = TRUE, boot.args = list(seed = 123)) # Estimate Q-matrix
+# In boot.args argument, R = 100 is recommended (R = 50 is here used for illustration purposes)
+sugQ2 <- estQ(r = dat, K = 5, boot = TRUE, boot.args = list(R = 50, seed = 123)) # Estimate Q-matrix
 sugQ2$est.Q <- orderQ(sugQ2$est.Q, Q)$order.Q # Reorder Q-matrix attributes
 sugQ2$boot.Q # Proportion of replicas a q-entry was specified in the estimated Q-matrix
 mean(sugQ2$est.Q == Q) # Check similarity with the generating Q-matrix
-}
 }
 \references{
 Garcia-Garzon, E., Abad, F. J., & Garrido, L. E. (2018). Improving bi-factor exploratory modelling: Empirical target rotation based on loading differences. \emph{Methodology}, \emph{15}, 45–55. https://doi.org/10.1027/1614-2241/a000163

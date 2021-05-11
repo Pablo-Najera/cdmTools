@@ -40,10 +40,8 @@ Only binary Q-matrix are supported so far.
 Useful for simulation studies.
 }
 \examples{
-\dontrun{
-Kj <- c(15, 10, 0, 5) # # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
+Kj <- c(15, 10, 0, 5) # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
 Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)
-}
 }
 \references{
 Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. https://doi.org/10.1080/01621459.2014.934827

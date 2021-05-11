@@ -53,7 +53,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(GDINA)
 #' dat <- sim30GDINA$simdat
 #' Q <- sim30GDINA$simQ
@@ -61,10 +61,10 @@
 #' #-------------------------------------
 #' # Assess dimensionality from CDM data
 #' #-------------------------------------
-#' mcK <- modelcompK(dat = dat, exploreK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
+#' mcK <- modelcompK(dat = dat, exploreK = 4:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
 #' mcK$sug.K # Check suggested number of attributes by each fit index
 #' mcK$fit # Check fit indices for each K explored
-#' sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Suggested Q-matrix by AIC
+#' sug.Q <- mcK$usedQ[[paste0("K", mcK$sug.K["AIC"])]] # Suggested Q-matrix by AIC
 #' sug.Q <- orderQ(sug.Q, Q)$order.Q # Reorder Q-matrix attributes
 #' mean(sug.Q == Q) # Check similarity with the generating Q-matrix
 #'
@@ -79,6 +79,19 @@
 #' mc <- modelcompK(dat = dat, Qs = Qs, verbose = TRUE)
 #' mc$sel.Q # Best-fitting Q-matrix for each fit index
 #' mc$fit # Check fit indices for each Q explored
+#' }
+#'
+#' \dontshow{
+#' library(GDINA)
+#' dat <- sim30GDINA$simdat
+#' Q <- sim30GDINA$simQ
+#' #-------------------------------------
+#' # Assess dimensionality from CDM data
+#' #-------------------------------------
+#' mcK <- modelcompK(dat = dat, exploreK = 2:4, stop = "none", val.Q = TRUE, verbose = TRUE)
+#' mcK$sug.K # Check suggested number of attributes by each fit index
+#' mcK$fit # Check fit indices for each K explored
+#' sug.Q <- mcK$usedQ[[paste0("K", mcK$sug.K["AIC"])]] # Suggested Q-matrix by AIC
 #' }
 modelcompK <- function(dat, exploreK = 1:7, Qs = NULL, stop = "none", val.Q = TRUE, estQ.args = list(criterion = "row", cor = "tet", rotation = "oblimin", fm = "uls"), valQ.args = list(index = "PVAF", iterative = "test.att", maxitr = 5, CDMconv = 0.01), verbose = TRUE){
   if(!is.matrix(dat) & !is.data.frame(dat)){stop("Error in modelcompK: dat must be a matrix or data.frame.")}

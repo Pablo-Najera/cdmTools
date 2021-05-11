@@ -26,11 +26,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' Kj <- c(15, 10, 0, 5) # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
 #' Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)
 #' miss.Q <- missQ(Q = Q$gen.Q, qjk = .20, retainJ = 4, seed = 123)
-#' }
 missQ <- function(Q, qjk, retainJ = 0, Qid = "none", seed = NULL){
   if(!is.matrix(Q) & !is.data.frame(Q)){stop("Error in missQ: Q must be a matrix or data.frame.")}
   J <- nrow(Q)

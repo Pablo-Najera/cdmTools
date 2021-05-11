@@ -52,15 +52,14 @@ The tetrachoric correlations are efficiently estimated using the \code{sirt} R p
 The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
 }
 \examples{
-\dontrun{
 library(GDINA)
 dat <- sim30GDINA$simdat
 Q <- sim30GDINA$simQ
-pa.K <- paK(dat = dat, fa = "pc", cutoff = c("mean", 95), plot = TRUE, verbose = TRUE, seed = 123)
+# In paK, R = 100 is recommended (R = 50 is here used for illustration purposes)
+pa.K <- paK(dat = dat, R = 50, fa = "pc", cutoff = c("mean", 95), plot = TRUE, verbose = TRUE, seed = 123)
 pa.K$sug.K # Check suggested number of attributes by each parallel analysis variant
 pa.K$e.values # Check eigenvalues
 pa.K$plot # Show parallel analysis plot
-}
 }
 \references{
 Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474. https://doi.org/10.1037/a0030005

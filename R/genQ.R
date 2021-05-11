@@ -33,10 +33,8 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' Kj <- c(15, 10, 0, 5) # # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
+#' Kj <- c(15, 10, 0, 5) # 15 one-att, 10 2-atts, 0 3-atts, and 5 four-atts items
 #' Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)
-#' }
 genQ <- function(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed = NULL){
   if((!is.numeric(J) & !is.double(J)) | length(J) > 1){stop("Error in genQ: J must be a unique numeric value.")}
   if((!is.numeric(K) & !is.double(K)) | length(K) > 1){stop("Error in genQ: K must be a unique numeric value.")}

@@ -67,7 +67,7 @@ This function can be also used by directly providing different Q-matrices (inste
 Note that, if Q-matrices are provided, this function will no longer serve as a dimensionality assessment method, but just as an automated model comparison procedure.
 }
 \examples{
-\dontrun{
+\donttest{
 library(GDINA)
 dat <- sim30GDINA$simdat
 Q <- sim30GDINA$simQ
@@ -75,10 +75,10 @@ Q <- sim30GDINA$simQ
 #-------------------------------------
 # Assess dimensionality from CDM data
 #-------------------------------------
-mcK <- modelcompK(dat = dat, exploreK = 1:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
+mcK <- modelcompK(dat = dat, exploreK = 4:7, stop = "AIC", val.Q = TRUE, verbose = TRUE)
 mcK$sug.K # Check suggested number of attributes by each fit index
 mcK$fit # Check fit indices for each K explored
-sug.Q <- mcK$usedQ[[mcK$sug.K["AIC"]]] # Suggested Q-matrix by AIC
+sug.Q <- mcK$usedQ[[paste0("K", mcK$sug.K["AIC"])]] # Suggested Q-matrix by AIC
 sug.Q <- orderQ(sug.Q, Q)$order.Q # Reorder Q-matrix attributes
 mean(sug.Q == Q) # Check similarity with the generating Q-matrix
 
@@ -93,6 +93,19 @@ Qs <- list(trueQ, missQ1, missQ2, missQ3)
 mc <- modelcompK(dat = dat, Qs = Qs, verbose = TRUE)
 mc$sel.Q # Best-fitting Q-matrix for each fit index
 mc$fit # Check fit indices for each Q explored
+}
+
+\dontshow{
+library(GDINA)
+dat <- sim30GDINA$simdat
+Q <- sim30GDINA$simQ
+#-------------------------------------
+# Assess dimensionality from CDM data
+#-------------------------------------
+mcK <- modelcompK(dat = dat, exploreK = 2:4, stop = "none", val.Q = TRUE, verbose = TRUE)
+mcK$sug.K # Check suggested number of attributes by each fit index
+mcK$fit # Check fit indices for each K explored
+sug.Q <- mcK$usedQ[[paste0("K", mcK$sug.K["AIC"])]] # Suggested Q-matrix by AIC
 }
 }
 \references{

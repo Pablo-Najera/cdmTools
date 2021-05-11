@@ -4,7 +4,7 @@ Title: Useful Tools for Cognitive Diagnosis Modeling
 Version: 1.0.0
 Date: 2021-05-10
 Authors@R: c(person(given = "Pablo", family = "Nájera", role = c("aut", "cre", "cph"), email = "pablo.najera@uam.es"), person(given = "Miguel A.", family = "Sorrel", role = c("aut", "cph"), email = "miguel.sorrel@uam.es"), person(given = "Francisco J.", family = "Abad", role = c("aut", "cph")))
-Description: Provides useful tools for cognitive diagnosis modeling (CDM) in applied and simulation studies. It includes empirical Q-matrix estimation and validation methods and procedures for determining the dimensionality (i.e., number of attributes) underlying CDM data.
+Description: Provides useful tools for cognitive diagnosis modeling (CDM). The packages includes the discrete factor loading method for Q-matrix estimation (Wang, Song, & Ding, 2018, <doi:10.1007/978-3-319-77249-3_29>) and the Hull method for Q-matrix validation (Nájera, Sorrel, de la Torre, & Abad, 2021, <doi:10.1111/bmsp.12228>). It also provides dimensionality assessment procedures for determining the number of attributes underlying CDM data, including parallel analysis and automated CDM fit comparison as explored in Nájera, Abad, and Sorrel (2021, <doi:10.3389/fpsyg.2021.614470>). Lastly, the package provides some useful functions for CDM simulation studies, such as random Q-matrix generation and detection of identified Q-matrices.
 License: GPL-3
 LazyData: FALSE
 Depends: R (>= 3.6.0)

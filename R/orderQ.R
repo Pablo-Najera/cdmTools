@@ -18,14 +18,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(GDINA)
 #' dat <- sim30GDINA$simdat
 #' Q <- sim30GDINA$simQ
 #' sugQ1 <- estQ(r = dat, K = 5) # Estimate Q-matrix
 #' sugQ1$est.Q <- orderQ(sugQ1$est.Q, Q)$order.Q # Reorder Q-matrix attributes
 #' mean(sugQ1$est.Q == Q) # Check similarity with the generating Q-matrix
-#' }
 orderQ <- function(Q, target){
   if(!is.matrix(Q) & !is.data.frame(Q)){stop("Error in orderQ: Q must be a matrix or data.frame.")}
   if(!is.matrix(target) & !is.data.frame(target)){stop("Error in orderQ: target must be a matrix or data.frame.")}
