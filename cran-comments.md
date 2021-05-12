@@ -1,3 +1,8 @@
+## First resubmission (May 12, 2021)
+We have addressed the two concerns mentioned in the mail we got on May 11, 2021 (thanks Gregor Seyer). Specifically,
+* A more elaborate package description was added in the description field of the DESCRIPTION file. Some references were included.
+* We have unwraped (removed \dontrun) the examples that take < 5 seconds to be executed. We have replaced \dontrun with \dontest for an example that takes > 5 seconds to be executed and included a short test (using \dontshow) so this function (modelcompK) can be automatically checked.
+
 ## Test envirnoments
 * local Windows 10 x64, R 4.0.5
 * Ubuntu Linux 16.04 LTS, R-release, GCC (check_rhub)
