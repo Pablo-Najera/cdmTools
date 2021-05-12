@@ -1,7 +1,7 @@
 #' Parallel analysis - dimensionality assessment method
 #'
 #' @description Parallel analysis with column permutation (i.e., resampling) as used in Nájera, Abad, & Sorrel (2021).
-#' It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Nájera, Abad, & Sorrel, 2020).
+#' It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Nájera, Abad, & Sorrel, 2021).
 #' The parallel analysis based on principal axis factor analysis is conducted using the \code{fa.parallel} function of the \code{psych} R package (Revelle, 2020).
 #' The tetrachoric correlations are efficiently estimated using the \code{sirt} R package (Robitzsch, 2020).
 #' The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
