@@ -3,7 +3,7 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cdmTools)](https://github.com/Pablo-Najera/cdmTools)
 
 ## How to cite this package
-Nájera, P., Sorrel, M. A., & Abad, F. J. (2021). *cdmTools: Useful Tools for Cognitive Diagnosis Modeling*. R package version 1.0.0. Retrieved from https://github.com/Pablo-Najera/cdmTools.
+Nájera, P., Sorrel, M. A., & Abad, F. J. (2021). *cdmTools: Useful Tools for Cognitive Diagnosis Modeling*. R package version 1.0.0. https://cran.r-project.org/web/packages/cdmTools/.
 ## Features of the package
 * Empirical Q-matrix estimation and validation
 * Empirical dimensionality assessment of CDM data
