@@ -1,6 +1,6 @@
 # cdmTools: Useful Tools for Cognitive Diagnosis Modeling
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cdmTools)](http://www.r-pkg.org/badges/version/cdmTools)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cdmTools)](https://cran.r-project.org/package=cdmTools)
 [![](https://cranlogs.r-pkg.org/badges/cdmTools?color=brightgreen)](https://cran.r-project.org/package=cdmTools)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/cdmTools?color=brightgreen)](https://cran.r-project.org/package=cdmTools)
 
