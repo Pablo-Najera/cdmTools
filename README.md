@@ -1,6 +1,8 @@
 # cdmTools: Useful Tools for Cognitive Diagnosis Modeling
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cdmTools)](https://github.com/Pablo-Najera/cdmTools)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cdmTools)](http://www.r-pkg.org/badges/version/cdmTools)
+[![](https://cranlogs.r-pkg.org/badges/cdmTools?color=brightgreen)](https://cran.r-project.org/package=cdmTools)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/cdmTools?color=brightgreen)](https://cran.r-project.org/package=cdmTools)
 
 ## How to cite this package
 Nájera, P., Sorrel, M. A., & Abad, F. J. (2021). *cdmTools: Useful Tools for Cognitive Diagnosis Modeling*. R package version 1.0.0. https://cran.r-project.org/web/packages/cdmTools/.
