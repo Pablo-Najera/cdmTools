@@ -1,4 +1,4 @@
-# cdmTools 1.1.0
+# cdmTools 1.0.1
 * Added - CA.MI function to calculate corrected classification accuracy with multiple imputation
 * Added - Rodrigo S. Kreitchmann as a contributor
 
