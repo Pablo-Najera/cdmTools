@@ -39,7 +39,7 @@ library(GDINA)
 dat <- sim10GDINA$simdat[1:100,]
 Q <- sim10GDINA$simQ
 fit <- GDINA(dat = dat, Q = Q, model = "GDINA")
-ca.mi <- CA.MI(fit)
+ca.mi <- CA.MI(fit, R = 100) # R > 500 is recommended
 ca.mi
 }
 }
