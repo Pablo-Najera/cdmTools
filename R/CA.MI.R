@@ -30,6 +30,8 @@
 #'
 #' Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-level and pattern-level classification consistency and accuracy indices for cognitive diagnostic assessment. \emph{Journal of Educational Measurement}, emph{52} , 457-476.
 #'
+#' @import foreach
+#'
 #' @export
 #'
 #' @examples
