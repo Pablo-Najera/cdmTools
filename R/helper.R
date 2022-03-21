@@ -1009,7 +1009,7 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
   cl <- parallel::makeCluster(n.cores, type = "SOCK")
   doSNOW::registerDoSNOW(cl)
 
-  comb <- function(x, ...){lapply(seq_along(x), function(r) c(x[[i]], lapply(list(...), function(y) y[[r]])))}
+  comb <- function(x, ...){lapply(seq_along(x), function(i) c(x[[i]], lapply(list(...), function(y) y[[i]])))}
 
   if(verbose){
     cat("Bootstrapping Progress:", "\n")
@@ -1020,11 +1020,11 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
     opts <- NULL
   }
 
-  boot.parallel = foreach::foreach(i = 1:bootsample,
+  boot.parallel = foreach::foreach(r = 1:bootsample,
                           .options.snow = opts,
                           .combine = 'comb', .multicombine = TRUE, .packages = "GDINA",
                           .init = list(lambda = list(), itemprob = list(), delta = list())) %dopar% {
-                            set.seed(i * seed)
+                            set.seed(r * seed)
                             if(tolower(type) == "parametric"){
                               simdat <- GDINA::simGDINA(N, Q, catprob.parm = fit$catprob.parm, attribute = att[sample(seq_len(nrow(att)), N, replace = TRUE, prob = fit$posterior.prob), ])$dat
                             } else if (tolower(type) == "nonparametric"){
