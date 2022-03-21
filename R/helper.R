@@ -30,8 +30,7 @@ cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "obli
         mu <- rep(0, nvar)
         eX <- eigen(r)
         X <- matrix(stats::rnorm(nvar * n.obs), n.obs)
-        X <- t(eX$vectors %*% diag(sqrt(pmax(eX$values,
-                                             0)), nvar) %*% t(X))
+        X <- t(eX$vectors %*% diag(sqrt(pmax(eX$values, 0)), nvar) %*% t(X))
       }
       else {
         X <- r[sample(n.obs, n.obs, replace = TRUE),
@@ -993,15 +992,15 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
     on.exit(rm(".Random.seed", envir = .GlobalEnv))
   }
   set.seed(seed)
-  Y <- extract(fit, "dat")
-  Q <- extract(fit, "Q")
+  Y <- GDINA::extract(fit, "dat")
+  Q <- GDINA::extract(fit, "Q")
   N <- nrow(Y)
   J <- ncol(Y)
   K <- ncol(Q)
   no.mg <- GDINA::extract(fit, "ngroup")
   stopifnot(no.mg == 1)
   lambda <- delta <- itemprob <- vector("list", bootsample)
-  GDINA.options <- formals(GDINA)
+  GDINA.options <- formals(GDINA::GDINA)
   GDINA.options <- GDINA.options[-c(1, 2, length(GDINA.options))]
   tmp <- as.list(fit$extra$call)[-c(1:3)]
   GDINA.options[names(GDINA.options) %in% names(tmp)] <- tmp
@@ -1036,7 +1035,7 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
                                 constant <- any(apply(simdat, 2, sd, na.rm = T) == 0)
                               }
                             }
-                            boot.out <- do.call(GDINA, c(list(dat = simdat, Q = Q), GDINA.options))
+                            boot.out <- do.call(GDINA::GDINA, c(list(dat = simdat, Q = Q), GDINA.options))
                             lambda <- boot.out$struc.parm
                             itemprob <- boot.out$catprob.parm
                             delta <- boot.out$delta.parm

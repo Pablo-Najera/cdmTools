@@ -39,7 +39,6 @@
 #' fit <- GDINA(dat = dat, Q = Q, model = "GDINA")
 #' ca.mi <- CA.MI(fit)
 #' ca.mi
-
 CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL){
 
   if(!(class(fit) == "GDINA")){stop("Error in CA.MI: fit must be of class 'GDINA'.")}
@@ -55,7 +54,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   if(is.null(seed)){seed <- sample(1:100000, 1)}
   set.seed(seed)
 
-  GDINA.options <- formals(GDINA)
+  GDINA.options <- formals(GDINA::GDINA)
   GDINA.options <- GDINA.options[-c(1, 2, length(GDINA.options))]
   tmp <- as.list(fit$extra$call)[-c(1:3)]
   GDINA.options[names(GDINA.options) %in% names(tmp)] <- tmp
@@ -71,13 +70,13 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   for(r in 1:R){
     if(verbose & r %% 100 == 0){cat("Imputing Item Parameters: Iteration", r, "of", R, "\r")}
     GDINA.options$catprob.parm <- boot.sampling.dist$boot.est$itemprob[[r]]
-    fit.tmp <- do.call(GDINA, c(list(dat = fit$options$dat, fit$options$Q), GDINA.options))
+    fit.tmp <- do.call(GDINA::GDINA, c(list(dat = fit$options$dat, fit$options$Q), GDINA.options))
     posterior.R[,,r] <- as.matrix(exp(t(fit.tmp$technicals$logposterior.i)))
   }
 
   posterior <- apply(posterior.R, 1:2, mean)
   fit.MI <- fit
   fit.MI$technicals$logposterior.i <- t(log(posterior))
-  res <- CA(fit.MI, what = what)
+  res <- GDINA::CA(fit.MI, what = what)
   return(res)
 }
