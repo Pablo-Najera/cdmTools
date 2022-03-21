@@ -1023,7 +1023,7 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
   boot.parallel = foreach::foreach(r = 1:bootsample,
                           .options.snow = opts,
                           .combine = 'comb', .multicombine = TRUE, .packages = "GDINA",
-                          .init = list(lambda = list(), itemprob = list(), delta = list())) foreach::`%dopar%` {
+                          .init = list(lambda = list(), itemprob = list(), delta = list())) %dopar% {
                             set.seed(r * seed)
                             if(tolower(type) == "parametric"){
                               simdat <- GDINA::simGDINA(N, Q, catprob.parm = fit$catprob.parm, attribute = att[sample(seq_len(nrow(att)), N, replace = TRUE, prob = fit$posterior.prob), ])$dat
