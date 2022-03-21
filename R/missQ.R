@@ -1,4 +1,4 @@
-#' Introduce random misspecifications in Q-matrix
+#' @title Introduce random misspecifications in Q-matrix
 #'
 #' @description Introduces random misspecifications in a Q-matrix.
 #' Only binary Q-matrix are supported so far.
@@ -20,7 +20,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Pablo Nájera, Universidad Autónoma de Madrid}
+#' @author {Pablo NÃ¡jera, Universidad AutÃ³noma de Madrid}
 #'
 #' @references
 #' Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. https://doi.org/10.1080/01621459.2017.1340889

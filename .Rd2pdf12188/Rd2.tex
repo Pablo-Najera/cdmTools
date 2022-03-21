@@ -1,0 +1,36 @@
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8]{inputenc} % @SET ENCODING@
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `cdmTools'}}
+\par\bigskip{\large \today}
+\end{center}
+\inputencoding{utf8}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdftitle = {cdmTools: Useful Tools for Cognitive Diagnosis Modeling}}}{}\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdfauthor = {Pablo Nájera; Miguel A. Sorrel; Francisco J. Abad}}}{}\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Useful Tools for Cognitive Diagnosis Modeling}
+\item[Version]\AsIs{1.1.0}
+\item[Date]\AsIs{2022-03-21}
+\item[Description]\AsIs{Provides useful tools for cognitive diagnosis modeling (CDM). The packages includes the discrete factor loading method for Q-matrix estimation (Wang, Song, & Ding, 2018, <}\Rhref{https://doi.org/10.1007/978-3-319-77249-3_29}{doi:10.1007/978-3-319-77249-3\_29}\AsIs{>) and the Hull method for Q-matrix validation (Nájera, Sorrel, de la Torre, & Abad, 2021, <}\Rhref{https://doi.org/10.1111/bmsp.12228}{doi:10.1111/bmsp.12228}\AsIs{>). It also provides dimensionality assessment procedures for determining the number of attributes underlying CDM data, including parallel analysis and automated CDM fit comparison as explored in Nájera, Abad, and Sorrel (2021, <}\Rhref{https://doi.org/10.3389/fpsyg.2021.614470}{doi:10.3389/fpsyg.2021.614470}\AsIs{>). Lastly, the package provides some useful functions for CDM simulation studies, such as random Q-matrix generation and detection of complete/identified Q-matrices.}
+\item[License]\AsIs{GPL-3}
+\item[LazyData]\AsIs{FALSE}
+\item[Depends]\AsIs{R (>= 3.6.0)}
+\item[Imports]\AsIs{GDINA (>= 2.8.0), ggplot2 (>= 3.3.0), psych (>= 1.9.12), sirt (>= 3.9-4), parallel (>= 3.6.3), stats (>= 3.6.3), GPArotation (>= 2014.11-1), combinat (>= 0.0-8)}
+\item[Suggests]\AsIs{CDM}
+\item[URL]\AsIs{}\url{https://github.com/pablo-najera/cdmTools}\AsIs{}
+\item[BugReports]\AsIs{}\url{https://github.com/pablo-najera/cdmTools/issues}\AsIs{}
+\item[RoxygenNote]\AsIs{7.1.1}
+\item[Encoding]\AsIs{UTF-8}
+\item[Author]\AsIs{Pablo Nájera [aut, cre, cph],
+Miguel A. Sorrel [aut, cph],
+Francisco J. Abad [aut, cph],
+Rodrigo S. Kreitchmann [ctb]}
+\item[Maintainer]\AsIs{Pablo Nájera }\email{pablo.najera@uam.es}\AsIs{}
+\end{description}
+\Rdcontents{\R{} topics documented:}

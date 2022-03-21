@@ -1,4 +1,4 @@
-#' Reorder Q-matrix columns
+#' @title Reorder Q-matrix columns
 #'
 #' @description Reorders Q-matrix columns according to a target matrix (e.g., another Q-matrix).
 #' Specifically, it provides a reordered Q-matrix which columns show the lowest possible average Tucker index congruent coefficient with the target columns.
@@ -15,7 +15,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Autónoma de Madrid}
+#' @author {Francisco J. Abad, Universidad AutÃ³noma de Madrid \cr Pablo NÃ¡jera, Universidad AutÃ³noma de Madrid}
 #' @export
 #'
 #' @examples

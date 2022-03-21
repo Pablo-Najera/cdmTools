@@ -1,12 +1,12 @@
-#' CDM fit comparison - dimensionality assessment method
+#' @title CDM fit comparison - dimensionality assessment method
 #'
 #' @description A procedure for determining the number of attributes underlying CDM using model fit comparison.
-#' For each number of attributes under exploration, a Q-matrix is estimated from the data using the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018), which can be further validated using the \emph{Hull} method (N�jera, Sorrel, de la Torre, & Abad, 2020).
+#' For each number of attributes under exploration, a Q-matrix is estimated from the data using the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018), which can be further validated using the \emph{Hull} method (Nájera, Sorrel, de la Torre, & Abad, 2020).
 #' Then, a CDM is fitted to the data using the resulting Q-matrix, and several fit indices are computed.
 #' After the desired range of number of attributes has been explored, the fit indices are compared.
 #' A suggested number of attributes is given for each fit index.
 #' The AIC index should be preferred among the other fit indices.
-#' For further details, see N�jera, Abad, & Sorrel (2021).
+#' For further details, see Nájera, Abad, & Sorrel (2021).
 #' This function can be also used by directly providing different Q-matrices (instead of estimating them from the data) in order to compare their fit and select the most appropriate Q-matrix.
 #' Note that, if Q-matrices are provided, this function will no longer serve as a dimensionality assessment method, but just as an automated model comparison procedure.
 #'
@@ -41,14 +41,14 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Pablo N�jera, Universidad Aut�noma de Madrid \cr Miguel A. Sorrel, Universidad Aut�noma de Madrid \cr Francisco J. Abad, Universidad Aut�noma de Madrid}
+#' @author {Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
 #'
 #' @references
 #' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 #'
-#' N�jera, P., Abad, F. J., & Sorrel, M. A. (2021). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
+#' Nájera, P., Abad, F. J., & Sorrel, M. A. (2021). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 #'
-#' N�jera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. https://doi.org/10.1111/bmsp.12228
+#' Nájera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020). Balancing fit and parsimony to improve Q-matrix validation. \emph{British Journal of Mathematical and Statistical Psychology}. https://doi.org/10.1111/bmsp.12228
 #'
 #' Wang, W., Song, L., & Ding, S. (2018). An exploratory discrete factor loading method for Q-matrix specification in cognitive diagnosis models. In: M. Wilberg, S. Culpepper, R. Janssen, J. González, & D. Molenaar (Eds.), \emph{Quantitative Psychology. IMPS 2017. Springer Proceedings in Mathematics & Statistics} (Vol. 233, pp. 351-362). Springer.
 #'

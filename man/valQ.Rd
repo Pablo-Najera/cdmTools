@@ -75,3 +75,6 @@ Nájera, P., Sorrel, M. A., de la Torre, J., & Abad, F. J. (2020b). Improving ro
 
 Terzi, R., & de la Torre, J. (2018). An iterative method for empirically-based Q-matrix validation. \emph{International Journal of Assessment Tools in Education}, \emph{5}, 248-262. https://doi.org/10.21449/ijate.407193
 }
+\author{
+{Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
+}

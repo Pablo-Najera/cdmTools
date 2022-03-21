@@ -7,9 +7,9 @@
 orderQ(Q, target)
 }
 \arguments{
-\item{Q}{A \emph{J} items × \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This is the Q-matrix that will be reordered.}
+\item{Q}{A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This is the Q-matrix that will be reordered.}
 
-\item{target}{A \emph{J} items × \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This could be the "true", generating Q-matrix.}
+\item{target}{A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This could be the "true", generating Q-matrix.}
 }
 \value{
 \code{orderQ} returns an object of class \code{orderQ}.
@@ -32,4 +32,7 @@ Q <- sim30GDINA$simQ
 sugQ1 <- estQ(r = dat, K = 5) # Estimate Q-matrix
 sugQ1$est.Q <- orderQ(sugQ1$est.Q, Q)$order.Q # Reorder Q-matrix attributes
 mean(sugQ1$est.Q == Q) # Check similarity with the generating Q-matrix
+}
+\author{
+{Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Autónoma de Madrid}
 }

@@ -1,4 +1,4 @@
-#' Calculate corrected classification accuracy with multiple imputation
+#' @title Calculate corrected classification accuracy with multiple imputation
 #'
 #' @description This function calculates the test-, pattern-, and attribute-level classification accuracy indices based on integrated posterior probabilities from multiple imputed item parameters (Kreitchmann et al., manuscript submitted for publication).
 #' The classification accuracy indices are the ones delevoped by Iaconangelo (2017) and Wang et al. (2015).
@@ -19,16 +19,16 @@
 #' \item{\code{CCM}}{Conditional classification matrix, see Iaconangelo (2017, p. 13) (\code{matrix}).}
 #' }
 #'
-#' @author {Rodrigo S. Kreitchmann, Universidad Autónoma de Madrid}
+#' @author {Rodrigo S. Kreitchmann, Universidad AutÃ³noma de Madrid}
 #'
 #' @references
-#' Iaconangelo, C.(2017). \emph{Uses of Classification Error Probabilities in the Three-Step Approach to Estimating Cognitive Diagnosis Models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
+#' Iaconangelo, C.(2017). \emph{Uses of classification error probabilities in the three-step approach to estimating cognitive diagnosis models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
 #'
-#' Kreitchmann, R. S., de la Torre, J., Sorrel, M. A., Nájera, P., & Abad, F. J. (manuscript submitted for publication). Improving Reliability Estimation in Cognitive Diagnosis Modeling.
+#' Kreitchmann, R. S., de la Torre, J., Sorrel, M. A., NÃ¡jera, P., & Abad, F. J. (manuscript submitted for publication). Improving reliability estimation in cognitive diagnosis modeling.
 #'
 #' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 #'
-#' Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-Level and Pattern-Level Classification Consistency and Accuracy Indices for Cognitive Diagnostic Assessment. \emph{Journal of Educational Measurement}, emph{52} , 457-476.
+#' Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-level and pattern-level classification consistency and accuracy indices for cognitive diagnostic assessment. \emph{Journal of Educational Measurement}, emph{52} , 457-476.
 #'
 #' @export
 #'
