@@ -30,7 +30,7 @@ CA.MI(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL)
 }
 \description{
 This function calculates the test-, pattern-, and attribute-level classification accuracy indices based on integrated posterior probabilities from multiple imputed item parameters (Kreitchmann et al., manuscript submitted for publication).
-The classification accuracy indices are the ones delevoped by Iaconangelo (2017) and Wang et al. (2015).
+The classification accuracy indices are the ones developed by Iaconangelo (2017) and Wang et al. (2015).
 It is only applicable to dichotomous attributes. The function is built upon the \code{CA} function from the \code{GDINA} package (Ma & de la Torre, 2020).
 }
 \examples{
