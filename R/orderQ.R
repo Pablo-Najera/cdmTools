@@ -5,8 +5,8 @@
 #' Reordering a Q-matrix is alike relabeling the attributes and it does not change the model.
 #' Useful for simulation studies (e.g., comparing a validated Q-matrix with the generating Q-matrix).
 #'
-#' @param Q A \emph{J} items Ã— \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This is the Q-matrix that will be reordered.
-#' @param target A \emph{J} items Ã— \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This could be the "true", generating Q-matrix.
+#' @param Q A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This is the Q-matrix that will be reordered.
+#' @param target A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}). This could be the "true", generating Q-matrix.
 #'
 #' @return \code{orderQ} returns an object of class \code{orderQ}.
 #' \describe{
@@ -15,6 +15,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
+#' @author {Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Autónoma de Madrid}
 #' @export
 #'
 #' @examples

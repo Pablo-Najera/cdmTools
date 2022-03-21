@@ -1,6 +1,6 @@
 #' Empirical Q-matrix estimation
 #'
-#' @description Empirical Q-matrix estimation based on the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018) as used in NÃ¡jera, Abad, and Sorrel (2021).
+#' @description Empirical Q-matrix estimation based on the \emph{discrete factor loading} method (Wang, Song, & Ding, 2018) as used in Nájera, Abad, and Sorrel (2021).
 #' Apart from the conventional dichotomization criteria, the procedure based on loading differences described in Garcia-Garzon, Abad, and Garrido (2018) is also available.
 #' Furthermore, the bagging bootstrap implementation (Xu & Shang, 2018) can be applied; it is recommended when working with small sample sizes.
 #' The \code{psych} package (Revelle, 2020) is used for estimating the required exploratory factor analysis (EFA).
@@ -35,10 +35,12 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
+#' @author {Pablo Nájera, Universidad Autónoma de Madrid}
+#'
 #' @references
 #' Garcia-Garzon, E., Abad, F. J., & Garrido, L. E. (2018). Improving bi-factor exploratory modelling: Empirical target rotation based on loading differences. \emph{Methodology}, \emph{15}, 45â€“55. https://doi.org/10.1027/1614-2241/a000163
 #'
-#' NÃ¡jera, P., Abad, F. J., & Sorrel, M. A. (2021). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
+#' Nájera, P., Abad, F. J., & Sorrel, M. A. (2021). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 #'
 #' Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. https://CRAN.R-project.org/package=psych.
 #'

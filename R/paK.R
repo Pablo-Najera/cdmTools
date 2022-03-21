@@ -1,7 +1,7 @@
 #' Parallel analysis - dimensionality assessment method
 #'
-#' @description Parallel analysis with column permutation (i.e., resampling) as used in NÃ¡jera, Abad, & Sorrel (2021).
-#' It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; NÃ¡jera, Abad, & Sorrel, 2021).
+#' @description Parallel analysis with column permutation (i.e., resampling) as used in Nájera, Abad, & Sorrel (2021).
+#' It is recommended to use principal components, Pearson correlations, and mean criterion (Garrido, Abad, & Ponsoda, 2013; Nájera, Abad, & Sorrel, 2021).
 #' The parallel analysis based on principal axis factor analysis is conducted using the \code{fa.parallel} function of the \code{psych} R package (Revelle, 2020).
 #' The tetrachoric correlations are efficiently estimated using the \code{sirt} R package (Robitzsch, 2020).
 #' The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
@@ -24,10 +24,12 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
+#' @author {Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
+#'
 #' @references
 #' Garrido, L. E., Abad, F. J., & Ponsoda, V. (2013). A new look at Horn's parallel analysis with ordinal variables. \emph{Psychological Methods}, \emph{18}, 454-474. https://doi.org/10.1037/a0030005
 #'
-#' NÃ¡jera, P., Abad, F. J., & Sorrel, M. A. (2021). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
+#' Nájera, P., Abad, F. J., & Sorrel, M. A. (2021). Determining the number of attributes in cognitive diagnosis modeling. \emph{Frontiers in Psychology}, \emph{12}:614470. https://doi.org/10.3389/fpsyg.2021.614470
 #'
 #' Revelle, W. (2019). \emph{psych: Procedures for Psychological, Psychometric, and Personality Research}. R package version 1.9.12. https://CRAN.R-project.org/package=psych.
 #'
