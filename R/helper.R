@@ -1020,6 +1020,7 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
     opts <- NULL
   }
 
+  library(foreach)
   boot.parallel = foreach::foreach(r = 1:bootsample,
                           .options.snow = opts,
                           .combine = 'comb', .multicombine = TRUE, .packages = "GDINA",
