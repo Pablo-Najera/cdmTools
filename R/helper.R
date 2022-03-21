@@ -984,7 +984,6 @@ select.q <- function(M, best.pos = NULL){
   return(list(sug.Q = sug.Q, bKj = bKj, H = H, bK = bK, bq = bq))
 }
 bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.cores = 1, verbose = TRUE, seed = 12345){
-  library(doParallel)
   if(exists(".Random.seed", .GlobalEnv)){
     oldseed <- .GlobalEnv$.Random.seed
     on.exit(.GlobalEnv$.Random.seed <- oldseed)
@@ -1014,25 +1013,25 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
 
   if(verbose){
     cat("Bootstrapping Progress:", "\n")
-    pb <- txtProgressBar(max = bootsample, style = 3)
-    progress <- function(n) setTxtProgressBar(pb, n)
+    pb <- utils::txtProgressBar(max = bootsample, style = 3)
+    progress <- function(n) utils::setTxtProgressBar(pb, n)
     opts <- list(progress = progress)
   } else {
     opts <- NULL
   }
 
-  boot.parallel = foreach(r = 1:bootsample,
+  boot.parallel = foreach::foreach(r = 1:bootsample,
                           .options.snow = opts,
                           .combine = 'comb', .multicombine = TRUE, .packages = "GDINA",
-                          .init = list(lambda = list(), itemprob = list(), delta = list())) %dopar% {
+                          .init = list(lambda = list(), itemprob = list(), delta = list())) foreach::`%dopar%` {
                             set.seed(r * seed)
                             if(tolower(type) == "parametric"){
-                              simdat <- simGDINA(N, Q, catprob.parm = fit$catprob.parm, attribute = att[sample(seq_len(nrow(att)), N, replace = TRUE, prob = fit$posterior.prob), ])$dat
+                              simdat <- GDINA::simGDINA(N, Q, catprob.parm = fit$catprob.parm, attribute = att[sample(seq_len(nrow(att)), N, replace = TRUE, prob = fit$posterior.prob), ])$dat
                             } else if (tolower(type) == "nonparametric"){
                               constant <- T
                               while(constant){
                                 simdat <- Y[sample(1:N, N, replace = TRUE),]
-                                constant <- any(apply(simdat, 2, sd, na.rm = T) == 0)
+                                constant <- any(apply(simdat, 2, stats::sd, na.rm = T) == 0)
                               }
                             }
                             boot.out <- do.call(GDINA::GDINA, c(list(dat = simdat, Q = Q), GDINA.options))
@@ -1045,9 +1044,9 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
   parallel::stopCluster(cl)
   names(boot.parallel) <- c("lambda", "itemprob", "delta")
 
-  se.ip <- lapply(do.call(Map, c(f = "rbind", boot.parallel$itemprob)), function(x) apply(x, 2, sd))
-  se.d <- lapply(do.call(Map, c(f = "rbind", boot.parallel$delta)), function(x) apply(x, 2, sd))
-  se.lambda <- apply(do.call(rbind, boot.parallel$lambda), 2, sd)
+  se.ip <- lapply(do.call(Map, c(f = "rbind", boot.parallel$itemprob)), function(x) apply(x, 2, stats::sd))
+  se.d <- lapply(do.call(Map, c(f = "rbind", boot.parallel$delta)), function(x) apply(x, 2, stats::sd))
+  se.lambda <- apply(do.call(rbind, boot.parallel$lambda), 2, stats::sd)
   if(GDINA::extract(fit, "att.dist") == "higher.order"){
     se.jointAtt <- matrix(se.lambda, ncol = 2)
   } else {

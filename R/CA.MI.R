@@ -43,7 +43,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
 
   if(!(class(fit) == "GDINA")){stop("Error in CA.MI: fit must be of class 'GDINA'.")}
   if(!what %in% c("EAP", "MAP", "MLE")){stop("Error in CA.MI: what must be either 'EAP', 'MAP', or 'MLE'.")}
-  if(any(apply(fit$options$dat, 2, sd) == 0)){stop("Error in CA.MI: The data must not contain constant responses for an item.")}
+  if(any(apply(fit$options$dat, 2, stats::sd) == 0)){stop("Error in CA.MI: The data must not contain constant responses for an item.")}
   if((!is.numeric(R) & !is.double(R)) | length(R) > 1){stop("Error in CA.MI: R must be a unique numeric value.")}
   if(R < 1){stop("Error in CA.MI: R must be greater than 0.")}
   if((!is.numeric(n.cores) & !is.double(n.cores)) | length(n.cores) > 1){stop("Error in CA.MI: n.cores must be a unique numeric value.")}
