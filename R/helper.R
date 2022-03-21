@@ -1048,7 +1048,7 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
   se.ip <- lapply(do.call(Map, c(f = "rbind", boot.parallel$itemprob)), function(x) apply(x, 2, sd))
   se.d <- lapply(do.call(Map, c(f = "rbind", boot.parallel$delta)), function(x) apply(x, 2, sd))
   se.lambda <- apply(do.call(rbind, boot.parallel$lambda), 2, sd)
-  if(extract(fit, "att.dist") == "higher.order"){
+  if(GDINA::extract(fit, "att.dist") == "higher.order"){
     se.jointAtt <- matrix(se.lambda, ncol = 2)
   } else {
     se.jointAtt <- se.lambda
