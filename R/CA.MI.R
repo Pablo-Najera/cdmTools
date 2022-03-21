@@ -33,12 +33,14 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' library(GDINA)
 #' dat <- sim10GDINA$simdat[1:100,]
 #' Q <- sim10GDINA$simQ
 #' fit <- GDINA(dat = dat, Q = Q, model = "GDINA")
 #' ca.mi <- CA.MI(fit)
 #' ca.mi
+#' }
 CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL){
 
   if(!(class(fit) == "GDINA")){stop("Error in CA.MI: fit must be of class 'GDINA'.")}

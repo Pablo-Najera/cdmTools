@@ -34,12 +34,14 @@ The classification accuracy indices are the ones delevoped by Iaconangelo (2017)
 It is only applicable to dichotomous attributes. The function is built upon the \code{CA} function from the \code{GDINA} package (Ma & de la Torre, 2020).
 }
 \examples{
+\donttest{
 library(GDINA)
 dat <- sim10GDINA$simdat[1:100,]
 Q <- sim10GDINA$simQ
 fit <- GDINA(dat = dat, Q = Q, model = "GDINA")
 ca.mi <- CA.MI(fit)
 ca.mi
+}
 }
 \references{
 Iaconangelo, C.(2017). \emph{Uses of classification error probabilities in the three-step approach to estimating cognitive diagnosis models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
