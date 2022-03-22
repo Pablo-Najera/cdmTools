@@ -102,7 +102,7 @@ Q <- sim30GDINA$simQ
 #-------------------------------------
 # Assess dimensionality from CDM data
 #-------------------------------------
-mcK <- modelcompK(dat = dat, exploreK = 2:3, stop = "none", val.Q = TRUE, verbose = TRUE)
+mcK <- modelcompK(dat = dat, exploreK = 2, stop = "none", val.Q = TRUE, verbose = TRUE)
 mcK$sug.K # Check suggested number of attributes by each fit index
 mcK$fit # Check fit indices for each K explored
 sug.Q <- mcK$usedQ[[paste0("K", mcK$sug.K["AIC"])]] # Suggested Q-matrix by AIC
