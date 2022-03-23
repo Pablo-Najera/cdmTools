@@ -1,5 +1,8 @@
 # cdmTools_1.0.1 (March 23, 2022)
 
+### NEWS
+* We have added the CA.MI function
+
 ### Test envirnoments
 * Local Windows 10 x64, R 4.1.2
 * Ubuntu Linux 16.04 LTS, R-release, GCC (check_rhub)
@@ -12,14 +15,17 @@
 * There were no ERRORs or WARNINGs.
 * There were 2 NOTEs:
 ```
-Mantainer: 'Pablo Nájera pablo.najera@uam.es'
-
-New submission
-
-Possibly mis-spelled words in DESCRIPTION: 
-CDM (7:70, 7:265)
+Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
+   
+   Uses the superseded package: 'doSNOW'
+   
+   Found the following (possibly) invalid DOIs:
+     DOI: 10.1111/bmsp.12228
+       From: DESCRIPTION
+       Status: Service Unavailable
+       Message: 503
 ```
-All possibly mis-spelled words are surnames, acronyms, or British spelling used in paper references.
+At the moment the 'doSNOW' package cannot be replaced with other packages in order to show the progress bar with multiple cores running in CA.MI function. The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
 
 # cdmTools_1.0.0 (May 12, 2021)
 
