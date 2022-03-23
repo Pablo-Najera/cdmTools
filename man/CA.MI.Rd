@@ -29,7 +29,7 @@ CA.MI(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL)
 }
 }
 \description{
-This function calculates the test-, pattern-, and attribute-level classification accuracy indices based on integrated posterior probabilities from multiple imputed item parameters (Kreitchmann et al., manuscript submitted for publication).
+This function calculates the test-, pattern-, and attribute-level classification accuracy indices based on integrated posterior probabilities from multiple imputed item parameters (Kreitchmann et al., 2022).
 The classification accuracy indices are the ones developed by Iaconangelo (2017) and Wang et al. (2015).
 It is only applicable to dichotomous attributes. The function is built upon the \code{CA} function from the \code{GDINA} package (Ma & de la Torre, 2020).
 }
@@ -46,7 +46,7 @@ ca.mi
 \references{
 Iaconangelo, C.(2017). \emph{Uses of classification error probabilities in the three-step approach to estimating cognitive diagnosis models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
 
-Kreitchmann, R. S., de la Torre, J., Sorrel, M. A., Nájera, P., & Abad, F. J. (manuscript submitted for publication). Improving reliability estimation in cognitive diagnosis modeling.
+Kreitchmann, R. S., de la Torre, J., Sorrel, M. A., Nájera, P., & Abad, F. J. (2022). Improving reliability estimation in cognitive diagnosis modeling. [Manuscript submitted for publication].
 
 Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 
