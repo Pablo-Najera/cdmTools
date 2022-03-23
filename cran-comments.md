@@ -13,7 +13,7 @@
 ### R CMD check results
 
 * There were no ERRORs or WARNINGs.
-* There were 2 NOTEs:
+* There was 1 NOTE:
 ```
 Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
    
