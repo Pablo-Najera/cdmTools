@@ -1,15 +1,15 @@
 #' @export
-print.estQ <- function(x){
+print.estQ <- function(x, ...){
   cat(paste0("Estimated Q-matrix using the DFL method using ", x$specifications$criterion, " criterion:", "\n", "\n"))
   print(as.data.frame(x$est.Q))
 }
 #' @export
-print.genQ <- function(x){
+print.genQ <- function(x, ...){
   cat("Generated Q-matrix:\n\n")
   print(as.data.frame(x$gen.Q))
 }
 #' @export
-print.GNPC <- function(x){
+print.GNPC <- function(x, ...){
   conv <- ifelse(x$n.ite < x$specifications$maxitr, TRUE, FALSE)
   cat("GNPC method\n\n")
   cat(paste0("Number of examinees:  ", nrow(x$specifications$dat), "\n"))
@@ -22,11 +22,11 @@ print.GNPC <- function(x){
   cat(paste0("Convergence: ", conv, "\n"))
 }
 #' @export
-print.is.Qid <- function(x){
+print.is.Qid <- function(x, ...){
   cat(x$message)
 }
 #' @export
-print.missQ <- function(x){
+print.missQ <- function(x, ...){
   mQ <- as.data.frame(x$miss.Q)
   tQ <- as.data.frame(x$Q)
   mQ[mQ != tQ] <- paste0(mQ[mQ != tQ], "*")
@@ -35,7 +35,7 @@ print.missQ <- function(x){
   cat("Note: * denotes a misspecified element.\n")
 }
 #' @export
-print.modelcompK <- function(x){
+print.modelcompK <- function(x, ...){
   if(is.null(x$specifications$Qs)){
     txt <- paste0("Suggested number of attributes based on model fit:")
     for(l in 1:length(table(x$sug.K))){
@@ -50,7 +50,7 @@ print.modelcompK <- function(x){
   cat(txt)
 }
 #' @export
-print.orderQ <- function(x){
+print.orderQ <- function(x, ...){
   config.MAD <- as.vector(x$configs[x$configs[,2] == min(x$configs[,2]), 1])
   min.MAD <- min(x$configs[,2])
   config.CC <- as.vector(x$configs[x$configs[,3] == max(x$configs[,3]), 1])
@@ -59,7 +59,7 @@ print.orderQ <- function(x){
              "Best attribute ordering(s) according to CC:  ", paste(config.CC, collapse = ", "), " (CC = ", max.CC, ")"))
 }
 #' @export
-print.paK <- function(x){
+print.paK <- function(x, ...){
   txt <- paste0("Suggested number of attributes based on parallel analysis:")
   for(l in 1:length(table(x$sug.K))){
     txt <- paste0(txt, "\n", names(table(x$sug.K))[l], " attributes: ", paste(names(x$sug.K)[x$sug.K == as.numeric(names(table(x$sug.K))[l])], collapse = ", "))
@@ -68,7 +68,7 @@ print.paK <- function(x){
   print(x$plot)
 }
 #' @export
-print.valQ <- function(x){
+print.valQ <- function(x, ...){
   vQ <- as.data.frame(x$sug.Q)
   oQ <- as.data.frame(x$Q)
   vQ[vQ != oQ] <- paste0(vQ[vQ != oQ], "*")
