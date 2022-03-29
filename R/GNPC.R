@@ -22,6 +22,8 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
+#' @author {Pablo Nájera, Universidad Autónoma de Madrid}
+#'
 #' @references
 #' Chiu, C.-Y., & Douglas, J. (2013). A nonparametric approach to cognitive diagnosis by proximity to ideal response patterns. \emph{Journal of Classification}, \emph{30}, 225-250. DOI: 10.1007/s00357-013-9132-9
 #'

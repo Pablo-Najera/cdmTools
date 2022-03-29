@@ -17,15 +17,13 @@
 ```
 Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
    
-   Uses the superseded package: 'doSNOW'
-   
    Found the following (possibly) invalid DOIs:
      DOI: 10.1111/bmsp.12228
        From: DESCRIPTION
        Status: Service Unavailable
        Message: 503
 ```
-At the moment the 'doSNOW' package cannot be replaced with other packages in order to show the progress bar with multiple cores running in CA.MI function. The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
+The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
 
 # cdmTools_1.0.0 (May 12, 2021)
 
