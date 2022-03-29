@@ -1,7 +1,7 @@
 # cdmTools_1.0.1 (March 23, 2022)
 
 ### NEWS
-* We have added the CA.MI function
+* We have added the GNPC function and print methods for classes used in the package
 
 ### Test envirnoments
 * Local Windows 10 x64, R 4.1.2
