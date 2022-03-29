@@ -1,6 +1,6 @@
 # cdmTools 1.0.1
-* Added - GNPC function to estimate attribute profiles
-* Added - print methods for classes
+* Added - `GNPC` function to estimate attribute profiles
+* Added - `print` methods for classes
 
 # cdmTools 1.0.0
 * CRAN release
