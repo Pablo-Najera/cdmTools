@@ -19,7 +19,7 @@ paK(
 \arguments{
 \item{dat}{A \emph{N} individuals x \emph{J} items (\code{matrix} or \code{data.frame}). Missing values need to be coded as \code{NA}.}
 
-\item{R}{Number of simulated datasets (i.e., replications) to generate. The default is 100.}
+\item{R}{Number of resampled datasets (i.e., replications) to generate. The default is 100.}
 
 \item{fa}{Extraction method to use. It includes \code{"pc"} (for principal components analysis), \code{"fa"} (for principal axis factor analysis), and \code{"both"}. The default is \code{"pc"}.}
 
@@ -53,8 +53,8 @@ The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
 }
 \examples{
 library(GDINA)
-dat <- sim30GDINA$simdat
-Q <- sim30GDINA$simQ
+dat <- resample30GDINA$resampledat
+Q <- resample30GDINA$resampleQ
 # In paK, R = 100 is recommended (R = 30 is here used for illustration purposes)
 pa.K <- paK(dat = dat, R = 30, fa = "pc", cutoff = c("mean", 95), plot = TRUE, seed = 123)
 pa.K$sug.K # Check suggested number of attributes by each parallel analysis variant
