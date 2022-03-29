@@ -53,8 +53,8 @@ The graph is made with the \code{ggplot2} package (Wickham et al., 2020).
 }
 \examples{
 library(GDINA)
-dat <- resample30GDINA$resampledat
-Q <- resample30GDINA$resampleQ
+dat <- sim30GDINA$simdat
+Q <- sim30GDINA$simQ
 # In paK, R = 100 is recommended (R = 30 is here used for illustration purposes)
 pa.K <- paK(dat = dat, R = 30, fa = "pc", cutoff = c("mean", 95), plot = TRUE, seed = 123)
 pa.K$sug.K # Check suggested number of attributes by each parallel analysis variant
