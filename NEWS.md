@@ -1,3 +1,7 @@
+# cdmTools 1.0.2
+* Added - `CA.MI` function to calculate corrected classification accuracy with multiple imputation
+* Added - Rodrigo S. Kreitchmann as a contributor
+
 # cdmTools 1.0.1
 * Added - `GNPC` function to estimate attribute profiles
 * Added - `print` methods for classes

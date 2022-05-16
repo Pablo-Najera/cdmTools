@@ -10,6 +10,7 @@ Nájera, P., Sorrel, M. A., & Abad, F. J. (2021). *cdmTools: Useful Tools for Co
 * Empirical Q-matrix estimation and validation
 * Empirical dimensionality assessment of CDM data
 * Attribute profile classification via the general nonparametric classification method
+* Corrected classification accuracy estimation via multiple imputation
 * Useful functions for simulation studies involving CDM
 ## Installation
 To install this package from source:

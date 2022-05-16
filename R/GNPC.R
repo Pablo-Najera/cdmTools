@@ -27,7 +27,7 @@
 #' @references
 #' Chiu, C.-Y., & Douglas, J. (2013). A nonparametric approach to cognitive diagnosis by proximity to ideal response patterns. \emph{Journal of Classification}, \emph{30}, 225-250. DOI: 10.1007/s00357-013-9132-9
 #'
-#' Chiu, C.-Y., Sun, Y., & Bian, Y. (2018). Cognitive diagnosis for small education programs: The general nonparametric classification method. \emph{Psychometrika}, \emph{83}, 355-375. DOI: 10.1007/s11336-017-9595-4.
+#' Chiu, C.-Y., Sun, Y., & Bian, Y. (2018). Cognitive diagnosis for small education programs: The general nonparametric classification method. \emph{Psychometrika}, \emph{83}, 355-375. DOI: 10.1007/s11336-017-9595-4
 #'
 #' Zheng, Y., & Chiu, C.-Y. (2019). \emph{NPCD: Nonparametric methods for cognitive diagnosis}. R package version 1.0-11. https://cran.r-project.org/web/packages/NPCD/.
 #'
@@ -136,5 +136,7 @@ GNPC <- function(dat, Q, initiate = "AND", min.change = 0.001, maxitr = 1000, ve
   eta.w <- t(eta.w)
   d <- apply(dat, 1, function(i) apply(i - eta.w, 2, function(l) sum(l^2)))
   specs <- list(dat = dat, Q = Q, initiate = initiate, min.change = min.change, maxitr = maxitr, verbose = verbose)
-  return(list(alpha.est = att.clas.wHD, loss.matrix = d, eta.w = eta.w, w = w, n.ite = ite, hist.change = change.h, specifications = specs))
+  res <- list(alpha.est = att.clas.wHD, loss.matrix = d, eta.w = eta.w, w = w, n.ite = ite, hist.change = change.h, specifications = specs)
+  class(res) <- "GNPC"
+  return(res)
 }
