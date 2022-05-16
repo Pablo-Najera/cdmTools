@@ -133,7 +133,7 @@ paK <- function(dat, R = 100, fa = "pc", cor = "both", cutoff = "mean", fm = "ul
   }
 
   if("cor" %in% cor){cor.matrix <- cor(dat, use = "pair")}
-  if("tet" %in% cor){tet.matrix <- sirt::tetrachoric2(dat)$rho}
+  if("tet" %in% cor){tet.matrix <- cdmTools.tetrachoric2(dat, method = "Bo")$rho}
   dat.eigen <- as.data.frame(matrix(NA, nrow = 4, ncol = J, dimnames = list(c("dat.fa.cor", "dat.fa.tet", "dat.pc.cor", "dat.pc.tet"), 1:J)))
   if("fa" %in% fa){
     if("cor" %in% cor){dat.eigen["dat.fa.cor",] <- cdmTools.fa(dat, nfactors = 1, cor = "cor", fm = fm)$values}
