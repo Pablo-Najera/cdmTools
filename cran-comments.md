@@ -2,8 +2,7 @@
 
 ### News & Comments
 * We have added the CA.MI function and Rodrigo S. Kreitchmann as a contributor
-* {sirt} package dependeny has been removed
-* The package was removed from CRAN due to an issue in the {sirt} package
+* {CDM} package dependeny has been removed - The {cdmTools} package was removed from CRAN due to an issue with the {CDM} package
 
 ### Test envirnoments
 * Local Windows 10 x64, R 4.1.2
