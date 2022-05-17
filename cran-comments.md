@@ -1,3 +1,32 @@
+# cdmTools_1.0.2 (May 17, 2022)
+
+### News & Comments
+* We have added the CA.MI function and Rodrigo S. Kreitchmann as a contributor
+* {sirt} package dependeny has been removed
+* The package was removed from CRAN due to an issue in the {sirt} package
+
+### Test envirnoments
+* Local Windows 10 x64, R 4.1.2
+* Ubuntu Linux 16.04 LTS, R-release, GCC (check_rhub)
+* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (check_rhub)
+* Fedora Linux, R-devel, clang, gfortran (check_rhub)
+* (check_win_devel)
+
+### R CMD check results
+
+* There were no ERRORs or WARNINGs.
+* There was 1 NOTE:
+```
+Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
+   
+   Found the following (possibly) invalid DOIs:
+     DOI: 10.1111/bmsp.12228
+       From: DESCRIPTION
+       Status: Service Unavailable
+       Message: 503
+```
+The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
+
 # cdmTools_1.0.1 (March 23, 2022)
 
 ### NEWS
