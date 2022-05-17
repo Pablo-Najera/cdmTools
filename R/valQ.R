@@ -56,7 +56,7 @@
 #' sug.Q <- valQ(fit = fit, verbose = TRUE) # Hull method for Q-matrix validation
 #' mean(sug.Q$sug.Q == Q) # Check similarity with the generating Q-matrix
 valQ <- function(fit, index = "PVAF", iterative = "test.att", emptyatt = TRUE, maxitr = 100, CDMconv = 0.0001, verbose = TRUE){
-  if(!(class(fit) == "GDINA")){stop("Error in valQ: fit must be of class 'GDINA'.")}
+  if(!inherits(fit, "GDINA")){stop("Error in valQ: fit must be of class 'GDINA'.")}
   if(!(index %in% c("PVAF", "R2"))){stop("Error in valQ: index must be 'PVAF' or 'R2'.")}
   if(!(iterative %in% c("none", "test", "test.att", "item"))){stop("Error in valQ: iterative must be 'none', 'test', 'test.att', or 'item'.")}
   if(!is.logical(emptyatt)){stop("Error in valQ: emptyatt must be logical.")}
