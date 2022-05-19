@@ -13,18 +13,42 @@
 
 ### R CMD check results
 
-* There were no ERRORs or WARNINGs.
+* There were no WARNINGs.
+* There was 1 ERROR on Windows Server 2022, R-devel, 64 bit:
+```
+* checking package dependencies ... ERROR
+
+Package required but not available: 'sirt'
+See section 'The DESCRIPTION file' in the 'Writing R Extensions'
+manual.
+```
+The package {sirt} was archived, but it is already available on CRAN: https://cran.r-project.org/web/packages/sirt/index.html.
+
 * There was 1 NOTE:
 ```
 Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
    
-   Found the following (possibly) invalid DOIs:
-     DOI: 10.1111/bmsp.12228
-       From: DESCRIPTION
-       Status: Service Unavailable
-       Message: 503
+Possibly misspelled words in DESCRIPTION:
+Abad (7:213, 7:497)
+CDM (7:70, 7:412, 7:595, 7:904)
+Chiu (7:670)
+Kreitchmann (7:803)
+Nájera (7:182, 7:489)
+Torre (7:204)
+al (7:678, 7:818)
+de (7:198)
+et (7:675, 7:815)
+
+Uses the superseded package: ‘doSNOW’
+   
+Found the following (possibly) invalid DOIs:
+  DOI: 10.1111/bmsp.12228
+    From: DESCRIPTION
+    Status: Service Unavailable
+    Message: 503
 ```
-The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
+All possibly misspelled words are surnames, acronyms, or British spelling used in paper references. The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The doSNOW package is required to show a progress bar inside a foreach loop.
+
 
 # cdmTools_1.0.1 (March 23, 2022)
 
@@ -52,6 +76,7 @@ Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
        Message: 503
 ```
 The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
+
 
 # cdmTools_1.0.0 (May 12, 2021)
 
