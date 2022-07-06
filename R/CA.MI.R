@@ -54,6 +54,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   if(n.cores < 1){stop("Error in CA.MI: n.cores must be greater than 0.")}
   if(!is.logical(verbose)){stop("Error in CA.MI: verbose must be logical.")}
   if(!is.null(seed)){if((!is.numeric(seed) & !is.double(seed)) | length(seed) > 1){stop("Error in CA.MI: seed must be a unique numeric value.")}}
+  if(extract(fit, "ngroup") != 1) {stop("Error in CA.MI: only applicable for single group analysis.")}
 
   if(is.null(seed)){seed <- sample(1:100000, 1)}
   set.seed(seed)
@@ -64,7 +65,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   GDINA.options[names(GDINA.options) %in% names(tmp)] <- tmp
   GDINA.options$verbose <- 0
   GDINA.options$att.dist <- "fixed"
-  GDINA.options$att.prior <- fit$struc.parm
+  GDINA.options$model <- fit$model
   GDINA.options$control <- list(maxitr = rep(0, nrow(fit$options$Q)))
 
   boot.sampling.dist <- bootSE.parallel(fit, bootsample = R, n.cores = n.cores, verbose = verbose, seed = seed)
@@ -74,6 +75,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   for(r in 1:R){
     if(verbose & r %% 100 == 0){cat("Imputing Item Parameters: Iteration", r, "of", R, "\r")}
     GDINA.options$catprob.parm <- boot.sampling.dist$boot.est$itemprob[[r]]
+    GDINA.options$att.prior <- boot.sampling.dist$boot.est$lambda[[r]]
     fit.tmp <- do.call(GDINA::GDINA, c(list(dat = fit$options$dat, fit$options$Q), GDINA.options))
     posterior.R[,,r] <- as.matrix(exp(t(fit.tmp$technicals$logposterior.i)))
   }
@@ -81,6 +83,31 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   posterior <- apply(posterior.R, 1:2, mean)
   fit.MI <- fit
   fit.MI$technicals$logposterior.i <- t(log(posterior))
-  res <- GDINA::CA(fit.MI, what = what)
+
+  p_c <- GDINA::extract(fit.MI, "posterior.prob")
+  pp <- GDINA::personparm(fit, what = what)
+  if (what == "MAP" || what == "MLE") {
+    if (any(pp[, ncol(pp)]))
+      warning(paste0(what, " estimates for some individuals have multiple modes.",
+                     collapse = ""), call. = FALSE)
+    pp <- as.matrix(pp[, -ncol(pp)])
+  }
+  mp <- GDINA::personparm(fit.MI, what = "mp")
+  patt <- GDINA::extract(fit.MI, "attributepattern")
+  gr <- GDINA:::matchMatrix(patt, pp)
+  pseudo.gr <- setdiff(seq(nrow(patt)), unique(gr))
+  gr <- c(gr, pseudo.gr)
+  lab <- apply(patt, 1, paste0, collapse = "")
+  post <- cbind(exp(t(GDINA:::indlogPost(fit.MI))), matrix(0, nrow(patt),
+                                                           length(pseudo.gr)))
+  CCM <- GDINA:::aggregateCol(post, gr)/c(GDINA::extract(fit.MI, "nobs") *
+                                            p_c)
+  tau_c <- diag(CCM)
+  tau <- sum(tau_c * c(p_c))
+  tau_k <- colMeans(pp * mp + (1 - pp) * (1 - mp))
+  names(tau_c) <- rownames(CCM) <- colnames(CCM) <- lab
+  res <- list(tau = tau, tau_l = tau_c, tau_k = tau_k, CCM = CCM)
+  class(res) <- "CA"
+
   return(res)
 }
