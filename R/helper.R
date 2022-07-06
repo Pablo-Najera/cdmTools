@@ -1004,7 +1004,6 @@ bootSE.parallel <- function(fit, bootsample = 50, type = "nonparametric", n.core
   tmp <- as.list(fit$extra$call)[-c(1:3)]
   GDINA.options[names(GDINA.options) %in% names(tmp)] <- tmp
   GDINA.options$verbose <- 0
-  GDINA.options$model <- fit$model
   att <- GDINA::extract(fit, "attributepattern")
 
   cl <- parallel::makeCluster(n.cores, type = "SOCK")
