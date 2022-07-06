@@ -54,7 +54,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   if(n.cores < 1){stop("Error in CA.MI: n.cores must be greater than 0.")}
   if(!is.logical(verbose)){stop("Error in CA.MI: verbose must be logical.")}
   if(!is.null(seed)){if((!is.numeric(seed) & !is.double(seed)) | length(seed) > 1){stop("Error in CA.MI: seed must be a unique numeric value.")}}
-  if(extract(fit, "ngroup") != 1) {stop("Error in CA.MI: only applicable for single group analysis.")}
+  if(GDINA::extract(fit, "ngroup") != 1) {stop("Error in CA.MI: only applicable for single group analysis.")}
 
   if(is.null(seed)){seed <- sample(1:100000, 1)}
   set.seed(seed)
