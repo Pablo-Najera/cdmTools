@@ -39,14 +39,14 @@ library(GDINA)
 dat <- sim10GDINA$simdat[1:100,]
 Q <- sim10GDINA$simQ
 fit <- GDINA(dat = dat, Q = Q, model = "GDINA")
-ca.mi <- CA.MI(fit, R = 100) # R > 500 is recommended
+ca.mi <- CA.MI(fit)
 ca.mi
 }
 }
 \references{
 Iaconangelo, C.(2017). \emph{Uses of classification error probabilities in the three-step approach to estimating cognitive diagnosis models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
 
-Kreitchmann, R. S., de la Torre, J., Sorrel, M. A., Nájera, P., & Abad, F. J. (2022). Improving reliability estimation in cognitive diagnosis modeling. [Manuscript submitted for publication].
+Kreitchmann, R. S., de la Torre, J., Sorrel, M. A., Nájera, P., & Abad, F. J. (2022). Improving reliability estimation in cognitive diagnosis modeling. \emph{Behavior Research Methods}. https://doi.org/10.3758/s13428-022-01967-5
 
 Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 

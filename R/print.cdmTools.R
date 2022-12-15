@@ -82,3 +82,36 @@ print.valQ <- function(x, ...){
   print(vQ, right = FALSE)
   cat("Note: * denotes a modified element.\n")
 }
+#' @export
+print.RDINA <- function(x){
+  if(x$specifications$gate %in% c("AND", "OR")){
+    Q <- x$specifications$Q
+    pckg <- paste0("cdmTools ", utils::packageDescription("cdmTools")$Version,
+                   ", NPCD ", utils::packageDescription("NPCD")$Version,
+                   ", GDINA ", utils::packageDescription("GDINA")$Version)
+  } else {
+    Q <- x$specifications$Q
+    pckg <- paste0("cdmTools ", utils::packageDescription("cdmTools")$Version,
+                   ", GDINA ", utils::packageDescription("GDINA")$Version)
+  }
+  cat.phi.true <- ifelse(is.null(x$phi.true), "", paste0(" (True \U1D711 = ", sprintf("%.*f", 4, x$phi.true), ")"))
+  cat(
+    paste0(
+      "============================================================", "\n",
+      "                         R-DINA model                       ", "\n", "\n",
+      "Packages used: ", pckg, "\n", "\n",
+      "Model estimated using the '", x$specifications$gate, "' gate and ", x$specifications$est, " optimization,", "\n",
+      nrow(x$specifications$dat), " individuals, ", nrow(Q), " items, and ", ncol(Q), " attributes.", "\n", "\n",
+      "Estimated \U1D711 = ", sprintf("%.*f", 4, x$phi), cat.phi.true, "\n", "\n",
+      "Relative model fit:", "\n",
+      "  -2LL = ", sprintf("%.*f", 2, x$test.fit$Deviance), " | npar  = ", x$test.fit$npar, "\n",
+      "  AIC  = ", sprintf("%.*f", 2, x$test.fit$AIC), " | BIC   = ", sprintf("%.*f", 2, x$test.fit$BIC), "\n",
+      "  CAIC = ", sprintf("%.*f", 2, x$test.fit$CAIC), " | SABIC = ", sprintf("%.*f", 2, x$test.fit$SABIC), "\n", "\n",
+      "Estimated classification accuracy (\U1D70F):", "\n",
+      "  Test level      = ",  sprintf("%.*f", 3, x$class.accu$tau), "\n",
+      "  Profile level   = from ", sprintf("%.*f", 3, min(x$class.accu$tau_l)), " {", names(which.min(x$class.accu$tau_l)), "} to ", sprintf("%.*f", 3, max(x$class.accu$tau_l)), " {", names(which.max(x$class.accu$tau_l)), "}", "\n",
+      "  Attribute level = from ", sprintf("%.*f", 3, min(x$class.accu$tau_k)), " (", names(which.min(x$class.accu$tau_k)), ") to ", sprintf("%.*f", 3, max(x$class.accu$tau_k)), " (", names(which.max(x$class.accu$tau_k)), ")", "\n",
+      "============================================================="
+    )
+  )
+}

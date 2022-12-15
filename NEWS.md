@@ -1,3 +1,7 @@
+# cdmTools 1.0.3
+* Fixed - `CA.MI` had a slightly error that has been corrected
+* Added - `RDINA` function to estimate the R-DINA model for small sample size settings
+
 # cdmTools 1.0.2
 * Added - `CA.MI` function to calculate corrected classification accuracy with multiple imputation
 * Added - Rodrigo S. Kreitchmann as a contributor

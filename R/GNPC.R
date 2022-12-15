@@ -57,9 +57,9 @@ GNPC <- function(dat, Q, initiate = "AND", min.change = 0.001, maxitr = 1000, ve
   L <- length(lc.ch)
 
   if(N > 1){
-    att.clas.wHD <- NPCD::AlphaNP(dat, Q, initiate, method = "Weighted")$alpha.est
+    att.clas.wHD <- cdmTools.AlphaNP(dat, Q, initiate, method = "Weighted")$alpha.est
   } else {
-    att.clas.wHD <- NPCD::AlphaNP(dat, Q, initiate)$alpha.est
+    att.clas.wHD <- cdmTools.AlphaNP(dat, Q, initiate)$alpha.est
   }
   change.h <- c()
   change <- 1
