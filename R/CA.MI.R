@@ -99,7 +99,7 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   pseudo.gr <- setdiff(seq(nrow(patt)), unique(gr))
   gr <- c(gr, pseudo.gr)
   lab <- apply(patt, 1, paste0, collapse = "")
-  post <- cbind(exp(t(GDINA:::indlogPost(fit.MI))), matrix(0, nrow(patt),
+  post <- cbind(exp(t(GDINA::indlogPost(fit.MI))), matrix(0, nrow(patt),
                                                            length(pseudo.gr)))
   CCM <- GDINA:::aggregateCol(post, gr)/c(GDINA::extract(fit.MI, "nobs") *
                                             p_c)

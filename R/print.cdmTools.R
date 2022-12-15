@@ -83,7 +83,7 @@ print.valQ <- function(x, ...){
   cat("Note: * denotes a modified element.\n")
 }
 #' @export
-print.RDINA <- function(x){
+print.RDINA <- function(x, ...){
   if(x$specifications$gate %in% c("AND", "OR")){
     Q <- x$specifications$Q
     pckg <- paste0("cdmTools ", utils::packageDescription("cdmTools")$Version,
