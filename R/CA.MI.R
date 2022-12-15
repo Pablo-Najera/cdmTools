@@ -45,7 +45,7 @@
 #' }
 
 CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL){
-  
+
   if(!inherits(fit, "GDINA")){stop("Error in CA.MI: fit must be of class 'GDINA'.")}
   if(!what %in% c("EAP", "MAP", "MLE")){stop("Error in CA.MI: what must be either 'EAP', 'MAP', or 'MLE'.")}
   if(any(apply(fit$options$dat, 2, stats::sd, na.rm = T) == 0)){stop("Error in CA.MI: The data must not contain constant responses for an item.")}
@@ -55,11 +55,11 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   if(n.cores < 1){stop("Error in CA.MI: n.cores must be greater than 0.")}
   if(!is.logical(verbose)){stop("Error in CA.MI: verbose must be logical.")}
   if(!is.null(seed)){if((!is.numeric(seed) & !is.double(seed)) | length(seed) > 1){stop("Error in CA.MI: seed must be a unique numeric value.")}}
-  if(extract(fit, "ngroup") != 1) {stop("Error in CA.MI: only applicable for single group analysis.")}
-  
+  if(GDINA::extract(fit, "ngroup") != 1) {stop("Error in CA.MI: only applicable for single group analysis.")}
+
   if(is.null(seed)){seed <- sample(1:100000, 1)}
   set.seed(seed)
-  
+
   GDINA.options <- formals(GDINA::GDINA)
   GDINA.options <- GDINA.options[-c(1, 2, length(GDINA.options))]
   tmp <- as.list(fit$extra$call)[-c(1:3)]
@@ -68,9 +68,9 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   GDINA.options$att.dist <- "fixed"
   GDINA.options$model <- fit$model
   GDINA.options$control <- list(maxitr = rep(0, nrow(fit$options$Q)))
-  
+
   boot.sampling.dist <- bootSE.parallel(fit, bootsample = R, n.cores = n.cores, verbose = verbose, seed = seed)
-  
+
   posterior.R <- array(NA, dim = c(dim(t(fit$technicals$logposterior.i)), R))
   if(verbose){cat("\n", "\n")}
   for(r in 1:R){
@@ -80,16 +80,16 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
     fit.tmp <- do.call(GDINA::GDINA, c(list(dat = fit$options$dat, fit$options$Q), GDINA.options))
     posterior.R[,,r] <- as.matrix(exp(t(fit.tmp$technicals$logposterior.i)))
   }
-  
+
   posterior <- apply(posterior.R, 1:2, mean)
   fit.MI <- fit
   fit.MI$technicals$logposterior.i <- t(log(posterior))
-  
+
   p_c <- GDINA::extract(fit.MI, "posterior.prob")
   pp <- GDINA::personparm(fit, what = what)
   if (what == "MAP" || what == "MLE") {
-    if (any(pp[, ncol(pp)])) 
-      warning(paste0(what, " estimates for some individuals have multiple modes.", 
+    if (any(pp[, ncol(pp)]))
+      warning(paste0(what, " estimates for some individuals have multiple modes.",
                      collapse = ""), call. = FALSE)
     pp <- as.matrix(pp[, -ncol(pp)])
   }
@@ -99,9 +99,9 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   pseudo.gr <- setdiff(seq(nrow(patt)), unique(gr))
   gr <- c(gr, pseudo.gr)
   lab <- apply(patt, 1, paste0, collapse = "")
-  post <- cbind(exp(t(GDINA:::indlogPost(fit.MI))), matrix(0, nrow(patt), 
+  post <- cbind(exp(t(GDINA:::indlogPost(fit.MI))), matrix(0, nrow(patt),
                                                            length(pseudo.gr)))
-  CCM <- GDINA:::aggregateCol(post, gr)/c(GDINA::extract(fit.MI, "nobs") * 
+  CCM <- GDINA:::aggregateCol(post, gr)/c(GDINA::extract(fit.MI, "nobs") *
                                             p_c)
   tau_c <- diag(CCM)
   tau <- sum(tau_c * c(p_c))
@@ -109,6 +109,6 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   names(tau_c) <- rownames(CCM) <- colnames(CCM) <- lab
   res <- list(tau = tau, tau_l = tau_c, tau_k = tau_k, CCM = CCM)
   class(res) <- "CA"
-  
+
   return(res)
 }

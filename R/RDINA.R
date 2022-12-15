@@ -96,7 +96,7 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", EM.args
     alpha.est <- NPC$alpha.est
     dist.li <- NPC$loss.matrix[match_lclass,]
 
-    phi <- optimize(f = phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = att.prior, interval = c(0, 0.5), maximum = TRUE)$maximum
+    phi <- stats::optimize(f = phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = att.prior, interval = c(0, 0.5), maximum = TRUE)$maximum
 
     lik.il <- t(phi^dist.li * (1 - phi)^(J - dist.li))
     marg.lik.il <- t(t(lik.il) * att.prior)
