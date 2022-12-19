@@ -25,7 +25,7 @@
 #' \item{\code{MAP}}{Estimated attribute profiles with the MAP estimator (\code{matrix}).}
 #' \item{\code{EAP}}{Estimated attribute profiles with the EAP estimator (\code{matrix}).}
 #' \item{\code{phi}}{Phi parameter estimate (\code{numeric}).}
-#' \item{\code{post.probs}}{A (\code{list}) containing the estimates of the posterior probability of each examinee in each latent class (\code{pp}), marginal posterior probabilities of attribute mastery (\code{mp}), and posterior probabily of each latent class (\code{lp}).}
+#' \item{\code{post.probs}}{A (\code{list}) containing the estimates of the posterior probability of each examinee in each latent class (\code{pp}), marginal posterior probabilities of attribute mastery (\code{mp}), and posterior probability of each latent class (\code{lp}).}
 #' \item{\code{likelihood}}{A (\code{list}) containing the likelihood of each examinee in each latent class (\code{lik_il}) and the model log-likelihood (\code{logLik}).}
 #' \item{\code{test.fit}}{Relative model fit indices (\code{list}).}
 #' \item{\code{class.accu}}{A (\code{list}) containing the classification accuracy estimates at the test-level (\code{tau}), latent class-level (\code{tau_l}), and attribute-level (\code{tau_k}).}
@@ -61,14 +61,14 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", EM.args
   # Arguments control
   #-------------------
 
-  if(!gate %in% c("AND", "OR")){stop("gate must be 'AND' or 'OR'")}
-  if(!est %in% c("Brent", "EM")){stop("est must be 'Brent' or 'EM'")}
-  if(!tau.alpha %in% c("MLE", "MAP", "EAP")){stop("tau.alpha must be 'MLE', 'MAP', or 'EAP'")}
+  if(!gate %in% c("AND", "OR")){stop("Error in RDINA: gate must be 'AND' or 'OR'")}
+  if(!est %in% c("Brent", "EM")){stop("Error in RDINA: est must be 'Brent' or 'EM'")}
+  if(!tau.alpha %in% c("MLE", "MAP", "EAP")){stop("Error in RDINA: tau.alpha must be 'MLE', 'MAP', or 'EAP'")}
   if(is.null(EM.args$maxitr)){EM.args$maxitr <- 1000}
   if(is.null(EM.args$conv.crit)){EM.args$conv.crit <- 0.0001}
   if(is.null(EM.args$init.phi)){EM.args$init.phi <- 0.2}
   if(is.null(EM.args$verbose)){EM.args$verbose <- TRUE}
-  if(!is.logical(EM.args$verbose)){stop("EM.args$verbose must be logical")}
+  if(!is.logical(EM.args$verbose)){stop("Error in RDINA: EM.args$verbose must be logical")}
 
   #-----------------------
   # Information gathering

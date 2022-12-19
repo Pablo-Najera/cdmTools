@@ -45,7 +45,7 @@ RDINA(
 \item{\code{MAP}}{Estimated attribute profiles with the MAP estimator (\code{matrix}).}
 \item{\code{EAP}}{Estimated attribute profiles with the EAP estimator (\code{matrix}).}
 \item{\code{phi}}{Phi parameter estimate (\code{numeric}).}
-\item{\code{post.probs}}{A (\code{list}) containing the estimates of the posterior probability of each examinee in each latent class (\code{pp}), marginal posterior probabilities of attribute mastery (\code{mp}), and posterior probabily of each latent class (\code{lp}).}
+\item{\code{post.probs}}{A (\code{list}) containing the estimates of the posterior probability of each examinee in each latent class (\code{pp}), marginal posterior probabilities of attribute mastery (\code{mp}), and posterior probability of each latent class (\code{lp}).}
 \item{\code{likelihood}}{A (\code{list}) containing the likelihood of each examinee in each latent class (\code{lik_il}) and the model log-likelihood (\code{logLik}).}
 \item{\code{test.fit}}{Relative model fit indices (\code{list}).}
 \item{\code{class.accu}}{A (\code{list}) containing the classification accuracy estimates at the test-level (\code{tau}), latent class-level (\code{tau_l}), and attribute-level (\code{tau_k}).}
