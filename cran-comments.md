@@ -1,9 +1,9 @@
-## cdmTools_1.0.3 (December 15, 2022)
+## cdmTools_1.0.3 (December 20, 2022)
 
 #### News & Comments
 * We have slightly modified the CA.MI function
 * We have added the RDINA function
-* We have added internal functions
+* We have added internal functions for the CA.MI and RDINA functions
 
 #### Test envirnoments
 * Local Windows 10 x64, R 4.1.2
@@ -15,30 +15,23 @@
 #### R CMD check results
 
 * There were no ERRORs or WARNINGs.
-* There were 4 NOTEs:
+* There were 3 NOTEs:
 ```
 Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
    
-Possibly misspelled words in DESCRIPTION:
-Abad (7:213, 7:497)
-CDM (7:70, 7:412, 7:595, 7:904)
-Chiu (7:670)
-Kreitchmann (7:803)
-Nájera (7:182, 7:489)
-Torre (7:204)
-al (7:678, 7:818)
-de (7:198)
-et (7:675, 7:815)
+Uses the superseded package: 'doSNOW'
 
-Uses the superseded package: ‘doSNOW’
-   
 Found the following (possibly) invalid DOIs:
   DOI: 10.1111/bmsp.12228
     From: DESCRIPTION
     Status: Service Unavailable
     Message: 503
+
+Unexported objects imported by ':::' calls:
+  'GDINA:::aggregateCol' 'GDINA:::matchMatrix' 'NPCD:::AlphaPermute'
+  See the note in ?`:::` about the use of this operator.
 ```
-All possibly misspelled words are surnames, acronyms, or British spelling used in paper references. The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a foreach loop.
+The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a `foreach` loop. The objects imported by the `:::` operator are very handy, efficient, and usable functions from the `GDINA` and `NPCD` packages that we have carefully inspected before including them on our codes.
 
 ## cdmTools_1.0.2 (May 17, 2022)
 
