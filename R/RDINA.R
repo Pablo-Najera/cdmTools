@@ -1,8 +1,8 @@
 #' Restricted DINA model
 #'
-#' @description Estimation of the \emph{restricted deterministic input, noisy "and" gate} model (R-DINA; Nájera et al., 2022).
+#' @description Estimation of the \emph{restricted deterministic input, noisy "and" gate} model (R-DINA; Nájera et al., 2023).
 #' In addition to the non-compensatory (i.e., conjunctive) condensation rule of the DINA model, the compensatory (i.e., disjunctive) rule of the DINO model can be also applied (i.e., R-DINO model).
-#' The R-DINA/R-DINO model should be only considered for applications involving very small sample sizes (N < 100; Nájera et al., 2022), and model fit evaluation and comparison with competing models (e.g., DINA/DINO, G-DINA) is highly recommended.
+#' The R-DINA/R-DINO model should be only considered for applications involving very small sample sizes (N < 100; Nájera et al., 2023), and model fit evaluation and comparison with competing models (e.g., DINA/DINO, G-DINA) is highly recommended.
 #'
 #' @param dat A \emph{N} individuals x \emph{J} items (\code{matrix} or \code{data.frame}). Missing values need to be coded as \code{NA}. Caution is advised if missing data are present.
 #' @param Q A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}).
@@ -37,7 +37,7 @@
 #' @references
 #' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 #'
-#' Nájera, P., Abad, F. J., Chiu, C.-Y., & Sorrel, M. A. (2022). The Restricted DINA model: A Comprehensive Cognitive Diagnostic Model for Classroom-Level Assessments. [Manuscript submitted for publication].
+#' Nájera, P., Abad, F. J., Chiu, C.-Y., & Sorrel, M. A. (2023). The Restricted DINA model: A Comprehensive Cognitive Diagnostic Model for Classroom-Level Assessments. [Manuscript submitted for publication].
 #'
 #' @export
 #'
