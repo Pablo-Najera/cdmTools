@@ -176,9 +176,9 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", EM.args
   colnames(mp) <- paste0("A", 1:K)
   names(lp) <- apply(lclass, 1, paste, collapse = "")
 
-  MLE.est <- cbind(as.data.frame(lclass[apply(marg.lik.il, 1, which.max),]),
+  MLE.est <- cbind(as.data.frame(lclass[sapply(apply(marg.lik.il, 1, function(x) which(x == max(x))), function(y) ifelse(length(y) > 1, sample(y, size = 1), y)),]),
                    MM = ifelse(rowSums(t(apply(marg.lik.il, 1, function(i) i == max(i)))) == 1, FALSE, TRUE))
-  MAP.est <- cbind(as.data.frame(lclass[apply(pp, 1, which.max),]),
+  MAP.est <- cbind(as.data.frame(lclass[sapply(apply(pp, 1, function(x) which(x == max(x))), function(y) ifelse(length(y) > 1, sample(y, size = 1), y)),]),
                    MM = ifelse(rowSums(t(apply(pp, 1, function(i) i == max(i)))) == 1, FALSE, TRUE))
   EAP.est <- ifelse(mp >= 0.5, 1, 0)
   tau.est <- as.matrix(switch(tau.alpha, MLE = MLE.est, MAP = MAP.est, EAP = EAP.est)[,1:K])
