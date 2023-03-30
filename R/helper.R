@@ -1078,7 +1078,7 @@ cdmTools.AlphaNP <- function(Y, Q, gate = c("AND", "OR"), method = c("Hamming", 
   nitem <- dim(Q)[1]
   natt <- dim(Q)[2]
   M <- 2^natt
-  pattern <- NPCD:::AlphaPermute(natt)
+  pattern <- cdmTools.AlphaPermute(natt)
   Ideal <- matrix(NA, M, nitem)
   for(m in 1:M){
     for(j in 1:nitem){
@@ -1139,7 +1139,7 @@ cdmTools.aggregateCol <- function(mX, ind){
   res <- matrix(0, nrow = N, ncol = Lj)
   for(l in 1:Lj){
     loc <- which(ind == l)
-    res[,l] <- rowSums(mX[,loc])
+    res[,l] <- rowSums(mX[, loc, drop = FALSE])
   }
   return(res)
 }
