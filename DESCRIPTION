@@ -8,7 +8,7 @@ Description: Provides useful tools for cognitive diagnosis modeling (CDM). The p
 License: GPL-3
 LazyData: FALSE
 Depends: R (>= 3.6.0)
-Imports: GDINA (>= 2.8.0), NPCD (>= 1.0-11), ggplot2 (>= 3.3.0), psych (>= 1.9.12), sirt (>= 3.9-4), parallel (>= 3.6.3), stats (>= 3.6.3), GPArotation (>= 2014.11-1), combinat (>= 0.0-8), foreach, doSNOW
+Imports: GDINA (>= 2.8.0), ggplot2 (>= 3.3.0), psych (>= 1.9.12), sirt (>= 3.9-4), parallel (>= 3.6.3), stats (>= 3.6.3), GPArotation (>= 2014.11-1), combinat (>= 0.0-8), foreach, doSNOW
 URL: https://github.com/pablo-najera/cdmTools
 BugReports: https://github.com/pablo-najera/cdmTools/issues
 RoxygenNote: 7.2.3
