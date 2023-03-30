@@ -15,7 +15,7 @@
 #### R CMD check results
 
 * There were no ERRORs or WARNINGs.
-* There were 3 NOTEs:
+* There were 2 NOTEs:
 ```
 Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
    
@@ -26,12 +26,8 @@ Found the following (possibly) invalid DOIs:
     From: DESCRIPTION
     Status: Service Unavailable
     Message: 503
-
-Unexported objects imported by ':::' calls:
-  'GDINA:::aggregateCol' 'GDINA:::matchMatrix' 'NPCD:::AlphaPermute'
-  See the note in ?`:::` about the use of this operator.
 ```
-The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a `foreach` loop. The objects imported by the `:::` operator are very handy, efficient, and usable functions from the `GDINA` and `NPCD` packages that we have carefully inspected before including them on our codes.
+The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
 
 ## cdmTools_1.0.2 (May 17, 2022)
 
