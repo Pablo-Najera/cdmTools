@@ -95,13 +95,13 @@ CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed 
   }
   mp <- GDINA::personparm(fit.MI, what = "mp")
   patt <- GDINA::extract(fit.MI, "attributepattern")
-  gr <- GDINA:::matchMatrix(patt, pp)
+  gr <- cdmTools.matchMatrix(patt, pp)
   pseudo.gr <- setdiff(seq(nrow(patt)), unique(gr))
   gr <- c(gr, pseudo.gr)
   lab <- apply(patt, 1, paste0, collapse = "")
   post <- cbind(exp(t(GDINA::indlogPost(fit.MI))), matrix(0, nrow(patt),
                                                            length(pseudo.gr)))
-  CCM <- GDINA:::aggregateCol(post, gr)/c(GDINA::extract(fit.MI, "nobs") *
+  CCM <- cdmTools.aggregateCol(post, gr)/c(GDINA::extract(fit.MI, "nobs") *
                                             p_c)
   tau_c <- diag(CCM)
   tau <- sum(tau_c * c(p_c))

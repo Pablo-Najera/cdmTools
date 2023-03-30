@@ -92,7 +92,7 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", EM.args
   if(est == "Brent"){
     NPC <- cdmTools.AlphaNP(dat, Q, gate, method = "Hamming")
     match_lclass <- match(apply(lclass, 1, paste, collapse = ""),
-                          apply(NPCD:::AlphaPermute(K), 1, paste, collapse = ""))
+                          apply(cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
     alpha.est <- NPC$alpha.est
     dist.li <- NPC$loss.matrix[match_lclass,]
 
@@ -190,12 +190,12 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", EM.args
   CAIC <- Deviance + (log(N) + 1) * npar
   SABIC <- Deviance + log((N + 2) / 24) * npar
 
-  gr <- GDINA:::matchMatrix(lclass, tau.est)
+  gr <- cdmTools.matchMatrix(lclass, tau.est)
   pseudo.gr <- setdiff(seq(nrow(lclass)), unique(gr))
   gr <- c(gr, pseudo.gr)
   lab <- apply(lclass, 1, paste0, collapse = "")
   post <- cbind(t(pp), matrix(0, nrow(lclass), length(pseudo.gr)))
-  CCM <- GDINA:::aggregateCol(post, gr)/c(nrow(tau.est) * lp)
+  CCM <- cdmTools.aggregateCol(post, gr)/c(nrow(tau.est) * lp)
   tau_c <- diag(CCM)
   tau <- sum(tau_c * c(lp))
   tau_k <- colMeans(tau.est * mp + (1 - tau.est) * (1 - mp))

@@ -1,10 +1,10 @@
-cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "oblimin",
-                         scores = "regression", residuals = FALSE, SMC = TRUE,
-                         covar = FALSE, missing = FALSE, impute = "median",
-                         min.err = 0.001, max.iter = 50, symmetric = TRUE, warnings = TRUE,
-                         fm = "minres", alpha = 0.1, p = 0.05, oblique.scores = FALSE,
-                         np.obs = NULL, use = "pairwise", cor = "cor",
-                         correct = 0.5, weight = NULL, ...){
+cdmTools.fa <- function(r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "oblimin",
+                        scores = "regression", residuals = FALSE, SMC = TRUE,
+                        covar = FALSE, missing = FALSE, impute = "median",
+                        min.err = 0.001, max.iter = 50, symmetric = TRUE, warnings = TRUE,
+                        fm = "minres", alpha = 0.1, p = 0.05, oblique.scores = FALSE,
+                        np.obs = NULL, use = "pairwise", cor = "cor",
+                        correct = 0.5, weight = NULL, ...){
   cl <- match.call()
   if (psych::isCorrelation(r)) {
     if (is.na(n.obs) && (n.iter > 1))
@@ -34,7 +34,7 @@ cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "obli
       }
       else {
         X <- r[sample(n.obs, n.obs, replace = TRUE),
-               ]
+        ]
       }
       fs <- cdmTools.fac(X, nfactors = nfactors, rotate = rotate,
                          scores = "none", SMC = SMC, missing = missing,
@@ -109,13 +109,13 @@ cdmTools.fa <- function (r, nfactors = 1, n.obs = NA, n.iter = 1, rotate = "obli
   }
   return(results)
 }
-cdmTools.fac <- function (r, nfactors = 1, n.obs = NA, rotate = "oblimin",
-                          scores = "tenBerge", residuals = FALSE, SMC = TRUE,
-                          covar = FALSE, missing = FALSE, impute = "median",
-                          min.err = 0.001, max.iter = 50, symmetric = TRUE, warnings = TRUE,
-                          fm = "minres", alpha = 0.1, oblique.scores = FALSE,
-                          np.obs = NULL, use = "pairwise", cor = "cor",
-                          correct = 0.5, weight = NULL, ...){
+cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
+                         scores = "tenBerge", residuals = FALSE, SMC = TRUE,
+                         covar = FALSE, missing = FALSE, impute = "median",
+                         min.err = 0.001, max.iter = 50, symmetric = TRUE, warnings = TRUE,
+                         fm = "minres", alpha = 0.1, oblique.scores = FALSE,
+                         np.obs = NULL, use = "pairwise", cor = "cor",
+                         correct = 0.5, weight = NULL, ...){
   cl <- match.call()
   control <- NULL
   "fit.residuals" <- function(Psi, S, nf, S.inv = NULL,
@@ -1069,7 +1069,7 @@ phi.ML <- function(phi, dist, J, posterior = FALSE, att.prior = NULL){
     return(sum(log(apply(mL.il, 1, sum))))
   }
 }
-cdmTools.AlphaNP <- function (Y, Q, gate = c("AND", "OR"), method = c("Hamming", "Weighted", "Penalized"), wg = 1, ws = 1){
+cdmTools.AlphaNP <- function(Y, Q, gate = c("AND", "OR"), method = c("Hamming", "Weighted", "Penalized"), wg = 1, ws = 1){
   Y <- as.matrix(Y)
   Q <- as.matrix(Q)
   gate <- match.arg(gate)
@@ -1131,4 +1131,26 @@ cdmTools.AlphaNP <- function (Y, Q, gate = c("AND", "OR"), method = c("Hamming",
                  loss.matrix = loss.matrix, method = method, Q = Q, Y = Y)
   class(output) <- "AlphaNP"
   return(output)
+}
+cdmTools.aggregateCol <- function(mX, ind){
+  uniq <- unique(ind)
+  N <- nrow(mX)
+  Lj <- length(uniq)
+  res <- matrix(0, nrow = N, ncol = Lj)
+  for(l in 1:Lj){
+    loc <- which(ind == l)
+    res[,l] <- rowSums(mX[,loc])
+  }
+  return(res)
+}
+cdmTools.matchMatrix <- function(A, B){
+  return(t(t(match(apply(B, 1, paste, collapse = ""), apply(A, 1, paste, collapse = "")))))
+}
+cdmTools.AlphaPermute <- function(dim){
+  alpha <- matrix(c(0, 1), 2, 1)
+  for (i in 1:(dim - 1)) {
+    alpha <- rbind(alpha, alpha)
+    alpha <- cbind(alpha, c(rep(0, 2^i), rep(1, 2^i)))
+  }
+  return(alpha)
 }
