@@ -75,7 +75,7 @@ ClassRate(fit.RDINA$EAP, simatt) # Check classification accuracy
 \references{
 Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 
-Nájera, P., Abad, F. J., Chiu, C.-Y., & Sorrel, M. A. (2023). The Restricted DINA model: A Comprehensive Cognitive Diagnostic Model for Classroom-Level Assessments. [Manuscript submitted for publication].
+Nájera, P., Abad, F. J., Chiu, C.-Y., & Sorrel, M. A. (2023). The Restricted DINA model: A Comprehensive Cognitive Diagnostic Model for Classroom-Level Assessments. \emph{Journal of Educational and Behavioral Statistics}.
 }
 \author{
 {Pablo Nájera, Universidad Autónoma de Madrid}
