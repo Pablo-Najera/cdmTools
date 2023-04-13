@@ -149,9 +149,9 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", EM.args
           r1 <- pp[c(as.double(which(dat[,j] == 1))), c(as.double(which(t(eta.lj)[j,] == 1)))]
         }
         IR[j,1] <- i0
-        IR[j,2] <- sum(colSums(r0))
+        IR[j,2] <- sum(r0)
         IR[j,3] <- i1
-        IR[j,4] <- sum(colSums(r1))
+        IR[j,4] <- sum(r1)
       }
 
       # M-step
