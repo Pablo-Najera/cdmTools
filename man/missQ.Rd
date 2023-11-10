@@ -13,7 +13,7 @@ missQ(Q, qjk, retainJ = 0, Qid = "none", seed = NULL)
 
 \item{retainJ}{Number of items to retain (i.e., not modify) in the Q-matrix. It will retain the first \code{retainJ} items. It is useful for assuring the completeness of the misspecified Q-matrix if the first items conform one or more identity matrices. The default is 0.}
 
-\item{Qid}{Assure that the generated Q-matrix is identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.}
+\item{Qid}{Assure that the generated Q-matrix is generically identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.}
 
 \item{seed}{A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.}
 }
@@ -24,7 +24,7 @@ missQ(Q, qjk, retainJ = 0, Qid = "none", seed = NULL)
 \item{\code{Q}}{The input (true) Q-matrix (\code{matrix}).}
 \item{\code{JK}}{Number of items measuring each attribute (\code{vector}).}
 \item{\code{Kcor}}{Tetrachoric correlations among the columns (\code{matrix}).}
-\item{\code{is.Qid}}{Is the generated Q-matrix identifiable under the DINA/DINO models or others CDMs? (\code{vector}).}
+\item{\code{is.Qid}}{Q-matrix identifiability information (\code{list}).}
 \item{\code{specifications}}{Function call specifications (\code{list}).}
 }
 }

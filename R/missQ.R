@@ -7,7 +7,7 @@
 #' @param Q A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}).
 #' @param qjk Number (or proportion, if lower than 1) of q-entries to modify in the Q-matrix.
 #' @param retainJ Number of items to retain (i.e., not modify) in the Q-matrix. It will retain the first \code{retainJ} items. It is useful for assuring the completeness of the misspecified Q-matrix if the first items conform one or more identity matrices. The default is 0.
-#' @param Qid Assure that the generated Q-matrix is identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.
+#' @param Qid Assure that the generated Q-matrix is generically identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.
 #' @param seed A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.
 #'
 #' @return \code{missQ} returns an object of class \code{missQ}.
@@ -16,7 +16,7 @@
 #' \item{\code{Q}}{The input (true) Q-matrix (\code{matrix}).}
 #' \item{\code{JK}}{Number of items measuring each attribute (\code{vector}).}
 #' \item{\code{Kcor}}{Tetrachoric correlations among the columns (\code{matrix}).}
-#' \item{\code{is.Qid}}{Is the generated Q-matrix identifiable under the DINA/DINO models or others CDMs? (\code{vector}).}
+#' \item{\code{is.Qid}}{Q-matrix identifiability information (\code{list}).}
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
@@ -69,8 +69,8 @@ missQ <- function(Q, qjk, retainJ = 0, Qid = "none", seed = NULL){
     if(cQ[qq] == 1) {cmiss.Q[qq] <- 0}
   }
   miss.Q <- matrix(data = cmiss.Q, nrow = J, ncol = K, byrow = TRUE)
-  idQ.DINA <- is.Qid(miss.Q, model = "DINA", verbose = FALSE)$id.Q
-  idQ.others <- is.Qid(miss.Q, model = "others", verbose = FALSE)$id.Q
+  idQ.DINA <- is.Qid(miss.Q, model = "DINA")
+  idQ.others <- is.Qid(miss.Q, model = "others")
 
   if(any(rowSums(miss.Q) == 0) & Qid == "none"){
     cmiss.Q <- c(as.matrix(t(miss.Q)))
@@ -88,10 +88,10 @@ missQ <- function(Q, qjk, retainJ = 0, Qid = "none", seed = NULL){
       }
     }
     miss.Q <- matrix(data = cmiss.Q, nrow = J, ncol = K, byrow = TRUE)
-    idQ.DINA <- is.Qid(miss.Q, model = "DINA", verbose = FALSE)$id.Q
-    idQ.others <- is.Qid(miss.Q, model = "others", verbose = FALSE)$id.Q
+    idQ.DINA <- is.Qid(miss.Q, model = "DINA")
+    idQ.others <- is.Qid(miss.Q, model = "others")
   } else if(any(rowSums(miss.Q) == 0) | (Qid == "DINA" | Qid == "DINO")){
-    while(!idQ.DINA | any(rowSums(miss.Q) == 0)){
+    while(!idQ.DINA$generic | any(rowSums(miss.Q) == 0)){
       cmiss.Q <- c(as.matrix(t(miss.Q)))
       q0 <- which(rowSums(miss.Q) == 0)
       for(q in q0){
@@ -107,8 +107,8 @@ missQ <- function(Q, qjk, retainJ = 0, Qid = "none", seed = NULL){
         }
       }
       miss.Q <- matrix(data = cmiss.Q, nrow = J, ncol = K, byrow = TRUE)
-      idQ.DINA <- is.Qid(miss.Q, model = "DINA", verbose = FALSE)$id.Q
-      idQ.others <- is.Qid(miss.Q, model = "others", verbose = FALSE)$id.Q
+      idQ.DINA <- is.Qid(miss.Q, model = "DINA")
+      idQ.others <- is.Qid(miss.Q, model = "others")
     }
   } else if(any(rowSums(miss.Q) == 0) | Qid == "others"){
     while(!idQ.others | any(rowSums(miss.Q) == 0)){
@@ -127,15 +127,15 @@ missQ <- function(Q, qjk, retainJ = 0, Qid = "none", seed = NULL){
         }
       }
       miss.Q <- matrix(data = cmiss.Q, nrow = J, ncol = K, byrow = TRUE)
-      idQ.DINA <- is.Qid(miss.Q, model = "DINA", verbose = FALSE)$id.Q
-      idQ.others <- is.Qid(miss.Q, model = "others", verbose = FALSE)$id.Q
+      idQ.DINA <- is.Qid(miss.Q, model = "DINA")
+      idQ.others <- is.Qid(miss.Q, model = "others")
     }
   }
   JK <- colSums(miss.Q)
   Kcor <- round(sirt::tetrachoric2(miss.Q)$rho, 3)
 
   spec <- list(Q = Q, qjk = qjk, retainJ = retainJ, Qid = Qid, seed = seed)
-  res <- list(miss.Q = miss.Q, Q = Q, JK = JK, Kcor = Kcor, is.Qid = c("DINA/O" = idQ.DINA, "others" = idQ.others), specifications = spec)
+  res <- list(miss.Q = miss.Q, Q = Q, JK = JK, Kcor = Kcor, is.Qid = list("DINA" = idQ.DINA, "others" = idQ.others), specifications = spec)
   class(res) <- "missQ"
   return(res)
 }

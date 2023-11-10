@@ -49,29 +49,29 @@ personFit <- function(fit, att.est = "MLE", sig.level = 0.05, p.adjust.method = 
                 "MAP" = as.matrix(GDINA::personparm(fit, what = c("MAP"))[,1:K]),
                 "MLE" = as.matrix(GDINA::personparm(fit, what = c("MLE"))[,1:K]))
   prob <- t(LCprob[, match(apply(att, 1, paste, collapse = ""), apply(GDINA::attributepattern(K), 1, paste, collapse = ""))])
-  
+
   l0 <- as.matrix(rowSums(dat * log(prob) + (1 - dat) * log(1 - prob)))
   mean.l0 <- rowSums(prob * log(prob) + (1 - prob) * log(1 - prob))
   var.l0 <- rowSums(prob * (1 - prob) * (log(prob/(1 - prob)))^2)
   lz <- (l0 - mean.l0)/sqrt(var.l0)
   skew.lz <- rowSums((1/sqrt(var.l0)^3) * prob * (1 - prob) * (1 - 2 * prob) * (log(prob) - log(1 - prob))^3)
-  lz.p <- pnorm(lz)*2
+  lz.p <- stats::pnorm(lz)*2
   lz.p[lz.p > 1] <- 1
-  
+
   v <- 8 / (skew.lz^2)
   b <- sqrt(var.l0/(2 * v))
   a <- -b * v - mean.l0
   lz.chi <- abs(l0 + a) / b
-  lz.chi.p <- pchisq(lz.chi, df = v, lower.tail = FALSE)
+  lz.chi.p <- stats::pchisq(lz.chi, df = v, lower.tail = FALSE)
   lz.chi.p[lz.chi.p > 1] <- 1
-  
+
   lz.cf <- lz - skew.lz * (lz^2 - 1)/12
-  lz.cf.p <- pnorm(lz.cf)*2
+  lz.cf.p <- stats::pnorm(lz.cf)*2
   lz.cf.p[lz.cf.p > 1] <- 1
-  
+
   lz.edge.p <- lz.p - dnorm(lz, mean = 0, sd = 1) * (lz^2 - 1) * (skew.lz/6)
   lz.edge.p[lz.edge.p > 1] <- 1
-  
+
   res.stat <- data.frame("lz" = lz, "lz.chi" = lz.chi, "lz.edge" = NA, "lz.cf" = lz.cf)
   res.p <- data.frame("lz" = lz.p, "lz.chi" = lz.chi.p, "lz.edge" = lz.edge.p, "lz.cf" = lz.cf.p)
   rownames(res.stat) <- rownames(res.p) <- 1:N
