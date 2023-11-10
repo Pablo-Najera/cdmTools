@@ -19,11 +19,11 @@
 #'
 #' @references
 #'
-#' Cui, Y., & Li, J. (2015). Evaluating person fit for cognitive diagnostic assessment. \emp{Applied Psychological Measurement}, \emp{39}, 223–238. https://doi.org/10.1177/0146621614557272
+#' Cui, Y., & Li, J. (2015). Evaluating person fit for cognitive diagnostic assessment. \emph{Applied Psychological Measurement}, \emph{39}, 223–238. https://doi.org/10.1177/0146621614557272
 #'
 #' Drasgow, F., Levine, M. V., & Williams, E. A. (1985). Appropriateness measurement with polychotomous item response models and standardized indices. \emph{British Journal of Mathematical and Statistical Psychology}, \emph{38}, 67–86. https://psycnet.apa.org/doi/10.1111/j.2044-8317.1985.tb00817.x
 #'
-#' Santos, K. C. P., de la Torre, J., & von Davier, M. (2020). Adjusting person fit index for skewness in cognitive diagnosis modeling. \emp{Journal of Classification}, \emp{37}, 399-420. https://doi.org/10.1007/s00357-019-09325-5
+#' Santos, K. C. P., de la Torre, J., & von Davier, M. (2020). Adjusting person fit index for skewness in cognitive diagnosis modeling. \emph{Journal of Classification}, \emph{37}, 399-420. https://doi.org/10.1007/s00357-019-09325-5
 #'
 #' @export
 #'
