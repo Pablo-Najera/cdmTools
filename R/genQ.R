@@ -11,7 +11,7 @@
 #' @param I Number of identity matrices to include in the Q-matrix (up to column permutation). The default is 2.
 #' @param min.JK Minimum number of items measuring each attribute. It can be overwritten by \code{I}, if \code{I} is higher than \code{min.JK}. The default is 3.
 #' @param max.Kcor Maximum allowed tetrachoric correlation among the columns to avoid overlapping (Nájera, Sorrel, de la Torre, & Abad, 2020). The default is 1.
-#' @param Qid Assure that the generated Q-matrix is identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.
+#' @param Qid Assure that the generated Q-matrix is generically identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.
 #' @param seed A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.
 #'
 #' @return \code{genQ} returns an object of class \code{genQ}.
@@ -19,7 +19,7 @@
 #' \item{\code{gen.Q}}{The generated Q-matrix (\code{matrix}).}
 #' \item{\code{JK}}{Number of items measuring each attribute (\code{vector}).}
 #' \item{\code{Kcor}}{Tetrachoric correlations among the columns (\code{matrix}).}
-#' \item{\code{is.Qid}}{Is the generated Q-matrix identifiable under the DINA/DINO models or others CDMs? (\code{vector}).}
+#' \item{\code{is.Qid}}{Q-matrix identifiability information (\code{list}).}
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
@@ -55,7 +55,8 @@ genQ <- function(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed =
   if(max.Kcor > 1 | max.Kcor < 0){stop("Error in genQ: max.Kcor must be a value between 0 and 1.")}
   if(!(Qid %in% c("none", "DINA", "DINO", "others"))){stop("Error in genQ: Qid must be 'none', 'DINA', 'DINO', or 'others'.")}
   if(!is.null(seed)){if((!is.numeric(seed) & !is.double(seed)) | length(seed) > 1){stop("Error in genQ: seed must be a unique numeric value.")}}
-  idQ.DINA <- idQ.others <- FALSE
+  idQ.DINA <- idQ.others <- list()
+  idQ.DINA$generic <- idQ.others$generic <- FALSE
 
   if(!is.null(seed)){set.seed(seed)}
   Q <- matrix(rep(diag(1, K), I), ncol = K, byrow = T)
@@ -88,34 +89,34 @@ genQ <- function(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed =
     while(any(colSums(Q[(K*I + 1):J,]) < min.JK) | any(corQ[lower.tri(corQ)] > max.Kcor)){
       Q <- matrix(rep(diag(1, K), I), ncol = K, byrow = T)
       for(k in 1:length(Kj)){Q <- rbind(Q, rbind(get(paste0("pat", k))[sample(nrow(get(paste0("pat", k))), size = Jk[k], replace = get(paste0("replace", k))),]))}
-      idQ.DINA <- is.Qid(Q, model = "DINA", verbose = FALSE)$id.Q
-      idQ.others <- is.Qid(Q, model = "others", verbose = FALSE)$id.Q
+      idQ.DINA <- is.Qid(Q, model = "DINA")
+      idQ.others <- is.Qid(Q, model = "others")
       corQ <- sirt::tetrachoric2(Q)$rho
     }
   } else if(Qid == "DINA" | Qid == "DINO"){
-    while(any(colSums(Q[(K*I + 1):J,]) < min.JK) | any(corQ[lower.tri(corQ)] > max.Kcor) | idQ.DINA == FALSE){
+    while(any(colSums(Q[(K*I + 1):J,]) < min.JK) | any(corQ[lower.tri(corQ)] > max.Kcor) | idQ.DINA$generic == FALSE){
       Q <- matrix(rep(diag(1, K), I), ncol = K, byrow = T)
       for(k in 1:length(Kj)){Q <- rbind(Q, rbind(get(paste0("pat", k))[sample(nrow(get(paste0("pat", k))), size = Jk[k], replace = get(paste0("replace", k))),]))}
-      idQ.DINA <- is.Qid(Q, model = "DINA", verbose = FALSE)$id.Q
-      idQ.others <- is.Qid(Q, model = "others", verbose = FALSE)$id.Q
+      idQ.DINA <- is.Qid(Q, model = "DINA")
+      idQ.others <- is.Qid(Q, model = "others")
       corQ <- sirt::tetrachoric2(Q)$rho
     }
   } else if(Qid == "others"){
-    while(any(colSums(Q[(K*I + 1):J,]) < min.JK) | any(corQ[lower.tri(corQ)] > max.Kcor) | idQ.others == FALSE){
+    while(any(colSums(Q[(K*I + 1):J,]) < min.JK) | any(corQ[lower.tri(corQ)] > max.Kcor) | idQ.others$generic == FALSE){
       Q <- matrix(rep(diag(1, K), I), ncol = K, byrow = T)
       for(k in 1:length(Kj)){Q <- rbind(Q, rbind(get(paste0("pat", k))[sample(nrow(get(paste0("pat", k))), size = Jk[k], replace = get(paste0("replace", k))),]))}
-      idQ.DINA <- is.Qid(Q, model = "DINA", verbose = FALSE)$id.Q
-      idQ.others <- is.Qid(Q, model = "others", verbose = FALSE)$id.Q
+      idQ.DINA <- is.Qid(Q, model = "DINA")
+      idQ.others <- is.Qid(Q, model = "others")
       corQ <- sirt::tetrachoric2(Q)$rho
     }
   }
-  idQ.DINA <- is.Qid(Q, model = "DINA", verbose = FALSE)$id.Q
-  idQ.others <- is.Qid(Q, model = "others", verbose = FALSE)$id.Q
+  idQ.DINA <- is.Qid(Q, model = "DINA")
+  idQ.others <- is.Qid(Q, model = "others")
   corQ <- sirt::tetrachoric2(Q)$rho
   Jk[1] <- Jk[1] + (I * K)
 
   spec <- list(J = J, K = K, Kj = Kj, I = I, min.JK = min.JK, max.Kcor = max.Kcor, Qid = Qid, seed = seed)
-  res <- list(gen.Q = Q, JK = Jk, Kcor = round(corQ, 3), is.Qid = c("DINA/O" = idQ.DINA, "others" = idQ.others), specifications = spec)
+  res <- list(gen.Q = Q, JK = Jk, Kcor = round(corQ, 3), is.Qid = list("DINA" = idQ.DINA, "others" = idQ.others), specifications = spec)
   class(res) <- "genQ"
   return(res)
 }

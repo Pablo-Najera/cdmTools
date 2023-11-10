@@ -19,7 +19,7 @@ genQ(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed = NULL)
 
 \item{max.Kcor}{Maximum allowed tetrachoric correlation among the columns to avoid overlapping (Nájera, Sorrel, de la Torre, & Abad, 2020). The default is 1.}
 
-\item{Qid}{Assure that the generated Q-matrix is identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.}
+\item{Qid}{Assure that the generated Q-matrix is generically identifiable. It includes \code{"none"} (for no identifiability assurance), \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs identifiability). The default is \code{"none"}.}
 
 \item{seed}{A seed for obtaining consistent results. If \code{NULL}, no seed is used. The default is \code{NULL}.}
 }
@@ -29,7 +29,7 @@ genQ(J, K, Kj, I = 2, min.JK = 3, max.Kcor = 1, Qid = "none", seed = NULL)
 \item{\code{gen.Q}}{The generated Q-matrix (\code{matrix}).}
 \item{\code{JK}}{Number of items measuring each attribute (\code{vector}).}
 \item{\code{Kcor}}{Tetrachoric correlations among the columns (\code{matrix}).}
-\item{\code{is.Qid}}{Is the generated Q-matrix identifiable under the DINA/DINO models or others CDMs? (\code{vector}).}
+\item{\code{is.Qid}}{Q-matrix identifiability information (\code{list}).}
 \item{\code{specifications}}{Function call specifications (\code{list}).}
 }
 }

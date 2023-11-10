@@ -48,7 +48,7 @@ estQ(
 \item{\code{efa.comm}}{EFA communalities (\code{vector}).}
 \item{\code{efa.fit}}{EFA model fit indices (\code{vector}).}
 \item{\code{boot.Q}}{Bagging bootstrap Q-matrix before dichotomization. Only if \code{boot = TRUE} (\code{matrix}).}
-\item{\code{is.Qid}}{Is the generated Q-matrix identifiable under the DINA/DINO models or others CDMs? (\code{vector}).}
+\item{\code{is.Qid}}{Q-matrix identifiability information (\code{list}).}
 \item{\code{specifications}}{Function call specifications (\code{list}).}
 }
 }

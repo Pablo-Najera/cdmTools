@@ -31,7 +31,7 @@
 #' \item{\code{efa.comm}}{EFA communalities (\code{vector}).}
 #' \item{\code{efa.fit}}{EFA model fit indices (\code{vector}).}
 #' \item{\code{boot.Q}}{Bagging bootstrap Q-matrix before dichotomization. Only if \code{boot = TRUE} (\code{matrix}).}
-#' \item{\code{is.Qid}}{Is the generated Q-matrix identifiable under the DINA/DINO models or others CDMs? (\code{vector}).}
+#' \item{\code{is.Qid}}{Q-matrix identifiability information (\code{list}).}
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
@@ -203,11 +203,11 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
   if(any(rowSums(est.Q) == 0)){warning("Warning in estQ: Item(s) {", which(rowSums(est.Q) == 0), "} are not measuring any attributes. Check factor loadings for the item(s).")}
   if(any(colSums(est.Q) == 0)){warning("Warning in estQ: Attribute(s) {", which(colSums(est.Q) == 0), "} are not measured by any items. Check factor loadings for the attribute(s) or consider reducing K.")}
 
-  idQ.DINA <- is.Qid(est.Q, model = "DINA", verbose = FALSE)$id.Q
-  idQ.others <- is.Qid(est.Q, model = "others", verbose = FALSE)$id.Q
+  idQ.DINA <- is.Qid(est.Q, model = "DINA")
+  idQ.others <- is.Qid(est.Q, model = "others")
 
   spec <- list(r = r, K = K, n.obs = n.obs, criterion = criterion, efa.args = list(cor = efa.args$cor, rotation = efa.args$rotation, fm = efa.args$fm))
-  res <- list(est.Q = est.Q, efa.loads = efa.loads, efa.comm = efa.comm, efa.fit = efa.fit, boot.Q = boot.Q, is.Qid = c("DINA/O" = idQ.DINA, "others" = idQ.others), specifications = spec)
+  res <- list(est.Q = est.Q, efa.loads = efa.loads, efa.comm = efa.comm, efa.fit = efa.fit, boot.Q = boot.Q, is.Qid = list("DINA" = idQ.DINA, "others" = idQ.others), specifications = spec)
   class(res) <- "estQ"
   return(res)
 }
