@@ -69,13 +69,13 @@ personFit <- function(fit, att.est = "MLE", sig.level = 0.05, p.adjust.method = 
   lz.cf.p <- stats::pnorm(lz.cf)*2
   lz.cf.p[lz.cf.p > 1] <- 1
 
-  lz.edge.p <- lz.p - dnorm(lz, mean = 0, sd = 1) * (lz^2 - 1) * (skew.lz/6)
+  lz.edge.p <- lz.p - stats::dnorm(lz, mean = 0, sd = 1) * (lz^2 - 1) * (skew.lz/6)
   lz.edge.p[lz.edge.p > 1] <- 1
 
   res.stat <- data.frame("lz" = lz, "lz.chi" = lz.chi, "lz.edge" = NA, "lz.cf" = lz.cf)
   res.p <- data.frame("lz" = lz.p, "lz.chi" = lz.chi.p, "lz.edge" = lz.edge.p, "lz.cf" = lz.cf.p)
   rownames(res.stat) <- rownames(res.p) <- 1:N
-  res.adjp <- apply(res.p, 2, function(x) p.adjust(x, method = p.adjust.method))
+  res.adjp <- apply(res.p, 2, function(x) stats::p.adjust(x, method = p.adjust.method))
   res.sigp <- res.p < sig.level
   res.sigadjp <- res.adjp < sig.level
   list.sigp <- apply(res.sigp, 2, function(x) as.numeric(which(x)))
