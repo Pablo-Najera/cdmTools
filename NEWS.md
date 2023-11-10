@@ -1,3 +1,7 @@
+# cdmTools 1.0.4
+* Changed - `is.Qid` has been updated to include new identifiability criteria
+* Added - `personfit` function to identify aberrant response patterns
+
 # cdmTools 1.0.3
 * Fixed - `CA.MI` had a small issue that has been corrected
 * Added - `RDINA` function to estimate the R-DINA model for small sample size settings

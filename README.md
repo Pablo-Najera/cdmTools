@@ -12,6 +12,7 @@ Nájera, P., Sorrel, M. A., & Abad, F. J. (2023). *cdmTools: Useful Tools for Co
 * Attribute profile classification via the general nonparametric classification method
 * R-DINA and R-DINO model estimation
 * Corrected classification accuracy estimation via multiple imputation
+* Person fit evaluation
 * Useful functions for simulation studies involving CDM
 ## Installation
 To install this package from source:

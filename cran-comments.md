@@ -1,3 +1,25 @@
+## cdmTools_1.0.4 (November 10, 2023)
+
+#### News & Comments
+* We have modified the is.Qid function
+* We have added the personfit function
+* We have added an internal function for the is.Qid function
+
+#### Test envirnoments
+* Local Windows 10 x64, R 4.1.2
+* Ubuntu Linux 16.04 LTS, R-release, GCC (check_rhub)
+* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (check_rhub)
+* Fedora Linux, R-devel, clang, gfortran (check_rhub)
+* (check_win_devel)
+
+#### R CMD check results
+
+* There were no ERRORs or WARNINGs.
+* There were 2 NOTEs:
+```
+
+```
+
 ## cdmTools_1.0.3 (March 30, 2023)
 
 #### News & Comments

@@ -4,41 +4,32 @@
 \alias{is.Qid}
 \title{Check whether a Q-matrix is identifiable}
 \usage{
-is.Qid(Q, model = "others", verbose = TRUE)
+is.Qid(Q, model)
 }
 \arguments{
 \item{Q}{A \emph{J} items x \emph{K} attributes Q-matrix (\code{matrix} or \code{data.frame}).}
 
-\item{model}{CDM to be considered. It includes \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs; e.g., G-DINA, A-CDM). The default is \code{"others"}.}
-
-\item{verbose}{Should a message about the identifiability of the Q-matrix be printed? The default is \code{TRUE}.}
+\item{model}{CDM to be considered. It includes \code{"DINA"}, \code{"DINO"}, or \code{"others"} (for other CDMs; e.g., G-DINA, A-CDM).}
 }
 \value{
 \code{is.Qid} returns an object of class \code{is.Qid}.
 \describe{
-\item{\code{id.Q}}{Is the Q-matrix identifiable? (\code{logical}).}
-\item{\code{comp.Q}}{Is the Q-matrix complete?  (\code{logical}).}
-\item{\code{criteria.Qid}}{Identifiability criteria and whether they are fulfilled or not (\code{vector}).}
-\item{\code{message}}{A message about the identifiability of the Q-matrix and references (\code{string}).}
+\item{\code{strict}}{Is the Q-matrix strictly identifiable? (\code{logical}).}
+\item{\code{generic}}{Is the Q-matrix generically identifiable?  (\code{logical}).}
+\item{\code{conditions}}{Identifiability criteria and whether they are fulfilled or not (\code{vector}).}
 \item{\code{specifications}}{Function call specifications (\code{list}).}
 }
 }
 \description{
-Checks whether a Q-matrix is complete (Köhn & Chiu, 2017, 2018) and identifiable according to the criteria from Chen, Liu, Xu, & Ying (2015) and Xu & Shang (2018).
+Checks whether a Q-matrix fulfills the conditions for strict and generic identifiability according to Gu & Xu (2021).
 }
 \examples{
 Kj <- c(15, 10, 0, 5)
 Q <- genQ(J = 30, K = 4, Kj = Kj, Qid = "others", seed = 123)$gen.Q
-idQ <- is.Qid(Q)
+idQ <- is.Qid(Q, model = "DINA")
 }
 \references{
-Chen, Y., Liu, J., Xu, G., & Ying, Z. (2015). Statistical analysis of Q-matrix based diagnostic classification models. \emph{Journal of the American Statistical Association}, \emph{110}, 850-866. https://doi.org/10.1080/01621459.2014.934827
-
-Köhn, H.-F., & Chiu, C.-Y. (2017). A procedure for assessing the completeness of the Q-matrices of cognitively diagnostic tests. \emph{Psychometrika}, \emph{82}, 112-132. https://doi.org/10.1007/s11336-016-9536-7
-
-Köhn, H.-F., & Chiu, C.-Y. (2018). How to build a complete Q-matrix for a cognitively diagnostic test. \emph{Journal of Classification}, \emph{35}, 273-299. https://doi.org/10.1007/s00357-018-9255-0
-
-Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284-1295. https://doi.org/10.1080/01621459.2017.1340889
+Gu, Y., & Xu, G. (2021). Sufficient and necessary conditions for the identifiability of the Q-matrix. \emph{Statistica Sinica}, \emph{31}, 449-472. https://www.jstor.org/stable/26969691
 }
 \author{
 {Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid}

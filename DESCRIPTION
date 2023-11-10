@@ -1,8 +1,8 @@
 Package: cdmTools
 Type: Package
 Title: Useful Tools for Cognitive Diagnosis Modeling
-Version: 1.0.3
-Date: 2023-03-30
+Version: 1.0.4
+Date: 2023-11-10
 Authors@R: c(person(given = "Pablo", family = "Nájera", role = c("aut", "cre", "cph"), email = "pablo.najera@uam.es"), person(given = "Miguel A.", family = "Sorrel", role = c("aut", "cph"), email = "miguel.sorrel@uam.es"), person(given = "Francisco J.", family = "Abad", role = c("aut", "cph")), person(given = "Rodrigo S.", family = "Kreitchmann", role = c("ctb")))
 Description: Provides useful tools for cognitive diagnosis modeling (CDM). The package includes functions for empirical Q-matrix estimation and validation, such as the Hull method (Nájera, Sorrel, de la Torre, & Abad, 2021, <doi:10.1111/bmsp.12228>) and the discrete factor loading method (Wang, Song, & Ding, 2018, <doi:10.1007/978-3-319-77249-3_29>). It also contains dimensionality assessment procedures for CDM, including parallel analysis and automated fit comparison as explored in Nájera, Abad, and Sorrel (2021, <doi:10.3389/fpsyg.2021.614470>). Other relevant methods and features for CDM applications, such as the restricted DINA model (Nájera et al., 2023), the general nonparametric classification method (Chiu et al., 2018; <doi:10.1007/s11336-017-9595-4>), and corrected estimation of the classification accuracy via multiple imputation (Kreitchmann et al., 2022; <doi:10.3758/s13428-022-01967-5>) are also available. Lastly, the package provides some useful functions for CDM simulation studies, such as random Q-matrix generation and detection of complete/identified Q-matrices.
 License: GPL-3

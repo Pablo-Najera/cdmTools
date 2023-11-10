@@ -23,7 +23,22 @@ print.GNPC <- function(x, ...){
 }
 #' @export
 print.is.Qid <- function(x, ...){
-  cat(x$message)
+  cat("Model =", x$specifications$model, "\n\n")
+  if(length(x$conditions) == 3){
+    cat("Identifiability conditions:", "\n")
+    cat("A) Completeness         =", x$conditions$completeness, "\n")
+    cat("B) Distinctiveness      =", x$conditions$distinctiveness, "\n")
+    cat("C) Repetition           =", x$conditions$repetition, "\n\n")
+  } else if(length(x$conditions) == 5){
+    cat("Identifiability conditions:", "\n")
+    cat("A) Completeness         =", x$conditions$completeness, "\n")
+    cat("B) Distinctiveness      =", x$conditions$distinctiveness, "\n")
+    cat("C) Repetition           =", x$conditions$repetition, "\n")
+    cat("D) Generic completeness =", x$conditions$generic.completeness, "\n")
+    cat("E) Generic repetition   =", x$conditions$generic.repetition, "\n\n")
+  }
+  cat("Strict identifiabilty   =", x$strict, "\n")
+  cat("Generic identifiabilty  =", x$generic, "\n")
 }
 #' @export
 print.missQ <- function(x, ...){
