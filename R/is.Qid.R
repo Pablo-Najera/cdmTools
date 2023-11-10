@@ -123,10 +123,10 @@ is.Qid <- function(Q, model){
     }
   } else {
     if(J <= K * 2){stop("The Q-matrix does not have enough items to achieve identifiability.")}
-    combs1 <- utils::combn(J, K)
+    combs1 <- combinat::combn(J, K)
     for(cc1 in 1:ncol(combs1)){
       c1 <- combs1[,cc1]
-      combs2 <- utils::combn(setdiff(1:J, c1), K)
+      combs2 <- combinat::combn(setdiff(1:J, c1), K)
       for(cc2 in 1:ncol(combs2)){
         c2 <- combs2[,cc2]
         if((min(c2) - max(c1)) <= 0){next}
