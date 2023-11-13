@@ -28,7 +28,7 @@
 #'
 #' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 #'
-#' Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-level and pattern-level classification consistency and accuracy indices for cognitive diagnostic assessment. \emph{Journal of Educational Measurement}, emph{52} , 457-476.
+#' Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-level and pattern-level classification consistency and accuracy indices for cognitive diagnostic assessment. \emph{Journal of Educational Measurement}, \emph{52} , 457-476.
 #'
 #' @import foreach
 #'

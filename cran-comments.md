@@ -17,8 +17,11 @@
 * There were no ERRORs or WARNINGs.
 * There were 2 NOTEs:
 ```
-
+Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
+   
+Uses the superseded package: 'doSNOW'
 ```
+The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
 
 ## cdmTools_1.0.3 (March 30, 2023)
 
