@@ -66,5 +66,5 @@ Chiu, C.-Y., Sun, Y., & Bian, Y. (2018). Cognitive diagnosis for small education
 Zheng, Y., & Chiu, C.-Y. (2019). \emph{NPCD: Nonparametric methods for cognitive diagnosis}. R package version 1.0-11. https://cran.r-project.org/web/packages/NPCD/.
 }
 \author{
-{Pablo Nájera, Universidad Autónoma de Madrid}
+{Pablo Nájera, Universidad Pontificia Comillas}
 }

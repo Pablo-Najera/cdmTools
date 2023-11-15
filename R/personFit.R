@@ -1,6 +1,6 @@
 #' @title Calculate standardized log-likelihood statistic (lZ) for person fit evaluation
 #'
-#' @description This function calculates the standardized log-likelihood statistic (lZ; Cui & Li, 2015); Drasgow et al. 1985) and the proposals for correcting its distribution discussed in Santos et al., 2019).
+#' @description This function calculates the standardized log-likelihood statistic (lZ; Cui & Li, 2015; Drasgow et al. 1985) and the proposals for correcting its distribution discussed in Santos et al. (2019).
 #'
 #' @param fit A G-DINA model fit object from the \code{GDINA} package (Ma & de la Torre, 2020).
 #' @param att.est What attribute estimates are used? The default is \code{"MLE"}.
@@ -15,7 +15,7 @@
 #' \item{\code{sigadjp}}{Scalar vectors denoting the examinees for which the person fit statitic is significant (adjusted p-value) (\code{list}).}
 #' }
 #'
-#' @author {Pablo Nájera, Universidad Autónoma de Madrid, \email{pablo.najera@uam.es}, \cr Miguel A. Sorrel, Universidad Autónoma de Madrid, \cr Kevin K. Santos, University of the Philippines}
+#' @author {Miguel A. Sorrel, Universidad Autónoma de Madrid, \cr Kevin Santos, University of the Philippines, \cr Pablo Nájera, Universidad Pontificia Comillas}
 #'
 #' @references
 #'

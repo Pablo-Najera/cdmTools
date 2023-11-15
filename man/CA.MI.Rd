@@ -53,5 +53,5 @@ Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis mo
 Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-level and pattern-level classification consistency and accuracy indices for cognitive diagnostic assessment. \emph{Journal of Educational Measurement}, \emph{52} , 457-476.
 }
 \author{
-{Rodrigo S. Kreitchmann, Universidad Autónoma de Madrid}
+{Rodrigo S. Kreitchmann, Universidad Pontificia Comillas}
 }

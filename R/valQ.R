@@ -30,7 +30,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
+#' @author {Pablo Nájera, Universidad Pontificia Comillas \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
 #'
 #' @references
 #' de la Torre, J., & Chiu, C.-Y. (2016). A general method of empirical Q-matrix validation. \emph{Psychometrika}, \emph{81}, 253-273. https://doi.org/10.1007/s11336-015-9467-8

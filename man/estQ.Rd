@@ -91,5 +91,5 @@ Wang, W., Song, L., & Ding, S. (2018). An exploratory discrete factor loading me
 Xu, G., & Shang, Z. (2018). Identifying latent structures in restricted latent class models. \emph{Journal of the American Statistical Association}, \emph{113}, 1284–1295. https://doi.org/10.1080/01621459.2017.1340889
 }
 \author{
-{Pablo Nájera, Universidad Autónoma de Madrid}
+{Pablo Nájera, Universidad Pontificia Comillas}
 }

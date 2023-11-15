@@ -35,7 +35,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Pablo Nájera, Universidad Autónoma de Madrid}
+#' @author {Pablo Nájera, Universidad Pontificia Comillas}
 #'
 #' @references
 #' Garcia-Garzon, E., Abad, F. J., & Garrido, L. E. (2018). Improving bi-factor exploratory modelling: Empirical target rotation based on loading differences. \emph{Methodology}, \emph{15}, 45–55. https://doi.org/10.1027/1614-2241/a000163

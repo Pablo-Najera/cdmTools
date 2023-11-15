@@ -13,7 +13,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid}
+#' @author {Pablo Nájera, Universidad Pontificia Comillas \cr Miguel A. Sorrel, Universidad Autónoma de Madrid}
 #'
 #' @references
 #' Gu, Y., & Xu, G. (2021). Sufficient and necessary conditions for the identifiability of the Q-matrix. \emph{Statistica Sinica}, \emph{31}, 449-472. https://www.jstor.org/stable/26969691

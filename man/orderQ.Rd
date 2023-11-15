@@ -34,5 +34,5 @@ sugQ1$est.Q <- orderQ(sugQ1$est.Q, Q)$order.Q # Reorder Q-matrix attributes
 mean(sugQ1$est.Q == Q) # Check similarity with the generating Q-matrix
 }
 \author{
-{Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Autónoma de Madrid}
+{Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Pontificia Comillas}
 }

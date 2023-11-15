@@ -25,7 +25,7 @@ personFit(fit, att.est = "MLE", sig.level = 0.05, p.adjust.method = "BH")
 }
 }
 \description{
-This function calculates the standardized log-likelihood statistic (lZ; Cui & Li, 2015); Drasgow et al. 1985) and the proposals for correcting its distribution discussed in Santos et al., 2019).
+This function calculates the standardized log-likelihood statistic (lZ; Cui & Li, 2015; Drasgow et al. 1985) and the proposals for correcting its distribution discussed in Santos et al. (2019).
 }
 \examples{
 \donttest{
@@ -45,5 +45,5 @@ Drasgow, F., Levine, M. V., & Williams, E. A. (1985). Appropriateness measuremen
 Santos, K. C. P., de la Torre, J., & von Davier, M. (2020). Adjusting person fit index for skewness in cognitive diagnosis modeling. \emph{Journal of Classification}, \emph{37}, 399-420. https://doi.org/10.1007/s00357-019-09325-5
 }
 \author{
-{Pablo Nájera, Universidad Autónoma de Madrid, \email{pablo.najera@uam.es}, \cr Miguel A. Sorrel, Universidad Autónoma de Madrid, \cr Kevin K. Santos, University of the Philippines}
+{Miguel A. Sorrel, Universidad Autónoma de Madrid, \cr Kevin Santos, University of the Philippines, \cr Pablo Nájera, Universidad Pontificia Comillas}
 }

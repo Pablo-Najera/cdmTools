@@ -32,5 +32,5 @@ idQ <- is.Qid(Q, model = "DINA")
 Gu, Y., & Xu, G. (2021). Sufficient and necessary conditions for the identifiability of the Q-matrix. \emph{Statistica Sinica}, \emph{31}, 449-472. https://www.jstor.org/stable/26969691
 }
 \author{
-{Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid}
+{Pablo Nájera, Universidad Pontificia Comillas \cr Miguel A. Sorrel, Universidad Autónoma de Madrid}
 }

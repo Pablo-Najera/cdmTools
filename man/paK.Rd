@@ -73,5 +73,5 @@ Robitzsch, A. (2020). \emph{sirt: Supplementary Item Response Theory Models}. R 
 Wickham, H., et al. (2020). \emph{ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics}. R package version 3.3.2. https://CRAN.R-project.org/package=ggplot2.
 }
 \author{
-{Pablo Nájera, Universidad Autónoma de Madrid \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
+{Pablo Nájera, Universidad Pontificia Comillas \cr Miguel A. Sorrel, Universidad Autónoma de Madrid \cr Francisco J. Abad, Universidad Autónoma de Madrid}
 }

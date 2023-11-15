@@ -15,7 +15,7 @@
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
-#' @author {Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Autónoma de Madrid}
+#' @author {Francisco J. Abad, Universidad Autónoma de Madrid \cr Pablo Nájera, Universidad Pontificia Comillas}
 #' @export
 #'
 #' @examples

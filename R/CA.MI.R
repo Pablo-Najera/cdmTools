@@ -19,7 +19,7 @@
 #' \item{\code{CCM}}{Conditional classification matrix, see Iaconangelo (2017, p. 13) (\code{matrix}).}
 #' }
 #'
-#' @author {Rodrigo S. Kreitchmann, Universidad Autónoma de Madrid}
+#' @author {Rodrigo S. Kreitchmann, Universidad Pontificia Comillas}
 #'
 #' @references
 #' Iaconangelo, C.(2017). \emph{Uses of classification error probabilities in the three-step approach to estimating cognitive diagnosis models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
