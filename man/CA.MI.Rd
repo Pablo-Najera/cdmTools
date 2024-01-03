@@ -7,7 +7,7 @@
 CA.MI(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL)
 }
 \arguments{
-\item{fit}{A G-DINA model fit object from the \code{GDINA} package (Ma & de la Torre, 2020).}
+\item{fit}{An object of class \code{RDINA} or \code{GDINA} (Ma & de la Torre, 2020).}
 
 \item{what}{What attribute estimates are used? The default is \code{"EAP"}.}
 
@@ -53,5 +53,5 @@ Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis mo
 Wang, W., Song, L., Chen, P., Meng, Y., & Ding, S. (2015). Attribute-level and pattern-level classification consistency and accuracy indices for cognitive diagnostic assessment. \emph{Journal of Educational Measurement}, \emph{52} , 457-476.
 }
 \author{
-{Rodrigo S. Kreitchmann, Universidad Pontificia Comillas}
+{Rodrigo S. Kreitchmann, Universidad Nacional de Educación a Distancia}
 }

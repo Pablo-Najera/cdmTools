@@ -1,3 +1,28 @@
+## cdmTools_1.0.5 (January 03, 2024)
+
+#### News & Comments
+* We have added the RDINA2GDINA function
+* We have slightly modified the CA.MI and personFit functions
+* We have listed Kevin Santos as a contributor
+
+#### Test envirnoments
+* Local Windows 10 x64, R 4.1.2
+* Ubuntu Linux 16.04 LTS, R-release, GCC (check_rhub)
+* Windows Server 2008 R2 SP1, R-devel, 32/64 bit (check_rhub)
+* Fedora Linux, R-devel, clang, gfortran (check_rhub)
+* (check_win_devel)
+
+#### R CMD check results
+
+* There were no ERRORs or WARNINGs.
+* There was 1 NOTE:
+```
+Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
+   
+Uses the superseded package: 'doSNOW'
+```
+The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
+
 ## cdmTools_1.0.4 (November 10, 2023)
 
 #### News & Comments

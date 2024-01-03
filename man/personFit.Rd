@@ -7,7 +7,7 @@
 personFit(fit, att.est = "MLE", sig.level = 0.05, p.adjust.method = "BH")
 }
 \arguments{
-\item{fit}{A G-DINA model fit object from the \code{GDINA} package (Ma & de la Torre, 2020).}
+\item{fit}{An object of class \code{RDINA} or \code{GDINA} (Ma & de la Torre, 2020).}
 
 \item{att.est}{What attribute estimates are used? The default is \code{"MLE"}.}
 

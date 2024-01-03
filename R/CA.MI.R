@@ -4,7 +4,7 @@
 #' The classification accuracy indices are the ones developed by Iaconangelo (2017) and Wang et al. (2015).
 #' It is only applicable to dichotomous attributes. The function is built upon the \code{CA} function from the \code{GDINA} package (Ma & de la Torre, 2020).
 #'
-#' @param fit A G-DINA model fit object from the \code{GDINA} package (Ma & de la Torre, 2020).
+#' @param fit An object of class \code{RDINA} or \code{GDINA} (Ma & de la Torre, 2020).
 #' @param what What attribute estimates are used? The default is \code{"EAP"}.
 #' @param R Number of bootstrap samples and imputations. The default is 500.
 #' @param n.cores Number of processors to use to speed up multiple imputation. The default is 2.
@@ -19,7 +19,7 @@
 #' \item{\code{CCM}}{Conditional classification matrix, see Iaconangelo (2017, p. 13) (\code{matrix}).}
 #' }
 #'
-#' @author {Rodrigo S. Kreitchmann, Universidad Pontificia Comillas}
+#' @author {Rodrigo S. Kreitchmann, Universidad Nacional de Educación a Distancia}
 #'
 #' @references
 #' Iaconangelo, C.(2017). \emph{Uses of classification error probabilities in the three-step approach to estimating cognitive diagnosis models}. (Unpublished doctoral dissertation). New Brunswick, NJ: Rutgers University.
@@ -43,10 +43,10 @@
 #' ca.mi <- CA.MI(fit)
 #' ca.mi
 #' }
-
 CA.MI <- function(fit, what = "EAP", R = 500, n.cores = 1, verbose = TRUE, seed = NULL){
 
-  if(!inherits(fit, "GDINA")){stop("Error in CA.MI: fit must be of class 'GDINA'.")}
+  if(inherits(fit, "RDINA")){fit <- RDINA2GDINA(fit)}
+  if(!inherits(fit, "GDINA")){stop("Error in CA.MI: fit must be of class 'RDINA' or 'GDINA'.")}
   if(!what %in% c("EAP", "MAP", "MLE")){stop("Error in CA.MI: what must be either 'EAP', 'MAP', or 'MLE'.")}
   if(any(apply(fit$options$dat, 2, stats::sd, na.rm = TRUE) == 0)){stop("Error in CA.MI: The data must not contain constant responses for an item.")}
   if((!is.numeric(R) & !is.double(R)) | length(R) > 1){stop("Error in CA.MI: R must be a unique numeric value.")}
