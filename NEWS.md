@@ -1,7 +1,7 @@
 # cdmTools 1.0.5
 * Added - `RDINA2GDINA` function to increase compatibility with the `GDINA` package
 * Changed - `CA.MI` and `personFit` have been updated to be compatible with `RDINA` objects
-* Kevin Santos is included as a contributor
+* Kevin Santos included as a contributor
 
 # cdmTools 1.0.4
 * Changed - `is.Qid` has been updated to include new identifiability criteria
@@ -13,7 +13,7 @@
 
 # cdmTools 1.0.2
 * Added - `CA.MI` function to calculate corrected classification accuracy with multiple imputation
-* Rodrigo S. Kreitchmann is included as a contributor
+* Rodrigo S. Kreitchmann included as a contributor
 
 # cdmTools 1.0.1
 * Added - `GNPC` function to estimate attribute profiles

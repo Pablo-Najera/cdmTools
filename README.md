@@ -9,7 +9,7 @@ Nájera, P., Sorrel, M. A., & Abad, F. J. (2024). *cdmTools: Useful Tools for Co
 ## Features of the package
 * Empirical Q-matrix estimation and validation
 * Empirical dimensionality assessment of CDM data
-* Attribute profile classification via the general nonparametric classification method
+* Attribute profile classification via the general nonparametric classification method (GNPC)
 * R-DINA and R-DINO model estimation
 * Corrected classification accuracy estimation via multiple imputation
 * Person fit evaluation
