@@ -1,4 +1,4 @@
-## cdmTools_1.0.5 (January 03, 2024)
+## cdmTools_1.0.5 (January 04, 2024)
 
 #### News & Comments
 * We have added the RDINA2GDINA function
@@ -17,7 +17,7 @@
 * There were no ERRORs or WARNINGs.
 * There was 1 NOTE:
 ```
-Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
+Maintainer: 'Pablo Nájera <pnajera@comillas.edu>'
    
 Uses the superseded package: 'doSNOW'
 ```
