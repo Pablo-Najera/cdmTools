@@ -10,8 +10,16 @@ RDINA(
   gate = "AND",
   att.prior = NULL,
   est = "Brent",
-  EM.args = list(maxitr = 1000, conv.crit = 1e-04, init.phi = 0.2, verbose = TRUE),
   tau.alpha = "MAP",
+  emp.bayes = FALSE,
+  boot = FALSE,
+  n.boots = 500,
+  n.cores = 1,
+  maxitr = 1000,
+  conv.crit = 1e-04,
+  init.phi = 0.2,
+  bound.p = 1e-06,
+  verbose = TRUE,
   seed = NULL
 )
 }
@@ -26,15 +34,25 @@ RDINA(
 
 \item{est}{Use the Brent's method (\code{"Brent"}) or the expectation-maximization algorithm (\code{"EM"}) to estimate the model? Default is \code{"Brent"}, since it is faster and both algorithms are virtually equivalent for the RDINA/RDINO model.}
 
-\item{EM.args}{A list of arguments in case the EM algorithm is used to estimate the model:
-\describe{
-\item{\code{maxitr}}{Maximum number of iterations. Default is 1000.}
-\item{\code{conv.crit}}{Convergence criterion regarding the maximum absolute change in either the phi parameter estimate or the marginal posterior probabilities of attribute mastery. Default is 0.0001.}
-\item{\code{init.phi}}{Initial value for the phi parameter. Default is 0.2.}
-\item{\code{verbose}}{Print information after each iteration. Default is \code{TRUE}.}
-}}
-
 \item{tau.alpha}{Attribute profile estimator (either \code{"MAP"}, \code{"EAP"}, or \code{"MLE"}) used to calculate the estimated classification accuracy as done with the \code{CA} function of the \code{GDINA} package (Ma & de la Torre, 2020).}
+
+\item{emp.bayes}{Use empirical Bayes estimation for structural parameters. Default is \code{FALSE}.}
+
+\item{boot}{Use bootstrapping to increase robustness in posterior probabilities estimation. Default is \code{FALSE}.}
+
+\item{n.boots}{Number of bootstrapping samples. Default is 500.}
+
+\item{n.cores}{Number of CPU processors to speed up computation when bootstrapping is used. Default is 1.}
+
+\item{maxitr}{Maximum number of iterations. Default is 1000.}
+
+\item{conv.crit}{Convergence criterion regarding the maximum absolute change in either the phi parameter estimate or the marginal posterior probabilities of attribute mastery. Default is 0.0001.}
+
+\item{init.phi}{Initial value for the phi parameter. Default is 0.2.}
+
+\item{bound.p}{Lowest value for probability estimates (highest would be 1 - bound.p). Default is 1e-06.}
+
+\item{verbose}{Print information after each iteration. Default is \code{TRUE}.}
 
 \item{seed}{Random number generation seed (e.g., to solve ties in case they occur with MLE or MAP estimation). Default is \code{NULL}, which means that no specific seed is used.}
 }
