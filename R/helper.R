@@ -1154,3 +1154,275 @@ cdmTools.AlphaPermute <- function(dim){
   }
   return(alpha)
 }
+est.polarity <- function(polarity, Q, polarity.initial = 1e-4, polarity.prior = NULL){
+  J <- nrow(polarity)
+  init.parm <- lapply(1:J, function(x) rep(NA, 4))
+  item.prior <- plyr::llply(2^rowSums(Q), function(x) matrix(NA, nrow = x, ncol = 2))
+  names(init.parm) <- names(item.prior) <- sapply(1:J, function(x) paste0("Item ", x))
+  if(is.null(polarity.prior)){polarity.prior <- list(c(1, 1), c(1, 1), c(1, 1))}
+  for(j in 1:J){
+    alpha.j <- expand.grid(lapply(1:sum(Q[j,]), function(x) c(0,1)))
+    tmp <- (polarity[j,1]*(2*alpha.j[,1]-1) + polarity[j,2]*(-2*alpha.j[,2]+1) + 2)/4
+    init.parm[[j]][tmp == 0] <- polarity.initial
+    init.parm[[j]][tmp == 0.5] <- 0.5
+    init.parm[[j]][tmp == 1] <- 1 - polarity.initial
+    names(init.parm[[j]]) <- paste0("P(", apply(alpha.j, 1, paste, collapse = ""), ")")
+    item.prior[[j]][tmp == 0,] <- polarity.prior[[1]]
+    item.prior[[j]][tmp == 0.5,] <- polarity.prior[[2]]
+    item.prior[[j]][tmp == 1,] <- polarity.prior[[3]]
+    rownames(item.prior[[j]]) <- apply(alpha.j, 1, paste, collapse = "")
+    colnames(item.prior[[j]]) <- c("alfa", "beta")
+  }
+  return(list(init.parm = init.parm, item.prior = item.prior))
+}
+GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL, mono.constr = FALSE, conv.crit = 1e-4, maxitr = 2000, bound = 1e-4, model = "GDINA"){
+
+  requiredPackages = c('plyr','nloptr','GDINA')
+  for(r in requiredPackages){
+    if(!require(r,character.only = TRUE))
+      install.packages(r)
+    library(r,character.only = TRUE)
+  }
+  if(mono.constr&&utils::packageDescription("nloptr")$Version != "1.2.1")
+    warning("nloptr 1.2.1 was used. A different version of nloptr may not work correctly. Check your results carefully.",call. = FALSE)
+
+  options('nloptr.show.inequality.warning'=FALSE)
+  dat <- as.matrix(dat)
+  Q <- as.matrix(Q)
+
+  K <- ncol(Q)
+
+  Kj <- rowSums(Q > 0)  # vector with length of J
+  Lj <- 2^Kj
+  N <- nrow(dat)
+  J <- ncol(dat)
+  AlphaPattern <- GDINA::attributepattern(K)
+  parloc <- GDINA::LC2LG(Q=Q)
+
+  ncat <- J
+  model <- GDINA:::model2numeric(model, ncat)
+  rule <- GDINA:::model2rule(model)
+
+  reduced.LG <- GDINA:::item_latent_group(Q)
+
+  if(any(model == -1)) stop("design.matrix must be provided for user-defined models.",call. = FALSE)
+  DesignMatrices <-  vector("list", ncat)
+  for(j in seq_len(ncat)) {
+    if(model[j] == 6){
+      DesignMatrices[[j]] <- designmatrix(model = model[j],Qj = originalQ[which(originalQ[,1]==j),-c(1:2),drop=FALSE])
+    }else if(rule[j] >= 0 & rule[j]<= 3){
+      DesignMatrices[[j]] <- GDINA:::designM(Kj[j], rule[j], reduced.LG[[j]])
+    }
+  }
+
+  L <- nrow(AlphaPattern)  # The number of latent classes
+  if(is.null(item.prior))
+    item.prior <- plyr::llply(Lj,function(x)matrix(1,nrow = x,ncol = 2))
+
+  prior <- rep(1/L, L)
+
+  logprior <- log(prior)
+
+  # initial values
+
+  if(is.null(catprob.parm)){
+    item.parm <- list()
+    for (j in seq_len(J)) {
+      if(model[j] == 0){
+        if (Kj[j] == 1) {
+          item.parm[[j]] <- c(0.2, 0.8)
+        } else if (Kj[j] == 2) {
+          item.parm[[j]] <- c(0.2, 0.5, 0.5, 0.8)
+        } else if (Kj[j] == 3) {
+          item.parm[[j]] <- c(0.2, 0.4, 0.4, 0.4, 0.6, 0.6, 0.6, 0.8)
+        } else if (Kj[j] > 3){
+          item.parm[[j]] <- c(0.2, rep(0.5,2^Kj[j]-2), 0.8)
+        }
+      } else if(model[j] == 1){ # pongo runif(.1, .3) como en STAN para DINA
+        if (Kj[j] == 1) {
+          item.parm[[j]] <- c(runif(1, .1, .3), 1 - runif(1, .1, .3))
+        } else if (Kj[j] > 1) {
+          initg <- runif(1, .1, .3)
+          item.parm[[j]] <- c(initg, rep(initg,2^Kj[j]-2), 1 - runif(1, .1, .3))
+        }
+      } else if(model[j] == 2){
+        if (Kj[j] == 1) {
+          item.parm[[j]] <- c(0.2, 0.8)
+        } else if (Kj[j] > 1) {
+          item.parm[[j]] <- c(0.2, rep(0.8,2^Kj[j]-2), 0.8)
+        }
+      }
+    }
+    item.parm <- GDINA:::l2m(item.parm)
+  } else {
+    item.parm <- GDINA:::l2m(catprob.parm)
+  }
+
+  ConstrMatrix <- vector("list",J)
+  ConstrPairs <- vector("list",J)
+
+  for(j in seq_len(J)) {
+
+    ConstrPairs[[j]] <- GDINA:::partial_order2(Kj[j])
+    nctj <- nrow(ConstrPairs[[j]])
+    tmp <- matrix(0,nctj,2^Kj[j])
+    tmp[matrix(c(seq_len(nctj),ConstrPairs[[j]][,1]),ncol = 2)] <- 1
+    tmp[matrix(c(seq_len(nctj),ConstrPairs[[j]][,2]),ncol = 2)] <- -1
+    ConstrMatrix[[j]] <- tmp
+
+  }
+
+  itr <- 0L
+
+  parm0 <- c(item.parm)
+  success <- TRUE
+  while(itr < maxitr)  {
+    estep <- GDINA:::LikNR(as.matrix(item.parm), as.matrix(dat), as.matrix(logprior), rep(1,N),
+                           as.matrix(parloc), rep(1,N), TRUE)
+
+    Rg = estep$Rg
+    Ng = estep$Ng
+
+    correction = c(.0005, .001)
+
+    for(j in 1:J){ #for each item
+
+      modelj <- model[j]
+      designMj=DesignMatrices[[j]]
+
+      Nj=Ng[j,1:2^Kj[j]]
+      Rj=Rg[j,1:2^Kj[j]]
+
+      if(modelj==1 | modelj==2){
+        rNj <- c(rep(sum(Nj[designMj[,2]==0],na.rm = TRUE),sum(designMj[,2]==0)),
+                 rep(sum(Nj[designMj[,2]==1],na.rm = TRUE),sum(designMj[,2]==1)))
+        rRj <- c(rep(sum(Rj[designMj[,2]==0],na.rm = TRUE),sum(designMj[,2]==0)),
+                 rep(sum(Rj[designMj[,2]==1],na.rm = TRUE),sum(designMj[,2]==1)))
+        if (any(rNj<correction[2])){
+          rNj[which(rNj<correction[2])] <- rNj[which(rNj<correction[2])] + correction[2]
+          rRj[which(rNj<correction[2])] <- rRj[which(rNj<correction[2])] + correction[1]
+        }
+
+        Nj <- rNj
+        Rj <- rRj
+      }
+
+      r1 <- c(item.prior[[j]][,1]) - 1
+      r2 <- c(item.prior[[j]][,2]) - 1
+      n <- r1 + r2
+
+      # if(any((Nj + n)==0)){
+      #   warning(paste("Nj contains 0 for item",j),call. = FALSE)
+      #   cat("\nFor item ",j,"\n")
+      #   print(data.frame(Rj=Rj,Nj=Nj,Pj=Rj/Nj))
+      #   return(list(success=FALSE))
+      # }
+
+      #EM and BM estimates
+      Pj <- (Rj + r1)/(Nj + n)
+      Pj[Pj <= bound] <- bound
+      Pj[Pj >= 1 - bound] <- 1 - bound
+      Pj[is.na(Pj)] <- bound
+
+      if(verbose==1)
+        cat("\nitem",j,"min(Nj)=",min(Nj + n))
+
+      if(mono.constr&&any(c(ConstrMatrix[[j]]%*%Pj)<0)){
+
+
+        obj <- function(x0){
+          -1*sum(Rj*log(x0)+(Nj-Rj)*log(1-x0))-sum(r1*log(x0)+r2*log(1-x0))
+        }
+        dev <- function(x0){
+          -1*(Rj + r1 - (Nj + n) * x0)/(x0-x0^2)
+        }
+        ineq <- function(x0){
+          c(ConstrMatrix[[j]] %*% x0)
+        }
+        ineq.jac <- function(x0){
+          ConstrMatrix[[j]]
+        }
+        x00 <- item.parm[j,1:(2^Kj[j])]
+
+        x00[x00<bound] <- bound
+        x00[x00>1-bound] <- 1-bound
+
+        optims <- try(nloptr::slsqp(x0 = x00,fn=obj,
+                                    gr = dev,
+                                    hin=ineq,
+                                    hinjac = ineq.jac,
+                                    lower = rep(bound,length(x00)),
+                                    upper = rep(1-bound,length(x00))),silent = TRUE)
+
+        if(inherits(optims,"try-error")){
+          warning(paste("Optimization failed for item",j),call. = FALSE)
+          if(verbose==1)
+            print(optims)
+          return(list(success=FALSE))
+        }
+
+        item.parm[j,1:(2^Kj[j])] <- optims$par
+      }else{
+        item.parm[j,1:(2^Kj[j])] <- Pj
+      }
+
+    }
+    prior <- c(exp(estep$logprior))
+    prior <- prior/sum(prior)
+    logprior <- log(prior)
+
+
+    parm1 <- c(item.parm)
+
+    maxchg = max(abs(parm1-parm0),na.rm = TRUE)
+
+    parm0 <- parm1
+    itr <- itr + 1
+
+    if(is.infinite(estep$LL))
+      stop("-2LL is not finite.",call. = FALSE)
+    if(verbose==1L) {
+      cat('\rIter =',itr,' Max. abs. change =',formatC(maxchg,digits = 5, format = "f"),
+          ' Deviance  =',formatC(-2 * estep$LL,digits = 3, format = "f"),'                                                                                 ')
+    }else if (verbose==2L) {
+      cat('Iter =',itr,' Max. abs. change =',formatC(maxchg,digits = 5, format = "f"),
+          ' Deviance  =',formatC(-2 * estep$LL,digits = 3, format = "f"),'                                                                                \n')
+    }
+
+    if(maxchg < conv.crit) break
+  }
+  estep <- GDINA:::LikNR(as.matrix(item.parm),
+                         as.matrix(dat),
+                         as.matrix(logprior),
+                         rep(1,N),
+                         as.matrix(parloc),
+                         rep(1,N),
+                         FALSE)
+
+  EAP <- 1*((exp(estep$logpost) %*% AlphaPattern) > 0.5000)
+  MAP <- AlphaPattern[max.col(estep$logpost),]
+  options('nloptr.show.inequality.warning'=TRUE)
+  list(catprob.parm = GDINA:::m2l(item.parm), posterior.prob = exp(estep$logprior),EAP=EAP, MAP=MAP,success=success,item.prior=item.prior, logpost = estep$logpost, loglik = estep$loglik, Q = Q)
+}
+relfit.GDINA.MJ <- function(fit, item.prior = NULL){
+  N <- nrow(fit$EAP)
+  lik.il <- exp(fit$loglik)
+  lik.il <- t(sapply(1:N, function(i) lik.il[i,] * fit$posterior.prob[,1]))
+  Deviance <- -2*sum(log(rowSums(lik.il)))
+  Q <- fit$Q
+  popu.parm <- 2^(ncol(Q)) - 1
+  free.l <- c()
+  for(j in 1:nrow(Q)){
+    l <- sum(2^sum(Q[j,]))
+    fixed.l <- 0
+    if(!is.null(item.prior)){fixed.l <- sum(apply(item.prior[[j]] == 1, 1, all))}
+    free.l <- c(free.l, l - fixed.l)
+  }
+  item.parm <- sum(free.l)
+  npar <- popu.parm + item.parm
+  AIC <- Deviance + 2 * npar
+  BIC <- Deviance + log(N) * npar
+  CAIC <- Deviance + (log(N) + 1) * npar
+  SABIC <- Deviance + log((N + 2)/24) * npar
+  return(list(Deviance = Deviance, npar = npar, AIC = AIC, BIC = BIC, CAIC = CAIC, SABIC = SABIC))
+}

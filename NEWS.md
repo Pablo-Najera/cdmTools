@@ -1,3 +1,9 @@
+# cdmTools 1.0.6
+* Added - `FCGDINA` function to estimate the G-DINA model with forced-choice items
+* Added - `simFCGDINA` function to simulate forced-choice data from the G-DINA model
+* Added - `is.CDMid` function to check model identifiability via post-hoc simulations
+* Changed - `RDINA` function to enable empirical Bayes estimation of structural parameters
+
 # cdmTools 1.0.5
 * Added - `RDINA2GDINA` function to increase compatibility with the `GDINA` package
 * Changed - `CA.MI` and `personFit` have been updated to be compatible with `RDINA` objects
