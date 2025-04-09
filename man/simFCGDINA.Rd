@@ -38,6 +38,14 @@ simFCGDINA(
 }}
 
 \item{seed}{Random number generation seed. Default is \code{NULL}.}
+
+\item{FCDCM.args}{A \code{list} of arguments used if \code{model = "FCDCM"}.
+\describe{
+\item{\code{d0}}{A \code{vector} of length 2 indicating the minimum and maximum value for the baseline probability for each FC block (see Huang, 2023). Default is \code{c(0.2, 0.2).}}
+\item{\code{sd}}{A \code{vector} of length 2 indicating the minimum and maximum value for the statement utility parameters (see Huang, 2023). Default is \code{c(0.15, 0.15).}}
+\item{\code{a}}{A \code{numeric} value indicating the minimum and maximum discrimination parameter for the higher-order model. Default is \code{c(0, 0).}}
+\item{\code{b}}{A \code{numeric} value indicating the location parameter for the higher-order model. Default is 0.}
+}}
 }
 \value{
 \code{simFCGDINA} returns an object of class \code{simFCGDINA}.
