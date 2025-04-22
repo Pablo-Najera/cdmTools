@@ -107,9 +107,9 @@ FCGDINA <- function(dat, Q, polarity = NULL, polarity.initial = 1e-4, polarity.p
   ep <- est.polarity(polarity, Q, polarity.initial, polarity.prior)
   if(est == "EM"){
     if(is.null(catprob.parm)){
-      fit <- GDINA(dat, Q, catprob.parm = ep$init.parm, att.dist = att.dist, att.prior = att.prior, verbose = verbose, higher.order = higher.order, control = control)
+      fit <- GDINA::GDINA(dat, Q, catprob.parm = ep$init.parm, att.dist = att.dist, att.prior = att.prior, verbose = verbose, higher.order = higher.order, control = control)
     } else {
-      fit <- GDINA(dat, Q, catprob.parm = catprob.parm, att.dist = att.dist, att.prior = att.prior, verbose = verbose, higher.order = higher.order, control = control)
+      fit <- GDINA::GDINA(dat, Q, catprob.parm = catprob.parm, att.dist = att.dist, att.prior = att.prior, verbose = verbose, higher.order = higher.order, control = control)
     }
   } else if(est == "BM"){
     if(is.null(catprob.parm)){

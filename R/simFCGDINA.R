@@ -63,7 +63,6 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
                        FCCDM.args = list(d0 = c(0.2, 0.2), sd = c(0.15, 0.15), a = c(0, 0), b = 0),
                        seed = NULL){
 
-  library(GDINA)
   if(!is.null(seed)){set.seed(seed)}
   J.items <- nrow(Q.items)
   K <- ncol(Q.items)
@@ -153,9 +152,9 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
       cutoffs <- seq(-GDINA.args$AT, GDINA.args$AT, length.out = K)
       m <- rep(0, K)
       vcov <- matrix(GDINA.args$AC, K, K); diag(vcov) <- 1
-      sim <- simGDINA(N, Q, catprob.parm = catprob.parm, att.dist = "mvnorm", mvnorm.parm = list(mean = m, sigma = vcov, cutoffs = cutoffs))
+      sim <- GDINA::simGDINA(N, Q, catprob.parm = catprob.parm, att.dist = "mvnorm", mvnorm.parm = list(mean = m, sigma = vcov, cutoffs = cutoffs))
     } else {
-      sim <- simGDINA(N, Q, catprob.parm = catprob.parm, attribute = att)
+      sim <- GDINA::simGDINA(N, Q, catprob.parm = catprob.parm, attribute = att)
     }
     dat <- sim$dat
     att <- sim$attribute
@@ -184,13 +183,13 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
     for(l in 1:L){
       for(j in 1:J){
         LCprob.parm[l, j] <- d0[j] +
-          (0.5 - d0[j]) * (attributepattern(K)[l, q_att[j, 1]] >= attributepattern(K)[l, q_att[j, 2]]) + #GDINA::attributepatern
-          (sd[item.pairs[j, 1]] * attributepattern(K)[l, q_att[j, 1]] + sd[item.pairs[j, 2]] * (1 - attributepattern(K)[l, q_att[j, 2]])) * (attributepattern(K)[l, q_att[j, 1]] > attributepattern(K)[l, q_att[j, 2]])
+          (0.5 - d0[j]) * (GDINA::attributepattern(K)[l, q_att[j, 1]] >= GDINA::attributepattern(K)[l, q_att[j, 2]]) +
+          (sd[item.pairs[j, 1]] * GDINA::attributepattern(K)[l, q_att[j, 1]] + sd[item.pairs[j, 2]] * (1 - GDINA::attributepattern(K)[l, q_att[j, 2]])) * (attributepattern(K)[l, q_att[j, 1]] > attributepattern(K)[l, q_att[j, 2]])
       }
     }
     dat <- matrix(NA, nrow = N, ncol = J)
     for(n in 1:N){
-      lc <- which(sapply(1:L, function(l) all(attributepattern(K)[l,] == att[n,])))
+      lc <- which(sapply(1:L, function(l) all(GDINA::attributepattern(K)[l,] == att[n,])))
       dat[n,] <- rbinom(J, 1, prob = LCprob.parm[lc,])
     }
     return(list(dat = dat, att = att, Q = Q, LCprob = LCprob.parm, d0 = d0, sd = sd, theta = theta, a = a, b = b, item.pairs = item.pairs, q_att = q_att, q_sta = q_sta, polarity = polarity))
