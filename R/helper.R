@@ -1201,7 +1201,7 @@ cdmTools.model2numeric <- function(model, J = 1){
   model
 }
 cdmTools.model2rule.j <- function(model.j){
-  x <- model.table()
+  x <- cdmTools.model.table()
   if (is.character(model.j)) {
     x$rule[which(x$model.char == model.j)]
   }
