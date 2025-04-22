@@ -1180,8 +1180,15 @@ cdmTools.m2l <- function(m, remove = NA){
     lapply(seq_len(nrow(m)), function(i) m[i, m[i, ] != remove])
   }
 }
+cdmTools.model.table <- function(){
+    data.frame(model.char=c("LOGGDINA","LOGITGDINA","UDF", "GDINA", "DINA", "DINO", "ACDM", "LLM", "RRUM", "MSDINA","BUGDINO","SISM"),
+               model.num=c(-3:8),
+               linkf.num = c(3,2,-1,1,1,1,1,2,3,1,1,1),
+               linkf.char = c("log","logit","UDF","identity","identity","identity","identity","logit","log","identity","identity","identity"),
+               rule = c(0,0,-1,0,1,2,3,3,3,4,5,6))
+}
 cdmTools.model2numeric <- function(model, J = 1){
-  x <- model.table()
+  x <- cdmTools.model.table()
   if(is.numeric(model)){
     if (J != 1 && length(model) != J)
       model <- rep(model, J)

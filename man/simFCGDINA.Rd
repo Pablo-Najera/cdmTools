@@ -12,7 +12,7 @@ simFCGDINA(
   att = NULL,
   model = "GDINA",
   GDINA.args = list(GS = NULL, GS.items = c(1/3, 1/3), AC = 0, AT = 0),
-  FCCDM.args = list(d0 = c(0.2, 0.2), sd = c(0.15, 0.15), a = c(0, 0), b = 0),
+  FCDCM.args = list(d0 = c(0.2, 0.2), sd = c(0.15, 0.15), a = c(0, 0), b = 0),
   seed = NULL
 )
 }
@@ -37,8 +37,6 @@ simFCGDINA(
 \item{\code{AT}}{A \code{numeric} value indicating the attribute thresholds in line with the multivariate normal threshold model (Chiu et al., 2009). Default is 0.}
 }}
 
-\item{seed}{Random number generation seed. Default is \code{NULL}.}
-
 \item{FCDCM.args}{A \code{list} of arguments used if \code{model = "FCDCM"}.
 \describe{
 \item{\code{d0}}{A \code{vector} of length 2 indicating the minimum and maximum value for the baseline probability for each FC block (see Huang, 2023). Default is \code{c(0.2, 0.2).}}
@@ -46,6 +44,8 @@ simFCGDINA(
 \item{\code{a}}{A \code{numeric} value indicating the minimum and maximum discrimination parameter for the higher-order model. Default is \code{c(0, 0).}}
 \item{\code{b}}{A \code{numeric} value indicating the location parameter for the higher-order model. Default is 0.}
 }}
+
+\item{seed}{Random number generation seed. Default is \code{NULL}.}
 }
 \value{
 \code{simFCGDINA} returns an object of class \code{simFCGDINA}.
