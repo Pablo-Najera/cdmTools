@@ -129,7 +129,7 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
 
   if(model == "GDINA"){
     if(is.null(GDINA.args$GS)){
-      GS.items <- cbind(runif(J.items, GDINA.args$GS.items[1], GDINA.args$GS.items[2]), runif(J.items, GDINA.args$GS.items[1], GDINA.args$GS.items[2]))
+      GS.items <- cbind(stats::runif(J.items, GDINA.args$GS.items[1], GDINA.args$GS.items[2]), stats::runif(J.items, GDINA.args$GS.items[1], GDINA.args$GS.items[2]))
     } else {
       GS.items <- GDINA.args$GS
     }
@@ -162,16 +162,16 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
   }
 
   if(model == "FCCDM"){
-    sd <- runif(J.items, FCDCM.args$sd[1], FCDCM.args$sd[2])
-    d0 <- runif(J, FCDCM.args$d0[1], FCDCM.args$d0[2])
-    theta <- rnorm(N, 0, 1)
-    a <- rlnorm(K, meanlog = FCDCM.args$a[1], sdlog = FCDCM.args$a[2])
+    sd <- stats::runif(J.items, FCDCM.args$sd[1], FCDCM.args$sd[2])
+    d0 <- stats::runif(J, FCDCM.args$d0[1], FCDCM.args$d0[2])
+    theta <- stats::rnorm(N, 0, 1)
+    a <- stats::rlnorm(K, meanlog = FCDCM.args$a[1], sdlog = FCDCM.args$a[2])
     b <- seq(-FCDCM.args$b, FCDCM.args$b, length.out = K)
     if(is.null(att)){
       mp <- att <- matrix(NA, nrow = N, ncol = K)
       for(n in 1:N){
         mp[n,] <- round(exp(a * (theta[n] - b))/(1 + exp(a * (theta[n] - b))), 5)
-        att[n,] <- rbinom(K, 1, prob = mp[n,])
+        att[n,] <- stats::rbinom(K, 1, prob = mp[n,])
         if(anyNA(att[n,])){
           if(sum(mp[n,] >= 1) > 0){att[n, which(mp[n,] > 1)] <- 1}
           if(sum(mp[n,] <= 0) > 0){att[n, which(mp[n,] < 0)] <- 0}
@@ -184,13 +184,13 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
       for(j in 1:J){
         LCprob.parm[l, j] <- d0[j] +
           (0.5 - d0[j]) * (GDINA::attributepattern(K)[l, q_att[j, 1]] >= GDINA::attributepattern(K)[l, q_att[j, 2]]) +
-          (sd[item.pairs[j, 1]] * GDINA::attributepattern(K)[l, q_att[j, 1]] + sd[item.pairs[j, 2]] * (1 - GDINA::attributepattern(K)[l, q_att[j, 2]])) * (attributepattern(K)[l, q_att[j, 1]] > attributepattern(K)[l, q_att[j, 2]])
+          (sd[item.pairs[j, 1]] * GDINA::attributepattern(K)[l, q_att[j, 1]] + sd[item.pairs[j, 2]] * (1 - GDINA::attributepattern(K)[l, q_att[j, 2]])) * (GDINA::attributepattern(K)[l, q_att[j, 1]] > GDINA::attributepattern(K)[l, q_att[j, 2]])
       }
     }
     dat <- matrix(NA, nrow = N, ncol = J)
     for(n in 1:N){
       lc <- which(sapply(1:L, function(l) all(GDINA::attributepattern(K)[l,] == att[n,])))
-      dat[n,] <- rbinom(J, 1, prob = LCprob.parm[lc,])
+      dat[n,] <- stats::rbinom(J, 1, prob = LCprob.parm[lc,])
     }
     return(list(dat = dat, att = att, Q = Q, LCprob = LCprob.parm, d0 = d0, sd = sd, theta = theta, a = a, b = b, item.pairs = item.pairs, q_att = q_att, q_sta = q_sta, polarity = polarity))
   }

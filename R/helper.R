@@ -1156,7 +1156,7 @@ cdmTools.AlphaPermute <- function(dim){
 }
 cdmTools.partial_order2 <- function(Kjj, AlphaPattern = NULL){
   if(is.null(AlphaPattern)){
-    alp <- attributepattern(Kjj)
+    alp <- GDINA::attributepattern(Kjj)
   } else {
     alp <- AlphaPattern
   }
