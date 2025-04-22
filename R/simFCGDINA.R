@@ -60,7 +60,7 @@
 #' }
 simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL, model = "GDINA",
                        GDINA.args = list(GS = NULL, GS.items = c(1/3, 1/3), AC = 0, AT = 0),
-                       FCCDM.args = list(d0 = c(0.2, 0.2), sd = c(0.15, 0.15), a = c(0, 0), b = 0),
+                       FCDCM.args = list(d0 = c(0.2, 0.2), sd = c(0.15, 0.15), a = c(0, 0), b = 0),
                        seed = NULL){
 
   if(!is.null(seed)){set.seed(seed)}
@@ -71,10 +71,10 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
   if(is.null(GDINA.args$GS.items)){GDINA.args$GS.items <- c(1/3, 1/3)}
   if(is.null(GDINA.args$AC)){GDINA.args$AC <- 0}
   if(is.null(GDINA.args$AT)){GDINA.args$AT <- 0}
-  if(is.null(FCCDM.args$d0)){FCCDM.args$d0 <- c(0.2, 0.2)}
-  if(is.null(FCCDM.args$sd)){FCCDM.args$sd <- c(0.15, 0.15)}
-  if(is.null(FCCDM.args$a)){FCCDM.args$a <- c(0, 0)}
-  if(is.null(FCCDM.args$b)){FCCDM.args$b <- 0}
+  if(is.null(FCDCM.args$d0)){FCDCM.args$d0 <- c(0.2, 0.2)}
+  if(is.null(FCDCM.args$sd)){FCDCM.args$sd <- c(0.15, 0.15)}
+  if(is.null(FCDCM.args$a)){FCDCM.args$a <- c(0, 0)}
+  if(is.null(FCDCM.args$b)){FCDCM.args$b <- 0}
   if(model == "FCCDM" & !is.null(polarity)){
     polarity <- matrix(1, nrow = J, ncol = 2)
     warning("FCCDM only supports homopolar blocks. Polarity has been changed accordingly.")
@@ -162,11 +162,11 @@ simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL,
   }
 
   if(model == "FCCDM"){
-    sd <- runif(J.items, FCCDM.args$sd[1], FCCDM.args$sd[2])
-    d0 <- runif(J, FCCDM.args$d0[1], FCCDM.args$d0[2])
+    sd <- runif(J.items, FCDCM.args$sd[1], FCDCM.args$sd[2])
+    d0 <- runif(J, FCDCM.args$d0[1], FCDCM.args$d0[2])
     theta <- rnorm(N, 0, 1)
-    a <- rlnorm(K, meanlog = FCCDM.args$a[1], sdlog = FCCDM.args$a[2])
-    b <- seq(-FCCDM.args$b, FCCDM.args$b, length.out = K)
+    a <- rlnorm(K, meanlog = FCDCM.args$a[1], sdlog = FCDCM.args$a[2])
+    b <- seq(-FCDCM.args$b, FCDCM.args$b, length.out = K)
     if(is.null(att)){
       mp <- att <- matrix(NA, nrow = N, ncol = K)
       for(n in 1:N){

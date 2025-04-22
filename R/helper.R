@@ -1154,6 +1154,54 @@ cdmTools.AlphaPermute <- function(dim){
   }
   return(alpha)
 }
+cdmTools.partial_order2 <- function(Kjj, AlphaPattern = NULL){
+  if(is.null(AlphaPattern)){
+    alp <- attributepattern(Kjj)
+  } else {
+    alp <- AlphaPattern
+  }
+  alp <- cbind(c(1:nrow(alp)), rowSums(alp), alp)
+  out <- NULL
+  for(k in 1:max(alp[, 2])){
+    for(i in 1:sum(alp[, 2] == k - 1)){
+      alpk_1 <- alp[alp[, 2] == k - 1, , drop = FALSE]
+      alpk <- alp[alp[, 2] == k, , drop = FALSE]
+      out <- rbind(out, cbind(alpk[(apply(alpk, 1, function(x){all(x - alpk_1[i, ] >= 0)})), 1], alpk_1[i, 1]))
+    }
+  }
+  colnames(out) <- c("l", "s")
+  return(out)
+}
+cdmTools.m2l <- function(m, remove = NA){
+  if(is.na(remove)){
+    lapply(seq_len(nrow(m)), function(i) m[i, !is.na(m[i,
+    ])])
+  } else {
+    lapply(seq_len(nrow(m)), function(i) m[i, m[i, ] != remove])
+  }
+}
+cdmTools.model2numeric <- function(model, J = 1){
+  x <- model.table()
+  if(is.numeric(model)){
+    if (J != 1 && length(model) != J)
+      model <- rep(model, J)
+  } else {
+    M <- x$model.char
+    if (J != 1 && length(model) != J)
+      model <- rep(model, J)
+    model <- match(toupper(model), M) - 4
+  }
+  model
+}
+cdmTools.model2rule.j <- function(model.j){
+  x <- model.table()
+  if (is.character(model.j)) {
+    x$rule[which(x$model.char == model.j)]
+  }
+  else if (is.numeric(model.j)) {
+    x$rule[which(x$model.num == model.j)]
+  }
+}
 est.polarity <- function(polarity, Q, polarity.initial = 1e-4, polarity.prior = NULL){
   J <- nrow(polarity)
   init.parm <- lapply(1:J, function(x) rep(NA, 4))
@@ -1200,8 +1248,8 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
   parloc <- GDINA::LC2LG(Q=Q)
 
   ncat <- J
-  model <- GDINA:::model2numeric(model, ncat)
-  rule <- GDINA:::model2rule(model)
+  model <- cdmTools.model2numeric(model, ncat)
+  rule <- sapply(model, cdmTools.model2rule.j)
 
   reduced.LG <- GDINA:::item_latent_group(Q)
 
@@ -1253,9 +1301,9 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
         }
       }
     }
-    item.parm <- GDINA:::l2m(item.parm)
+    item.parm <- t(sapply(item.parm, "length<-", value = max(sapply(item.parm, length))))
   } else {
-    item.parm <- GDINA:::l2m(catprob.parm)
+    item.parm <- t(sapply(catprob.parm, "length<-", value = max(sapply(catprob.parm, length))))
   }
 
   ConstrMatrix <- vector("list",J)
@@ -1263,7 +1311,7 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
 
   for(j in seq_len(J)) {
 
-    ConstrPairs[[j]] <- GDINA:::partial_order2(Kj[j])
+    ConstrPairs[[j]] <- cdmTools.partial_order2(Kj[j])
     nctj <- nrow(ConstrPairs[[j]])
     tmp <- matrix(0,nctj,2^Kj[j])
     tmp[matrix(c(seq_len(nctj),ConstrPairs[[j]][,1]),ncol = 2)] <- 1
@@ -1402,7 +1450,7 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
   EAP <- 1*((exp(estep$logpost) %*% AlphaPattern) > 0.5000)
   MAP <- AlphaPattern[max.col(estep$logpost),]
   options('nloptr.show.inequality.warning'=TRUE)
-  list(catprob.parm = GDINA:::m2l(item.parm), posterior.prob = exp(estep$logprior),EAP=EAP, MAP=MAP,success=success,item.prior=item.prior, logpost = estep$logpost, loglik = estep$loglik, Q = Q)
+  list(catprob.parm = cdmTools.m2l(item.parm), posterior.prob = exp(estep$logprior),EAP=EAP, MAP=MAP,success=success,item.prior=item.prior, logpost = estep$logpost, loglik = estep$loglik, Q = Q)
 }
 relfit.GDINA.MJ <- function(fit, item.prior = NULL){
   N <- nrow(fit$EAP)
