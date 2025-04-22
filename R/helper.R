@@ -1232,22 +1232,13 @@ est.polarity <- function(polarity, Q, polarity.initial = 1e-4, polarity.prior = 
 }
 GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL, mono.constr = FALSE, conv.crit = 1e-4, maxitr = 2000, bound = 1e-4, model = "GDINA"){
 
-  requiredPackages = c('plyr','nloptr','GDINA')
-  for(r in requiredPackages){
-    if(!require(r,character.only = TRUE))
-      install.packages(r)
-    library(r,character.only = TRUE)
-  }
-  if(mono.constr&&utils::packageDescription("nloptr")$Version != "1.2.1")
-    warning("nloptr 1.2.1 was used. A different version of nloptr may not work correctly. Check your results carefully.",call. = FALSE)
-
   options('nloptr.show.inequality.warning'=FALSE)
   dat <- as.matrix(dat)
   Q <- as.matrix(Q)
 
   K <- ncol(Q)
 
-  Kj <- rowSums(Q > 0)  # vector with length of J
+  Kj <- rowSums(Q > 0)
   Lj <- 2^Kj
   N <- nrow(dat)
   J <- ncol(dat)
@@ -1264,18 +1255,16 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
   DesignMatrices <-  vector("list", ncat)
   for(j in seq_len(ncat)) {
     if(model[j] == 6){
-      DesignMatrices[[j]] <- designmatrix(model = model[j],Qj = originalQ[which(originalQ[,1]==j),-c(1:2),drop=FALSE])
+      DesignMatrices[[j]] <- GDINA::designmatrix(model = model[j],Qj = Q[which(Q[,1]==j),-c(1:2),drop=FALSE])
     }else if(rule[j] >= 0 & rule[j]<= 3){
       DesignMatrices[[j]] <- GDINA:::designM(Kj[j], rule[j], reduced.LG[[j]])
     }
   }
 
   L <- nrow(AlphaPattern)  # The number of latent classes
-  if(is.null(item.prior))
-    item.prior <- plyr::llply(Lj,function(x)matrix(1,nrow = x,ncol = 2))
+  if(is.null(item.prior)){item.prior <- plyr::llply(Lj,function(x)matrix(1,nrow = x,ncol = 2))}
 
   prior <- rep(1/L, L)
-
   logprior <- log(prior)
 
   # initial values
@@ -1295,10 +1284,10 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
         }
       } else if(model[j] == 1){ # pongo runif(.1, .3) como en STAN para DINA
         if (Kj[j] == 1) {
-          item.parm[[j]] <- c(runif(1, .1, .3), 1 - runif(1, .1, .3))
+          item.parm[[j]] <- c(stats::runif(1, .1, .3), 1 - stats::runif(1, .1, .3))
         } else if (Kj[j] > 1) {
-          initg <- runif(1, .1, .3)
-          item.parm[[j]] <- c(initg, rep(initg,2^Kj[j]-2), 1 - runif(1, .1, .3))
+          initg <- stats::runif(1, .1, .3)
+          item.parm[[j]] <- c(initg, rep(initg,2^Kj[j]-2), 1 - stats::runif(1, .1, .3))
         }
       } else if(model[j] == 2){
         if (Kj[j] == 1) {
@@ -1366,13 +1355,6 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
       r2 <- c(item.prior[[j]][,2]) - 1
       n <- r1 + r2
 
-      # if(any((Nj + n)==0)){
-      #   warning(paste("Nj contains 0 for item",j),call. = FALSE)
-      #   cat("\nFor item ",j,"\n")
-      #   print(data.frame(Rj=Rj,Nj=Nj,Pj=Rj/Nj))
-      #   return(list(success=FALSE))
-      # }
-
       #EM and BM estimates
       Pj <- (Rj + r1)/(Nj + n)
       Pj[Pj <= bound] <- bound
@@ -1383,7 +1365,6 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
         cat("\nitem",j,"min(Nj)=",min(Nj + n))
 
       if(mono.constr&&any(c(ConstrMatrix[[j]]%*%Pj)<0)){
-
 
         obj <- function(x0){
           -1*sum(Rj*log(x0)+(Nj-Rj)*log(1-x0))-sum(r1*log(x0)+r2*log(1-x0))
