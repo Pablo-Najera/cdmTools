@@ -111,13 +111,13 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
 
     # Without bootstrapping
 
-    NPC <- cdmTools:::cdmTools.AlphaNP(dat, Q, gate, method = "Hamming")
-    match_lclass <- match(apply(lclass, 1, paste, collapse = ""), apply(cdmTools:::cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
+    NPC <- cdmTools.AlphaNP(dat, Q, gate, method = "Hamming")
+    match_lclass <- match(apply(lclass, 1, paste, collapse = ""), apply(cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
     alpha.est <- NPC$alpha.est
     dist.li <- NPC$loss.matrix[match_lclass, ]
 
     if(!boot){
-      phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = att.prior, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+      phi <- stats::optimize(f = phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = att.prior, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
       lik.il <- t(phi^dist.li * (1 - phi)^(J - dist.li))
       marg.lik.il <- t(t(lik.il) * att.prior)
       pp <- t(apply(marg.lik.il, 1, function(i) i/sum(i)))
@@ -128,7 +128,7 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
         while(r <= maxitr){
           phi_back <- phi
           pp_back <- pp
-          phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+          phi <- stats::optimize(f = phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
           lik.il <- t(phi^dist.li * (1 - phi)^(J - dist.li))
           marg.lik.il <- t(t(lik.il) * lp)
           pp <- t(apply(marg.lik.il, 1, function(i) i/sum(i)))
@@ -153,11 +153,11 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
         for(b in 1:n.boots){
           set.seed(b + seed)
           dat.b <- dat[sample(1:N, size = N, replace = TRUE),]
-          NPC.b <- cdmTools:::cdmTools.AlphaNP(dat.b, Q, gate, method = "Hamming")
-          match_lclass.b <- match(apply(lclass, 1, paste, collapse = ""), apply(cdmTools:::cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
+          NPC.b <- cdmTools.AlphaNP(dat.b, Q, gate, method = "Hamming")
+          match_lclass.b <- match(apply(lclass, 1, paste, collapse = ""), apply(cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
           alpha.est.b <- NPC.b$alpha.est
           dist.li.b <- NPC.b$loss.matrix[match_lclass, ]
-          phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = att.prior, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+          phi <- stats::optimize(f = phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = att.prior, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
           lik.il <- t(phi^dist.li.b * (1 - phi)^(J - dist.li.b))
           marg.lik.il <- t(t(lik.il) * att.prior)
           pp <- t(apply(marg.lik.il, 1, function(i) i/sum(i)))
@@ -168,7 +168,7 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
             while(r <= maxitr){
               phi_back <- phi
               pp_back <- pp
-              phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+              phi <- stats::optimize(f = phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
               lik.il <- t(phi^dist.li.b * (1 - phi)^(J - dist.li.b))
               marg.lik.il <- t(t(lik.il) * lp)
               pp <- t(apply(marg.lik.il, 1, function(i) i/sum(i)))
@@ -193,13 +193,12 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
         pp <- apply(b.pp, 1:2, mean)
         lp <- colMeans(pp)
         lp[lp == 0] <- bound.p; lp[lp == 1] <- 1 - bound.p; lp <- lp / sum(lp)
-        phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+        phi <- stats::optimize(f = phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
         lik.il <- t(phi^dist.li * (1 - phi)^(J - dist.li))
         marg.lik.il <- t(t(lik.il) * lp)
       }
 
       if(n.cores > 1){
-        library(doParallel)
         cl <- parallel::makeCluster(n.cores, type = "SOCK")
         doSNOW::registerDoSNOW(cl)
         if(verbose){
@@ -215,11 +214,11 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
                                 .combine = 'list', .multicombine = TRUE, .packages = "GDINA") %dopar% {
                                   set.seed(b + seed)
                                   dat.b <- dat[sample(1:N, size = N, replace = TRUE),]
-                                  NPC.b <- cdmTools:::cdmTools.AlphaNP(dat.b, Q, gate, method = "Hamming")
-                                  match_lclass.b <- match(apply(lclass, 1, paste, collapse = ""), apply(cdmTools:::cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
+                                  NPC.b <- cdmTools.AlphaNP(dat.b, Q, gate, method = "Hamming")
+                                  match_lclass.b <- match(apply(lclass, 1, paste, collapse = ""), apply(cdmTools.AlphaPermute(K), 1, paste, collapse = ""))
                                   alpha.est.b <- NPC.b$alpha.est
                                   dist.li.b <- NPC.b$loss.matrix[match_lclass, ]
-                                  phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = att.prior, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+                                  phi <- stats::optimize(f = phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = att.prior, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
                                   lik.il <- t(phi^dist.li.b * (1 - phi)^(J - dist.li.b))
                                   marg.lik.il <- t(t(lik.il) * att.prior)
                                   pp <- t(apply(marg.lik.il, 1, function(i) i/sum(i)))
@@ -230,7 +229,7 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
                                     while(r <= maxitr){
                                       phi_back <- phi
                                       pp_back <- pp
-                                      phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+                                      phi <- stats::optimize(f = phi.ML, dist = dist.li.b, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
                                       lik.il <- t(phi^dist.li.b * (1 - phi)^(J - dist.li.b))
                                       marg.lik.il <- t(t(lik.il) * lp)
                                       pp <- t(apply(marg.lik.il, 1, function(i) i/sum(i)))
@@ -258,7 +257,7 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
         pp <- Reduce("+", b.pp) / length(b.pp)
         lp <- colMeans(pp)
         lp[lp == 0] <- bound.p; lp[lp == 1] <- 1 - bound.p; lp <- lp / sum(lp)
-        phi <- stats::optimize(f = cdmTools:::phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
+        phi <- stats::optimize(f = phi.ML, dist = dist.li, J = J, posterior = FALSE, att.prior = lp, interval = c(bound.p, 0.5 - bound.p), maximum = TRUE)$maximum
         lik.il <- t(phi^dist.li * (1 - phi)^(J - dist.li))
         marg.lik.il <- t(t(lik.il) * lp)
       }
@@ -349,12 +348,12 @@ RDINA <- function(dat, Q, gate = "AND", att.prior = NULL, est = "Brent", tau.alp
   BIC <- Deviance + log(N) * npar
   CAIC <- Deviance + (log(N) + 1) * npar
   SABIC <- Deviance + log((N + 2)/24) * npar
-  gr <- cdmTools:::cdmTools.matchMatrix(lclass, tau.est)
+  gr <- cdmTools.matchMatrix(lclass, tau.est)
   pseudo.gr <- setdiff(seq(nrow(lclass)), unique(gr))
   gr <- c(gr, pseudo.gr)
   lab <- apply(lclass, 1, paste0, collapse = "")
   post <- cbind(t(pp), matrix(0, nrow(lclass), length(pseudo.gr)))
-  CCM <- cdmTools:::cdmTools.aggregateCol(post, gr)/c(nrow(tau.est) * lp)
+  CCM <- cdmTools.aggregateCol(post, gr)/c(nrow(tau.est) * lp)
   tau_c <- diag(CCM)
   tau <- sum(tau_c * c(lp))
   tau_k <- colMeans(tau.est * mp + (1 - tau.est) * (1 - mp))
