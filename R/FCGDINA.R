@@ -44,7 +44,7 @@
 #' library(GDINA)
 #' set.seed(123)
 #' Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE)) # Q-matrix for the unidimensional statements
-#' GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3), runif(n = nrow(Q.items), min = 0.1, max = 0.3)) # Guessing and slip parameter for each statement
+#' GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3), runif(n = nrow(Q.items), min = 0.1, max = 0.3)) # Guessing and slip
 #' n.blocks <- 30 # Number of forced-choice blocks
 #'
 #' #----------------------------------------------------------------------------------------
