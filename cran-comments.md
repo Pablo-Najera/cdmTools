@@ -63,7 +63,7 @@ Rd file 'simFCGDINA.Rd':
 Maintainer: 'Pablo Nájera <pnajera@comillas.edu>'
    
 Uses the superseded package: 'doSNOW'
-```
+
 The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
 ```
 
@@ -89,7 +89,7 @@ The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
 Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
    
 Uses the superseded package: 'doSNOW'
-```
+
 The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
 ```
 
@@ -121,7 +121,7 @@ Found the following (possibly) invalid DOIs:
     From: DESCRIPTION
     Status: Service Unavailable
     Message: 503
-```
+
 The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
 ```
 
@@ -163,7 +163,7 @@ Found the following (possibly) invalid DOIs:
     From: DESCRIPTION
     Status: Service Unavailable
     Message: 503
-```
+
 All possibly misspelled words are surnames, acronyms, or British spelling used in paper references. The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a foreach loop.
 ```
 
@@ -191,7 +191,7 @@ Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
        From: DESCRIPTION
        Status: Service Unavailable
        Message: 503
-```
+
 The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
 ```
 
@@ -219,6 +219,6 @@ New submission
 
 Possibly mis-spelled words in DESCRIPTION: 
 CDM (7:70, 7:265)
-```
+
 All possibly mis-spelled words are surnames, acronyms, or British spelling used in paper references.
 ```
