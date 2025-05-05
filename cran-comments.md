@@ -1,3 +1,46 @@
+## cdmTools_1.0.6 (May 05, 2025)
+
+#### News & Comments
+* We have added the FCGDINA, simFCGDINA and is.CDMid functions
+* We have slightly modified the RDINA function
+
+#### Test envirnoments
+* Local Windows 10 x64, R 4.3.1
+* linux, macos, windows | R-devel (rhub_check)
+* atlas, c23, clang-ubsan, donttest, gcc-asan, gcc13, mkl, nold, noremap, nosuggests, ubuntu-clang, ubuntu-gcc12, ubuntu-next, ubuntu-release (rhub_check)
+
+#### R CMD check results
+
+* There were no ERRORs or WARNINGs.
+* There were 2 NOTEs:
+```
+Maintainer: 'Pablo Nájera <pnajera@comillas.edu>'
+
+* checking dependencies in R code ... NOTE
+Unexported objects imported by ':::' calls:
+  ‘GDINA:::LikNR’ ‘GDINA:::designM’ ‘GDINA:::item_latent_group’
+  See the note in ?`:::` about the use of this operator.
+
+* checking Rd line widths ... NOTE
+Rd file 'FCGDINA.Rd':
+  \examples lines wider than 100 characters:
+     Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE)) # Q-matrix for the unidimensional statements
+     GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3), runif(n = nrow(Q.items), min = 0.1, max = 0.3)) # Guessing and slip paramet ... [TRUNCATED]
+     polarity <- matrix(1, nrow = n.blocks, ncol = 2) # Block polarity (1 = direct statement; -1 = indirect statement)
+     sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity, model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
+     polarity[sample(x = 1:(2*n.blocks), size = 15, replace = FALSE)] <- -1 # Including 15 inverse statements
+     sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity, model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
+     priors <- list("Minimum" = c(1, 1), # Non-informative prior, Beta(1, 1), for latent group with ideal response = 0
+                    "Intermediate" = c(1e8, 1e8), # Extremely informative prior, Beta(1e8, 1e8), for latent groups with ideal response = 0.5
+                    "Maximum" = c(1, 1)) # Non-informative prior, Beta(1, 1), for latent group with ideal response = 1
+Rd file 'simFCGDINA.Rd':
+  \examples lines wider than 100 characters:
+     Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE)) # Q-matrix for the unidimensional statements
+     GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3), runif(n = nrow(Q.items), min = 0.1, max = 0.3)) # Guessing and slip paramet ... [TRUNCATED]
+     polarity <- matrix(1, nrow = n.blocks, ncol = 2) # Block polarity (1 = direct statement; -1 = indirect statement)
+     sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity, model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
+```
+
 ## cdmTools_1.0.5 (January 04, 2024)
 
 #### News & Comments
@@ -22,6 +65,7 @@ Maintainer: 'Pablo Nájera <pnajera@comillas.edu>'
 Uses the superseded package: 'doSNOW'
 ```
 The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
+```
 
 ## cdmTools_1.0.4 (November 10, 2023)
 
@@ -47,6 +91,7 @@ Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
 Uses the superseded package: 'doSNOW'
 ```
 The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
+```
 
 ## cdmTools_1.0.3 (March 30, 2023)
 
@@ -78,6 +123,7 @@ Found the following (possibly) invalid DOIs:
     Message: 503
 ```
 The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a `foreach` loop.
+```
 
 ## cdmTools_1.0.2 (May 17, 2022)
 
@@ -119,6 +165,7 @@ Found the following (possibly) invalid DOIs:
     Message: 503
 ```
 All possibly misspelled words are surnames, acronyms, or British spelling used in paper references. The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology). The `doSNOW` package is required to show a progress bar inside a foreach loop.
+```
 
 ## cdmTools_1.0.1 (March 23, 2022)
 
@@ -146,6 +193,7 @@ Maintainer: 'Pablo Nájera <pablo.najera@uam.es>'
        Message: 503
 ```
 The DOI 10.1111/bmsp.12228 is valid (from the British Journal of Mathematical and Statistical Psychology).
+```
 
 ## cdmTools_1.0.0 (May 12, 2021)
 
@@ -173,3 +221,4 @@ Possibly mis-spelled words in DESCRIPTION:
 CDM (7:70, 7:265)
 ```
 All possibly mis-spelled words are surnames, acronyms, or British spelling used in paper references.
+```
