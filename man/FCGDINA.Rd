@@ -61,16 +61,21 @@ Only unidimensional statements (i.e., bidimensional blocks) are currently suppor
 \donttest{
 library(GDINA)
 set.seed(123)
-Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE)) # Q-matrix for the unidimensional statements
-GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3), runif(n = nrow(Q.items), min = 0.1, max = 0.3)) # Guessing and slip
+# Q-matrix for the unidimensional statements
+Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE))
+# Guessing and slip
+GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3),
+            runif(n = nrow(Q.items), min = 0.1, max = 0.3))
 n.blocks <- 30 # Number of forced-choice blocks
 
 #----------------------------------------------------------------------------------------
 # Illustration with simulated data using only direct statements (i.e., homopolar blocks)
 #----------------------------------------------------------------------------------------
 
-polarity <- matrix(1, nrow = n.blocks, ncol = 2) # Block polarity (1 = direct statement; -1 = indirect statement)
-sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity, model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
+# Block polarity (1 = direct statement; -1 = indirect statement)
+polarity <- matrix(1, nrow = n.blocks, ncol = 2)
+sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity,
+                  model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
 Q <- sim$Q # Generated Q-matrix of forced-choice blocks
 dat <- sim$dat # Generated responses
 att <- sim$att # Generated attribute profiles
@@ -83,8 +88,10 @@ ClassRate(personparm(fit$GDINA.obj), att) # Classification accuracy
 #-------------------------------------------------------------------------------------------
 
 polarity <- matrix(1, nrow = n.blocks, ncol = 2)
-polarity[sample(x = 1:(2*n.blocks), size = 15, replace = FALSE)] <- -1 # Including 15 inverse statements
-sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity, model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
+# Including 15 inverse statements
+polarity[sample(x = 1:(2*n.blocks), size = 15, replace = FALSE)] <- -1
+sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity,
+                  model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
 Q <- sim$Q
 dat <- sim$dat
 att <- sim$att
@@ -96,9 +103,12 @@ ClassRate(personparm(fit$GDINA.obj), att)
 # Illustration of the FC-DCM (Huang, 2023) via BM estimation
 #------------------------------------------------------------
 
-priors <- list("Minimum" = c(1, 1), # Non-informative prior, Beta(1, 1), for latent group with ideal response = 0
-               "Intermediate" = c(1e8, 1e8), # Extremely informative prior, Beta(1e8, 1e8), for latent groups with ideal response = 0.5
-               "Maximum" = c(1, 1)) # Non-informative prior, Beta(1, 1), for latent group with ideal response = 1
+# Non-informative prior, Beta(1, 1), for latent group with ideal response = 0
+# Extremely informative prior, Beta(1e8, 1e8), for latent groups with ideal response = 0.5
+# Non-informative prior, Beta(1, 1), for latent group with ideal response = 1
+priors <- list("Minimum" = c(1, 1),
+               "Intermediate" = c(1e8, 1e8),
+               "Maximum" = c(1, 1))
 fit <- FCGDINA(dat = dat, Q = Q, polarity = polarity, polarity.prior = priors, verbose = 0)
 ClassRate(fit$GDINA.obj$EAP, att)
 }

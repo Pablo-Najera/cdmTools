@@ -52,11 +52,16 @@
 #' \donttest{
 #' library(GDINA)
 #' set.seed(123)
-#' Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE)) # Q-matrix for the unidimensional statements
-#' GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3), runif(n = nrow(Q.items), min = 0.1, max = 0.3)) # Guessing and slip
+#' # Q-matrix for the unidimensional statements
+#' Q.items <- do.call("rbind", replicate(5, diag(5), simplify = FALSE))
+#' # Guessing and slip
+#' GS <- cbind(runif(n = nrow(Q.items), min = 0.1, max = 0.3),
+#'             runif(n = nrow(Q.items), min = 0.1, max = 0.3))
 #' n.blocks <- 30 # Number of forced-choice blocks
-#' polarity <- matrix(1, nrow = n.blocks, ncol = 2) # Block polarity (1 = direct statement; -1 = indirect statement)
-#' sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity, model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
+#' # Block polarity (1 = direct statement; -1 = indirect statement)
+#' polarity <- matrix(1, nrow = n.blocks, ncol = 2)
+#' sim <- simFCGDINA(N = 1000, Q.items, n.blocks = n.blocks, polarity = polarity,
+#'                   model = "GDINA", GDINA.args = list(GS = GS), seed = 123)
 #' }
 simFCGDINA <- function(N, Q.items, n.blocks = NULL, polarity = NULL, att = NULL, model = "GDINA",
                        GDINA.args = list(GS = NULL, GS.items = c(1/3, 1/3), AC = 0, AT = 0),
