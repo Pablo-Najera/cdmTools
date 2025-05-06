@@ -1209,6 +1209,15 @@ cdmTools.model2rule.j <- function(model.j){
     x$rule[which(x$model.num == model.j)]
   }
 }
+cdmTools.LikNR <- function(mpar, mX, vlogPrior, vgroup, mloc, weights, simplify = TRUE){
+  .Call("_GDINA_LikNR", PACKAGE = "GDINA", mpar, mX, vlogPrior, vgroup, mloc, weights, simplify)
+}
+cdmTools.designM <- function(Kj, rule, AlphaPattern = NULL){
+  .Call("_GDINA_designM", PACKAGE = "GDINA", Kj, rule, AlphaPattern)
+}
+cdmTools.item_latent_group <- function(Q, AlphaPattern = NULL){
+  .Call("_GDINA_item_latent_group", PACKAGE = "GDINA", Q, AlphaPattern)
+}
 est.polarity <- function(polarity, Q, polarity.initial = 1e-4, polarity.prior = NULL){
   J <- nrow(polarity)
   init.parm <- lapply(1:J, function(x) rep(NA, 4))
@@ -1249,7 +1258,7 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
   model <- cdmTools.model2numeric(model, ncat)
   rule <- sapply(model, cdmTools.model2rule.j)
 
-  reduced.LG <- GDINA:::item_latent_group(Q)
+  reduced.LG <- my.item_latent_group(Q)
 
   if(any(model == -1)) stop("design.matrix must be provided for user-defined models.",call. = FALSE)
   DesignMatrices <-  vector("list", ncat)
@@ -1257,7 +1266,7 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
     if(model[j] == 6){
       DesignMatrices[[j]] <- GDINA::designmatrix(model = model[j],Qj = Q[which(Q[,1]==j),-c(1:2),drop=FALSE])
     }else if(rule[j] >= 0 & rule[j]<= 3){
-      DesignMatrices[[j]] <- GDINA:::designM(Kj[j], rule[j], reduced.LG[[j]])
+      DesignMatrices[[j]] <- my.designM(Kj[j], rule[j], reduced.LG[[j]])
     }
   }
 
@@ -1321,8 +1330,8 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
   parm0 <- c(item.parm)
   success <- TRUE
   while(itr < maxitr)  {
-    estep <- GDINA:::LikNR(as.matrix(item.parm), as.matrix(dat), as.matrix(logprior), rep(1,N),
-                           as.matrix(parloc), rep(1,N), TRUE)
+    estep <- my.LikNR(as.matrix(item.parm), as.matrix(dat), as.matrix(logprior), rep(1,N),
+                      as.matrix(parloc), rep(1,N), TRUE)
 
     Rg = estep$Rg
     Ng = estep$Ng
@@ -1427,13 +1436,13 @@ GDINA.MJ <- function(dat, Q, verbose = 0, item.prior = NULL, catprob.parm = NULL
 
     if(maxchg < conv.crit) break
   }
-  estep <- GDINA:::LikNR(as.matrix(item.parm),
-                         as.matrix(dat),
-                         as.matrix(logprior),
-                         rep(1,N),
-                         as.matrix(parloc),
-                         rep(1,N),
-                         FALSE)
+  estep <- my.LikNR(as.matrix(item.parm),
+                    as.matrix(dat),
+                    as.matrix(logprior),
+                    rep(1,N),
+                    as.matrix(parloc),
+                    rep(1,N),
+                    FALSE)
 
   EAP <- 1*((exp(estep$logpost) %*% AlphaPattern) > 0.5000)
   MAP <- AlphaPattern[max.col(estep$logpost),]
