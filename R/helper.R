@@ -1210,13 +1210,13 @@ cdmTools.model2rule.j <- function(model.j){
   }
 }
 cdmTools.LikNR <- function(mpar, mX, vlogPrior, vgroup, mloc, weights, simplify = TRUE){
-  .Call("_GDINA_LikNR", PACKAGE = "GDINA", mpar, mX, vlogPrior, vgroup, mloc, weights, simplify)
+  .Call("_cdmTools_LikNR", PACKAGE = "cdmTools", mpar, mX, vlogPrior, vgroup, mloc, weights, simplify)
 }
 cdmTools.designM <- function(Kj, rule, AlphaPattern = NULL){
-  .Call("_GDINA_designM", PACKAGE = "GDINA", Kj, rule, AlphaPattern)
+  .Call("_cdmTools_designM", PACKAGE = "cdmTools", Kj, rule, AlphaPattern)
 }
 cdmTools.item_latent_group <- function(Q, AlphaPattern = NULL){
-  .Call("_GDINA_item_latent_group", PACKAGE = "GDINA", Q, AlphaPattern)
+  .Call("_cdmTools_item_latent_group", PACKAGE = "cdmTools", Q, AlphaPattern)
 }
 est.polarity <- function(polarity, Q, polarity.initial = 1e-4, polarity.prior = NULL){
   J <- nrow(polarity)
