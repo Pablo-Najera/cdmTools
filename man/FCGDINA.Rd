@@ -9,7 +9,6 @@ FCGDINA(
   Q,
   polarity = NULL,
   polarity.initial = 1e-04,
-  polarity.prior = NULL,
   att.dist = "saturated",
   att.prior = NULL,
   verbose = 1,
@@ -26,8 +25,6 @@ FCGDINA(
 \item{polarity}{A \emph{F} blocks x 2 (\code{matrix} or \code{data.frame}). Each row reflects the direction of the first and second statement, where 1 and -1 corresponds to direct and inverse statements, respectively. Default is \code{NULL}, denoting that all statements are direct.}
 
 \item{polarity.initial}{A \code{numeric} value that indicates the initial value for the estimation of the probability of endorsement for the latent group whose ideal response is equal to 0. The initial value for the latent group whose ideal response is equal to 1 will be 1 - \code{polarity.initial}. The initial value for latent groups without a clear ideal response is always equal to 0.5. This argument is ignored if \code{catprob.parm != NULL}. Default is \code{1e-4}.}
-
-\item{polarity.prior}{A \code{list} containing three \code{vectors} of length 2, each containing the alpha and beta hyperparameters of the Beta distribution for the priors of the latent groups with ideal responses equal to 0, 0.5, and 1, respectively. Marginal maximum likelihood via EM algorithm is used, therefore ignoring these priors, if \code{polarity.prior == NULL}, while BM estimation is used if \code{polarity.prior != NULL}. See the examples for a case. Default is \code{NULL}.}
 
 \item{att.dist}{How is the joint attribute distribution estimated? It can be \code{"saturated"}, \code{"higher.order"}, \code{"fixed"}, \code{"independent"}, and \code{"loglinear"}. Only considered if EM estimation is used. Default is \code{"saturated"}. See the \code{GDINA} package documentation for more information.}
 
@@ -51,10 +48,9 @@ FCGDINA(
 }
 \description{
 Estimation of the G-DINA model for forced-choice responses according to Nájera et al. (2024).
-Block polarity (i.e., statement direction), initial values for parameters, and prior distributions can be specified to determine the design of the forced-choice blocks.
+Block polarity (i.e., statement direction) and initial values for parameters can be specified to determine the design of the forced-choice blocks.
 The \code{GDINA} package (Ma & de la Torre, 2020) is used to estimate the model via expectation maximumation (EM) algorithm if no priors are used.
-The code provided by Ma and Jiang (2021) is used to estimate the model via Bayes modal (BM) estimation if priors are used.
-The \emph{forced-choice diagnostic classification model} (FC-DCM; Huang, 2023) can be efficiently estimated using Bayes modal estimation rather than Markov chain Monte Carlo.
+To estimate the \emph{forced-choice diagnostic classification model} (FC-DCM; Huang, 2023) using Bayes modal estimation, please check the codes provided in https://osf.io/h6x9e/.
 Only unidimensional statements (i.e., bidimensional blocks) are currently supported.
 }
 \examples{
@@ -98,27 +94,12 @@ att <- sim$att
 
 fit <- FCGDINA(dat = dat, Q = Q, polarity = polarity)
 ClassRate(personparm(fit$GDINA.obj), att)
-
-#------------------------------------------------------------
-# Illustration of the FC-DCM (Huang, 2023) via BM estimation
-#------------------------------------------------------------
-
-# Non-informative prior, Beta(1, 1), for latent group with ideal response = 0
-# Extremely informative prior, Beta(1e8, 1e8), for latent groups with ideal response = 0.5
-# Non-informative prior, Beta(1, 1), for latent group with ideal response = 1
-priors <- list("Minimum" = c(1, 1),
-               "Intermediate" = c(1e8, 1e8),
-               "Maximum" = c(1, 1))
-fit <- FCGDINA(dat = dat, Q = Q, polarity = polarity, polarity.prior = priors, verbose = 0)
-ClassRate(fit$GDINA.obj$EAP, att)
 }
 }
 \references{
 Huang, H.-Y. (2023). Diagnostic Classification Model for Forced-Choice Items and Noncognitive Tests. \emph{Educational and Psychological Measurement}, \emph{83}(1), 146-180. https://doi.org/10.1177/00131644211069906
 
 Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
-
-Ma, W., & Jiang, Z. (2021). Estimating Cognitive Diagnosis Models in Small Samples: Bayes Modal Estimation and Monotonic Constraints. \emph{Applied Psychological Measurement}, \emph{45}(2), 95-111. https://doi.org/10.1177/0146621620977681
 
 Nájera, P., Kreitchmann, R. S., Escudero, S., Abad, F. J., de la Torre, J., & Sorrel, M. A. (2025). A General Diagnostic Modeling Framework for Forced-Choice Assessments. \emph{British Journal of Mathematical and Statistical Psychology}.
 }
