@@ -20,7 +20,7 @@
 #' @return \code{FCGDINA} returns an object of class \code{FCGDINA}.
 #' \describe{
 #' \item{\code{GDINA.obj}}{Estimation output from the \code{GDINA} function of the \code{GDINA.MJ} (Ma & Jiang, 2021) function, depending on whether EM or BM estimation has been used (\code{list}).}
-#' \item{\code{technical}}{Information about the estimation method (EM or BM), initial values, and priors (\code{list}).}
+#' \item{\code{technical}}{Information about initial values (\code{list}).}
 #' \item{\code{specifications}}{Function call specifications (\code{list}).}
 #' }
 #'
@@ -105,7 +105,7 @@ FCGDINA <- function(dat, Q, polarity = NULL, polarity.initial = 1e-4, att.dist =
   #------------------------------------------------------------------------
 
   res <- list(GDINA.obj = fit,
-              technical = list(est = est, init.values = ep$init.parm, priors = ep$item.prior),
+              technical = list(init.values = ep$init.parm, priors = ep$item.prior),
               specifications = list(dat = dat, Q = Q,
                                     polarity = polarity, polarity.initial = polarity.initial,
                                     att.dist = att.dist, att.prior = att.prior, verbose = verbose,

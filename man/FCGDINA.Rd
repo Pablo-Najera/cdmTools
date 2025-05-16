@@ -42,7 +42,7 @@ FCGDINA(
 \code{FCGDINA} returns an object of class \code{FCGDINA}.
 \describe{
 \item{\code{GDINA.obj}}{Estimation output from the \code{GDINA} function of the \code{GDINA.MJ} (Ma & Jiang, 2021) function, depending on whether EM or BM estimation has been used (\code{list}).}
-\item{\code{technical}}{Information about the estimation method (EM or BM), initial values, and priors (\code{list}).}
+\item{\code{technical}}{Information about initial values (\code{list}).}
 \item{\code{specifications}}{Function call specifications (\code{list}).}
 }
 }
