@@ -5,3 +5,5 @@
 ^cdmTools_1.0.0.tar.gz$
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
+^\.positai$
+^\.claude$

@@ -167,7 +167,7 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
     }
     upper <- max(S.smc, 1)
     if ((fm == "wls") | (fm == "gls")) {
-      S.inv <- solve(S)
+      S.inv <- base::solve(S)
     }
     else {
       S.inv <- NULL
@@ -601,7 +601,7 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           }
           rotated <- GPArotation::Varimax(loadings, ...)
           loadings <- rotated$loadings
-          rot.mat <- t(solve(rotated$Th))
+          rot.mat <- t(base::solve(rotated$Th))
         }, quartimax = {
           if (!requireNamespace("GPArotation")) {
             stop("I am sorry, to do this rotation requires the GPArotation package to be installed")
@@ -609,7 +609,7 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rotated <- GPArotation::quartimax(loadings,
                                             ...)
           loadings <- rotated$loadings
-          rot.mat <- t(solve(rotated$Th))
+          rot.mat <- t(base::solve(rotated$Th))
         }, bentlerT = {
           if (!requireNamespace("GPArotation")) {
             stop("I am sorry, to do this rotation requires the GPArotation package to be installed")
@@ -617,14 +617,14 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rotated <- GPArotation::bentlerT(loadings,
                                            ...)
           loadings <- rotated$loadings
-          rot.mat <- t(solve(rotated$Th))
+          rot.mat <- t(base::solve(rotated$Th))
         }, geominT = {
           if (!requireNamespace("GPArotation")) {
             stop("I am sorry, to do this rotation requires the GPArotation package to be installed")
           }
           rotated <- GPArotation::geominT(loadings, ...)
           loadings <- rotated$loadings
-          rot.mat <- t(solve(rotated$Th))
+          rot.mat <- t(base::solve(rotated$Th))
         }, targetT = {
           if (!requireNamespace("GPArotation")) {
             stop("I am sorry, to do this rotation requires the GPArotation package to be installed")
@@ -632,11 +632,11 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rotated <- GPArotation::targetT(loadings, Tmat = diag(ncol(loadings)),
                                           ...)
           loadings <- rotated$loadings
-          rot.mat <- t(solve(rotated$Th))
+          rot.mat <- t(base::solve(rotated$Th))
         }, bifactor = {
           rot <- psych::bifactor(loadings, ...)
           loadings <- rot$loadings
-          rot.mat <- t(solve(rot$Th))
+          rot.mat <- t(base::solve(rot$Th))
         }, TargetT = {
           if (!requireNamespace("GPArotation")) {
             stop("I am sorry, to do this rotation requires the GPArotation package to be installed")
@@ -644,15 +644,15 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           rot <- GPArotation::targetT(loadings, Tmat = diag(ncol(loadings)),
                                       ...)
           loadings <- rot$loadings
-          rot.mat <- t(solve(rot$Th))
+          rot.mat <- t(base::solve(rot$Th))
         }, equamax = {
           rot <- psych::equamax(loadings, ...)
           loadings <- rot$loadings
-          rot.mat <- t(solve(rot$Th))
+          rot.mat <- t(base::solve(rot$Th))
         }, varimin = {
           rot <- psych::varimin(loadings, ...)
           loadings <- rot$loadings
-          rot.mat <- t(solve(rot$Th))
+          rot.mat <- t(base::solve(rot$Th))
         }, Promax = {
           pro <- psych::Promax(loadings, ...)
           loadings <- pro$loadings
@@ -674,12 +674,12 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
           ob <- psych::biquartimin(loadings, ...)
           loadings <- ob$loadings
           Phi <- ob$Phi
-          rot.mat <- t(solve(ob$Th))
+          rot.mat <- t(base::solve(ob$Th))
         }, TargetQ = {
           ob <- psych::TargetQ(loadings, ...)
           loadings <- ob$loadings
           Phi <- ob$Phi
-          rot.mat <- t(solve(ob$Th))
+          rot.mat <- t(base::solve(ob$Th))
         })
       }
       else {
@@ -699,7 +699,7 @@ cdmTools.fac <- function(r, nfactors = 1, n.obs = NA, rotate = "oblimin",
             }
             loadings <- ob$loadings
             Phi <- ob$Phi
-            rot.mat <- t(solve(ob$Th))
+            rot.mat <- t(base::solve(ob$Th))
           }
         }
         else {

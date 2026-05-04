@@ -140,7 +140,7 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
       } else if(criterion == "loaddiff"){
         A <- efa.loads
         hA <- efa.comm
-        B <- (t(sapply(1:nrow(A), function(j) A[j,] * as.vector(solve(sqrt(hA[j]))))))^2
+        B <- (t(sapply(1:nrow(A), function(j) A[j,] * as.vector(base::solve(sqrt(hA[j]))))))^2
         B.j <- matrix(1:nrow(B), nrow = nrow(B), ncol = ncol(B))
         D.j <- apply(B, 2, function(f) order(f, decreasing = T))
         C <- apply(B, 2, function(f) sort(f, decreasing = T))
@@ -178,7 +178,7 @@ estQ <- function(r, K, n.obs = NULL, criterion = "row", boot = FALSE, efa.args =
         } else if(criterion == "loaddiff"){
           A <- efa.loads.boot
           hA <- efa.comm
-          B <- (t(sapply(1:nrow(A), function(j) A[j,] * as.vector(solve(sqrt(hA[j]))))))^2
+          B <- (t(sapply(1:nrow(A), function(j) A[j,] * as.vector(base::solve(sqrt(hA[j]))))))^2
           B.j <- matrix(1:nrow(B), nrow = nrow(B), ncol = ncol(B))
           D.j <- apply(B, 2, function(f) order(f, decreasing = T))
           C <- apply(B, 2, function(f) sort(f, decreasing = T))
