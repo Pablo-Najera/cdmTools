@@ -23,11 +23,11 @@
 #' @author {David Goretzko, Goethe University Frankfurt, \cr Philipp Sterner, LMU Munich, \cr Pablo Nájera, Universidad Pontificia Comillas}
 #'
 #' @references
-#' Hothorn T, Zeileis A (2015). partykit: A Modular Toolkit for Recursive Partytioning in R. \emph{Journal of Machine Learning Research}, \emph{16}, 3905-3909. <https://jmlr.org/papers/v16/hothorn15a.html>.
+#' Hothorn, T., & Zeileis, A. (2015). partykit: A Modular Toolkit for Recursive Partytioning in R. \emph{Journal of Machine Learning Research}, \emph{16}, 3905-3909. https://jmlr.org/papers/v16/hothorn15a.html
 #'
 #' Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 #'
-#' Zeileis A, Hothorn T, Hornik K (2008). Model-Based Recursive Partitioning. \emphJournal of Computational and Graphical Statistics}, \emph{17}(2), 492-514. doi:10.1198/106186008X319331 <https://doi.org/10.1198/106186008X319331>.
+#' Zeileis, A., Hothorn, T., & Hornik, K. (2008). Model-Based Recursive Partitioning. \emph{Journal of Computational and Graphical Statistics}, \emph{17}(2), 492-514. https://doi.org/10.1198/106186008X319331
 #'
 #' @export
 #'
@@ -44,6 +44,11 @@
 #' fit <- GDINAtree(dat = dat[,1:30], covariates = dat[,31:35], Q = Q)
 #' plot(fit)
 GDINAtree <- function(dat, covariates, Q, model = "GDINA", maxdepth = 3, minsize = 100, alpha = 0.05, bonferroni = TRUE, ...){
+
+  #--------------------
+  # Auxiliary function
+  #--------------------
+
   GDINAtree_fit <- function(q){
     function(y, x = NULL, start = NULL, weights = NULL, offset = NULL, ..., estfun = TRUE, object = FALSE){
       mod <- GDINA::GDINA(dat = y, Q = q, model = model, start = start)
@@ -51,6 +56,11 @@ GDINAtree <- function(dat, covariates, Q, model = "GDINA", maxdepth = 3, minsize
            estfun = do.call(cbind, GDINA::score(mod, parm = "prob")[-length(GDINA::score(mod))]), object = NULL)
     }
   }
+
+  #-------------
+  # G-DINA tree
+  #-------------
+
   tree <- partykit::mob(formula = as.formula(paste(paste(colnames(dat), collapse = "+"), paste("~"), paste(colnames(covariates), collapse = "+"))),
                         data = cbind(dat, covariates),
                         fit = GDINAtree_fit(Q),
@@ -61,7 +71,12 @@ GDINAtree <- function(dat, covariates, Q, model = "GDINA", maxdepth = 3, minsize
     dat.n <- dat[as.numeric(names(predict(tree[n], type = "node"))),]
     fit.nodes[[n]] <- GDINA::GDINA(dat = dat.n, Q = Q, model = model, verbose = 0)
   }
-  specs <- list(dat = dat, covariates = covariates, Q = Q, model = model, 
+
+  #-----------------
+  # Return outcomes
+  #-----------------
+
+  specs <- list(dat = dat, covariates = covariates, Q = Q, model = model,
                 maxdepth = maxdepth, minsize = minsize, alpha = alpha, bonferroni = bonferroni)
   res <- list(tree = tree, fit.nodes = fit.nodes, specifications = specs)
   class(res) <- "GDINAtree"
