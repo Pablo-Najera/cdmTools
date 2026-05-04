@@ -130,3 +130,14 @@ print.RDINA <- function(x, ...){
     )
   )
 }
+#' @export
+plot.GDINAtree <- function(x, ...){
+  displ <- function(info){
+    n <- info$nobs
+    paste("n =", n)
+  }
+  res <- partykit::plot.modelparty(x$tree,
+                                   terminal_panel = partykit::node_terminal,
+                                   tp_args = list(FUN = displ))
+  return(res)
+}

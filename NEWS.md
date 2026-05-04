@@ -1,3 +1,8 @@
+# cdmTools 1.0.7
+* Added - `GDINAtree` function to implement model-based recursive partitioning with the G-DINA model
+* Fixed - compatibility issue with the `CVXR` package
+* David Goretzko and Philipp Sterner included as contributors
+
 # cdmTools 1.0.6
 * Added - `FCGDINA` function to estimate the G-DINA model with forced-choice items
 * Added - `simFCGDINA` function to simulate forced-choice data from the G-DINA model
