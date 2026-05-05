@@ -139,5 +139,44 @@ plot.GDINAtree <- function(x, ...){
   res <- partykit::plot.modelparty(x$tree,
                                    terminal_panel = partykit::node_terminal,
                                    tp_args = list(FUN = displ))
-  return(res)
+}
+#' @export
+print.GDINAtree <- function(x, ...){
+  all_ids <- partykit::nodeids(fit$tree)
+  term_ids <- partykit::nodeids(fit$tree, terminal = TRUE)
+  inner_ids <- setdiff(all_ids, term_ids)
+  res.model <- as.data.frame(matrix(NA, nrow = length(fit$fit.nodes), ncol = 7, dimnames = list(NULL, c(" nodeid", "terminal", "nobs", "npar", "Deviance", "AIC", "BIC"))))
+  for(m in 1:length(fit$fit.nodes)){
+    res.model$` nodeid`[m] <- m
+    res.model$terminal[m] <- as.numeric(m %in% term_ids)
+    res.model$nobs[m] <- nrow(fit$fit.nodes[[m]]$options$dat)
+    res.model$npar[m] <- fit$fit.nodes[[m]]$testfit$npar
+    res.model$Deviance[m] <- round(fit$fit.nodes[[m]]$testfit$Deviance, 2)
+    res.model$AIC[m] <- round(fit$fit.nodes[[m]]$testfit$AIC, 2)
+    res.model$BIC[m] <- round(fit$fit.nodes[[m]]$testfit$BIC, 2)
+  }
+  if(length(all_ids) > 1){all_ids <- paste0(all_ids, collapse = ", ")}
+  if(length(inner_ids) > 1){inner_ids <- paste0(inner_ids, collapse = ", ")}
+  if(length(term_ids) > 1){term_ids <- paste0(term_ids, collapse = ", ")}
+  pckg <- paste0("cdmTools ", utils::packageDescription("cdmTools")$Version,
+                 ", partykit ", utils::packageDescription("partykit")$Version,
+                 ", GDINA ", utils::packageDescription("GDINA")$Version)
+  cat(
+    paste0(
+      "============================================================", "\n",
+      "                         G-DINA tree                        ", "\n", "\n",
+      "Packages used: ", pckg, "\n", "\n",
+      "Tree size:", "\n",
+      "  Number of nodes = ", length(fit$tree), "\n",
+      "  Tree depth      = ", depth(fit$tree), "\n",
+      "  Tree width      = ", width(fit$tree), "\n", "\n",
+      "Nodes IDs:", "\n",
+      "  All      = ", all_ids, "\n",
+      "  Internal = ", inner_ids, "\n",
+      "  Terminal = ", term_ids, "\n", "\n",
+      "Model info:", "\n"
+    )
+  )
+  print(res.model, row.names = FALSE)
+  cat("=============================================================")
 }
