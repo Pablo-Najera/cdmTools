@@ -32,6 +32,8 @@ GDINAtree(
 \item{alpha}{Nominal significance level.}
 
 \item{bonferroni}{A \code{logical} value indicating whether the Bonferroni correction should be applied.}
+
+\item{...}{Additional arguments for \code{partykit::mob_control}.}
 }
 \value{
 \code{GDINAtree} returns an object of class \code{GDINAtree}.
