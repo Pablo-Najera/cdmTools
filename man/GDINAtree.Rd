@@ -62,6 +62,8 @@ plot(fit)
 \references{
 Hothorn, T., & Zeileis, A. (2015). partykit: A Modular Toolkit for Recursive Partytioning in R. \emph{Journal of Machine Learning Research}, \emph{16}, 3905-3909. https://jmlr.org/papers/v16/hothorn15a.html
 
+Nájera, P., Sorrel, M. A., Sterner, P., & Goretzko, D. (2026). Invariance Analysis in Cognitive Diagnosis Models with G-DINA Trees. \emph{Manuscript submitted for publication}
+
 Ma, W., & de la Torre, J. (2020). GDINA: An R package for cognitive diagnosis modeling. \emph{Journal of Statistical Software}, \emph{93}(14). https://doi.org/10.18637/jss.v093.i14
 
 Zeileis, A., Hothorn, T., & Hornik, K. (2008). Model-Based Recursive Partitioning. \emph{Journal of Computational and Graphical Statistics}, \emph{17}(2), 492-514. https://doi.org/10.1198/106186008X319331

@@ -7,12 +7,13 @@
 ## How to cite this package
 Nájera, P., Sorrel, M. A., & Abad, F. J. (2025). *cdmTools: Useful Tools for Cognitive Diagnosis Modeling*. R package version 1.0.6. https://cran.r-project.org/web/packages/cdmTools/.
 ## Features of the package
-* Empirical Q-matrix estimation and validation
-* Empirical dimensionality assessment of CDM data
+* R-DINA and R-DINO model estimation
 * G-DINA model estimation for forced-choice items
 * Attribute profile classification via the general nonparametric classification method (GNPC)
-* R-DINA and R-DINO model estimation
+* Empirical Q-matrix estimation and validation
+* Empirical dimensionality assessment of CDM data
 * Corrected classification accuracy estimation via multiple imputation
+* Model-based recursive partitioning via G-DINA trees
 * Person fit evaluation
 * Model identifiability check
 * Useful functions for simulation studies involving CDM
