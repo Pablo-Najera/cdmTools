@@ -12,6 +12,7 @@
 #' @param minsize An \code{integer} indicating the minimum number of observations in a node.
 #' @param alpha Nominal significance level.
 #' @param bonferroni A \code{logical} value indicating whether the Bonferroni correction should be applied.
+#' @param ... Additional arguments for \code{partykit::mob_control}.
 #'
 #' @return \code{GDINAtree} returns an object of class \code{GDINAtree}.
 #' \describe{
@@ -54,7 +55,7 @@ GDINAtree <- function(dat, covariates, Q, model = "GDINA", maxdepth = 3, minsize
   GDINAtree_fit <- function(q){
     function(y, x = NULL, start = NULL, weights = NULL, offset = NULL, ..., estfun = TRUE, object = FALSE){
       mod <- GDINA::GDINA(dat = y, Q = q, model = model, start = start)
-      list(coefficients = unlist(mod$catprob.parm), objfun = -as.numeric(logLik(mod)),
+      list(coefficients = unlist(mod$catprob.parm), objfun = -as.numeric(stats::logLik(mod)),
            estfun = do.call(cbind, GDINA::score(mod, parm = "prob")[-length(GDINA::score(mod))]), object = NULL)
     }
   }
@@ -63,14 +64,14 @@ GDINAtree <- function(dat, covariates, Q, model = "GDINA", maxdepth = 3, minsize
   # G-DINA tree
   #-------------
 
-  tree <- partykit::mob(formula = as.formula(paste(paste(colnames(dat), collapse = "+"), paste("~"), paste(colnames(covariates), collapse = "+"))),
+  tree <- partykit::mob(formula = stats::as.formula(paste(paste(colnames(dat), collapse = "+"), paste("~"), paste(colnames(covariates), collapse = "+"))),
                         data = cbind(dat, covariates),
                         fit = GDINAtree_fit(Q),
                         control = partykit::mob_control(ytype = "data.frame", alpha = alpha, bonferroni = bonferroni, minsize = minsize, maxdepth = maxdepth, vcov = "opg", ...))
   n.nodes <- length(partykit::nodeids(tree))
   fit.nodes <- list()
   for(n in 1:n.nodes){
-    dat.n <- dat[as.numeric(names(predict(tree[n], type = "node"))),]
+    dat.n <- dat[as.numeric(names(stats::predict(tree[n], type = "node"))),]
     fit.nodes[[n]] <- GDINA::GDINA(dat = dat.n, Q = Q, model = model, verbose = 0)
   }
 
